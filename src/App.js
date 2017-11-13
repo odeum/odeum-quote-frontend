@@ -8,6 +8,7 @@ import {
   Workspace,
   Footer
 } from 'odeum-app'
+import CreateNewQuote from './Components/createNewQuote';
 
 class App extends Component {
 
@@ -19,7 +20,7 @@ class App extends Component {
           <Menu label={'Tilbud'} icon={'home'} route={'/home'}>
             <Tab icon={'assignment'} label={'Opret Tilbud'}>
               <Workspace >
-                Opret Tilbud
+                <CreateNewQuote/>
           </Workspace>
             </Tab>
             <Tab icon={'assignment'} label={'Tilbuds oversigt'}>
