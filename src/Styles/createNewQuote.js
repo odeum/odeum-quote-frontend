@@ -47,7 +47,7 @@ export const Input = styled.input`
 
 export const TableWrapper = styled.div`
     width: 100%;
-    height: 149px;
+    height: 145px;
     overflow-x: auto;
     margin-bottom: 20px;
 `
@@ -55,29 +55,29 @@ export const TableWrapper = styled.div`
 export const Table = styled.table`
     border-collapse: collapse;
     width: 100%;
-    border: 1px solid #ddd;
+    border: 1px solid #E3E5E5;
     font-family: sans-serif;
-    font-size: 18px;
+    font-size: 16px;
 `
 
 export const TH = styled.th`
     text-align: left;
     padding: 10px;
     font-family: sans-serif;
-    font-size: 14px;
+    font-size: 13px;
 `
 
 export const TD = styled.td`
     text-align: left;
     padding: 10px;
     font-family: sans-serif;
-    font-size: 14px;
+    font-size: 13px;
 `
 
 export const TR = styled.tr`
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #E3E5E5;
     &:hover {
-        background-color: #f1f1f1;
+        background-color: #eee;
     }
 `
 
@@ -125,7 +125,7 @@ export const Label = styled.label`
 export const TotalPriceWrapper = styled.div`
     width: 70%;
     height: 30px;
-    margin-top: 60px;
+    margin-top: 57px;
     margin-left: auto;
     display: inline-flex;
 `
@@ -138,7 +138,7 @@ export const SaveButton = styled.button`
     background-color: #3B97D3;
     color: #fff;
     font-size: 12px;
-    font-family: serif-sans;
+    font-family: sans-serif;
     border: none;
     border-radius: 4px;
 `

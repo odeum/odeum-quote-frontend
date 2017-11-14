@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Wrapper, LeftSideWrapper, RightSideWrapper, H1, Input, TableWrapper, Table, TD, TH, TR, TextArea, ProductWrapper, LabelWrapper, Label, TotalPriceWrapper, SaveButton } from '../Styles/createNewQuote';
+import { Button } from 'odeum-ui'
 
 class CreateNewQuote extends Component {
   renderProductInputs = () => {
@@ -29,7 +30,7 @@ class CreateNewQuote extends Component {
             <TableWrapper>
               <Table>
                 <tbody>
-                  <TR style={{backgroundColor: '#f1f1f1'}}>
+                  <TR style={{backgroundColor: '#E3E5E5'}}>
                     <TH>Virksomhed</TH>
                     <TH>E-mail</TH>
                     <TH>Telefon</TH>
@@ -71,7 +72,7 @@ class CreateNewQuote extends Component {
           <RightSideWrapper>
             <H1>Vælg produkter:</H1>
             <LabelWrapper>
-              <Label marginRight="223px;">Produkt</Label>
+              <Label marginRight="195px;">Produkt</Label>
               <Label marginRight="29px;">Antal</Label>
               <Label marginRight="25px;">Rabat (i kr.)</Label>
               <Label>Pris</Label>
@@ -84,6 +85,7 @@ class CreateNewQuote extends Component {
             </TotalPriceWrapper>
 
             <SaveButton>Opret tilbud</SaveButton>
+            {/*<Button icon='check_circle' label={'Opret tilbud'} size={'small'}/>*/}
           </RightSideWrapper>
         </Wrapper>
       </div>
