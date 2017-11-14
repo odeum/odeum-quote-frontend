@@ -5,16 +5,24 @@ import App from './App'
 import registerServiceWorker from './registerServiceWorker'
 import './index.css'
 
+import { Provider } from 'react-redux';
+import Store from './store';
+
+const StoreInstace = Store();
+
+
 
 //TODO Check Hot Reloading
 class AppRouter extends Component {
 	render() {
 		return (
-			<Router>
-				<div>
-					<Route path='/' component={App} />
-				</div>
-			</Router>
+			<Provider store={StoreInstace}>
+				<Router>
+					<div>
+						<Route path='/' component={App} />
+					</div>
+				</Router>
+			</Provider>
 		)
 	}
 }
