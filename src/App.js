@@ -18,18 +18,22 @@ class App extends Component {
         <MenuPanel>
           <Menu label={'Tilbud'} icon={'home'} route={'/home'}>
             <Tab icon={'assignment'} label={'Opret Tilbud'}>
-                <CreateNewQuote/>
+              <CreateNewQuote />
             </Tab>
             <Tab icon={'assignment'} label={'Tilbuds oversigt'}>
-                Oversigt over alle tilbud
-            </Tab>
-            <Tab icon={'assignment'} label={'Kunde oversigt'}>
-                Oversigt over alle Kunder
-            </Tab>
-            <Tab icon={'assignment'} label={'Produkt oversigt'}>
-                Oversigt over alle produkter 
+              Oversigt over alle tilbud
             </Tab>
           </Menu>
+          <Menu label={'Kunde'} icon={'home'} route={'/kunde'}>
+            <Tab icon={'assignment'} label={'Kunde oversigt'}>
+              Oversigt over alle Kunder
+            </Tab>
+          </Menu>
+          <Menu label={'Produkt'} icon={'home'} route={'/produkt'}>
+          <Tab icon={'assignment'} label={'Produkt oversigt'}>
+            Oversigt over alle produkter
+            </Tab>
+            </Menu>
         </MenuPanel>
       </AppContainer>
     );
