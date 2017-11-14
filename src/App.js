@@ -16,7 +16,7 @@ class App extends Component {
       <AppContainer>
         <Header/>
         <MenuPanel>
-          <Menu label={'Tilbud'} icon={'assignment'} route={'/home'}>
+          <Menu label={'Tilbud'} icon={'assignment'} route={'/tilbud'}>
             <Tab icon={'add_circle'} label={'Opret tilbud'}>
               <CreateNewQuote />
             </Tab>
@@ -24,12 +24,12 @@ class App extends Component {
               Oversigt over alle tilbud
             </Tab>
           </Menu>
-          <Menu label={'Kunder'} icon={'people'} route={'/kunde'}>
+          <Menu label={'Kunder'} icon={'people'} route={'/kunder'}>
             <Tab icon={'assignment'} label={'Kunde oversigt'}>
               Oversigt over alle Kunder
             </Tab>
           </Menu>
-          <Menu label={'Produkter'} icon={'view_module'} route={'/produkt'}>
+          <Menu label={'Produkter'} icon={'view_module'} route={'/produkter'}>
             <Tab icon={'assignment'} label={'Produkt oversigt'}>
               Oversigt over alle produkter
             </Tab>
