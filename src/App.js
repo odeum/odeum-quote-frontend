@@ -14,26 +14,26 @@ class App extends Component {
   render() {
     return (
       <AppContainer>
-        <Header />
+        <Header/>
         <MenuPanel>
-          <Menu label={'Tilbud'} icon={'home'} route={'/home'}>
-            <Tab icon={'assignment'} label={'Opret Tilbud'}>
+          <Menu label={'Tilbud'} icon={'assignment'} route={'/home'}>
+            <Tab icon={'add_circle'} label={'Opret tilbud'}>
               <CreateNewQuote />
             </Tab>
             <Tab icon={'assignment'} label={'Tilbuds oversigt'}>
               Oversigt over alle tilbud
             </Tab>
           </Menu>
-          <Menu label={'Kunde'} icon={'home'} route={'/kunde'}>
+          <Menu label={'Kunder'} icon={'people'} route={'/kunde'}>
             <Tab icon={'assignment'} label={'Kunde oversigt'}>
               Oversigt over alle Kunder
             </Tab>
           </Menu>
-          <Menu label={'Produkt'} icon={'home'} route={'/produkt'}>
-          <Tab icon={'assignment'} label={'Produkt oversigt'}>
-            Oversigt over alle produkter
+          <Menu label={'Produkter'} icon={'view_module'} route={'/produkt'}>
+            <Tab icon={'assignment'} label={'Produkt oversigt'}>
+              Oversigt over alle produkter
             </Tab>
-            </Menu>
+          </Menu>
         </MenuPanel>
       </AppContainer>
     );
