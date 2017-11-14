@@ -1,30 +1,30 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-    width: 1500;
-    height: 600px;
+    width: 1000px;
+    height: 480px;
     display: inline-flex;
 `
 
 export const LeftSideWrapper = styled.div`
-    width: 500px;
-    height: 550px;
+    width: 475px;
+    height: 470px;
     display: flex;
     flex-direction: column;
     padding: 5px;
-    margin-right: 20px;
+    margin-right: 40px;
 `
 
 export const RightSideWrapper = styled.div`
-    width: 500px;
-    height: 550px;
+    width: 475px;
+    height: 470px;
     display: flex;
     flex-direction: column;
     padding: 5px;
 `
 
 export const H1 = styled.div`
-    font-family: sans-serif; //Source Sans Pro
+    font-family: sans-serif;
     font-size: 16px;
     font-weight: bold;
 `
@@ -47,7 +47,7 @@ export const Input = styled.input`
 
 export const TableWrapper = styled.div`
     width: 100%;
-    height: 186px;
+    height: 149px;
     overflow-x: auto;
     margin-bottom: 20px;
 `
@@ -125,7 +125,7 @@ export const Label = styled.label`
 export const TotalPriceWrapper = styled.div`
     width: 70%;
     height: 30px;
-    margin-top: 97px;
+    margin-top: 60px;
     margin-left: auto;
     display: inline-flex;
 `
@@ -133,7 +133,7 @@ export const TotalPriceWrapper = styled.div`
 export const SaveButton = styled.button`
     height: 30px;
     width: 120px;
-    margin-top: 50px;
+    margin-top: 20px;
     margin-left: auto;
     background-color: #3B97D3;
     color: #fff;
