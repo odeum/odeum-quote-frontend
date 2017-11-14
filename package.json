@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.17.1",
     "odeum-app": "^0.2.10",
+    "odeum-ui": "^0.1.26",
     "react": "^16.1.0",
     "react-dom": "^16.1.0",
     "react-redux": "^5.0.6",
