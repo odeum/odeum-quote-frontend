@@ -4,13 +4,12 @@ import { BrowserRouter as Router, Route, } from 'react-router-dom'
 import App from './App'
 import registerServiceWorker from './registerServiceWorker'
 import './index.css'
-
+import ReduxPromise from 'redux-promise' 
 import { Provider } from 'react-redux';
 import Store from './store';
 
+
 const StoreInstace = Store();
-
-
 
 //TODO Check Hot Reloading
 class AppRouter extends Component {
