@@ -10,6 +10,7 @@ import {
 import CreateNewQuote from './Components/createNewQuote';
 import Cart from './Components/cart'; 
 import Product from './Containers/products';
+import Customer from './Containers/customers';
 
 class App extends Component {
 
@@ -28,7 +29,8 @@ class App extends Component {
           </Menu>
           <Menu label={'Kunder'} icon={'people'} route={'/kunder'}>
             <Tab icon={'assignment'} label={'Kunde oversigt'}>
-              Oversigt over alle Kunder
+              Oversigt over alle Kunder:
+              <Customer/>
             </Tab>
           </Menu>
           <Menu label={'Produkter'} icon={'view_module'} route={'/produkter'}>
@@ -36,14 +38,14 @@ class App extends Component {
               Oversigt over alle produkter
             </Tab>
             </Menu>
-            <Menu label={'Workspace'} icon={'home'} route={'/workspace'}>
+          <Menu label={'Workspace'} icon={'home'} route={'/workspace'}>
             <Tab icon={'assignment'} label={'workspace'}>
               <Cart/>
-              </Tab>
-              <Tab icon={'assignment'} label={'produkt'}>
+            </Tab>
+            <Tab icon={'assignment'} label={'produkt'}>
               <Product/>
-              </Tab>
-              </Menu>
+            </Tab>
+          </Menu>
         </MenuPanel>
       </AppContainer>
     );
