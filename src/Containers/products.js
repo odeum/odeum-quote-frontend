@@ -13,14 +13,18 @@ class Product extends Component {
         this.props.fetchProducts();
     }
   render() {
-  const fetchProducts = this.props.product.map((item, index) => {
-      return <h1 key={index}>{item}</h1>
-  })
+  const fetchProducts = this.props.product.map((array, index) => {
+      console.log('render', array);
+      return array.product.map((item, index) => {
+          console.log('array', item.name);
+          return (<h3 key={index}>{item.name}</h3>)
+      });
+  });
     return (
       <div>
        {/* <Shelf addItem={this.props.action.addToCart} />*/}
         <h2>Shopping bag</h2>
-        {fetchProducts}
+       {fetchProducts}
       </div>
     )
   }
