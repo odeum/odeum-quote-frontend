@@ -29,13 +29,12 @@ class App extends Component {
           </Menu>
           <Menu label={'Kunder'} icon={'people'} route={'/kunder'}>
             <Tab icon={'assignment'} label={'Kunde oversigt'}>
-              Oversigt over alle Kunder:
               <Customer/>
             </Tab>
           </Menu>
           <Menu label={'Produkter'} icon={'view_module'} route={'/produkter'}>
             <Tab icon={'assignment'} label={'Produkt oversigt'}>
-              Oversigt over alle produkter
+              <Product/>
             </Tab>
             </Menu>
           <Menu label={'Workspace'} icon={'home'} route={'/workspace'}>

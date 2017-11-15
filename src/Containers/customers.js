@@ -25,6 +25,7 @@ class Customer extends Component {
         })
         return (
             <div>
+                <h2>Kunder</h2>
                 <TableWrapper>
                     <Table>
                         <tbody>
