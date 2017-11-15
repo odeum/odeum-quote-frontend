@@ -8,16 +8,17 @@ class Customer extends Component {
         this.props.fetchCustomers();
     }
 
-    renderCustomer = () => {
-        return this.props.customer.map((item, index) => {
-            return <li key={index}>{item.orgName}</li>;
-        })
-    }
-
     render() {
+        const renderCustomer = this.props.customer.map((array, index) => {
+            //console.log(array)
+            return Object.entries(array).map((item, key) => {
+                console.log(item)
+                return (<h3>{item[1].orgName}</h3>)
+            })
+        })
         return (
             <div>
-                {this.renderCustomer()}
+                {renderCustomer}
             </div>
         )
     }
