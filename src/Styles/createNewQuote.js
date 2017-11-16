@@ -46,8 +46,8 @@ export const Input = styled.input`
 `
 
 export const TableWrapper = styled.div`
-    width: 100%;
-    height: 145px;
+    width: ${(props) => props.width || '100%'};
+    height: ${(props) => props.height || '145px'};
     overflow-x: auto;
     margin-bottom: 20px;
 `

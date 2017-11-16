@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
 import { Wrapper, LeftSideWrapper, RightSideWrapper, H1, Input, TableWrapper, Table, TD, TH, TR, TextArea, ProductWrapper, LabelWrapper, Label, TotalPriceWrapper, SaveButton } from '../Styles/createNewQuote';
-import { Button, ButtonPanel } from 'odeum-ui'
+import { Button, ButtonPanel } from 'odeum-ui';
+import { connect } from 'react-redux'; 
+import { fetchCustomers } from '../Actions/customerAction';
+import TableComponent from '../Components/table';
 
 class CreateNewQuote extends Component {
+  componentDidMount(){
+    this.props.fetchCustomers();
+  }
+
   renderProductInputs = () => {
       var i
       var arr = []
@@ -19,6 +26,20 @@ class CreateNewQuote extends Component {
     return arr
   }
 
+  renderCustomers = () => {
+    return this.props.customer.map((array, index) => {
+         return Object.entries(array).map((item, index) => {
+             return (
+                 <TR key={index}>
+                     <TD>{item[1].orgName}</TD>
+                     <TD>{item[1].contactEmail}</TD>
+                     <TD>{item[1].contactPhone}</TD>
+                 </TR>
+             )
+         })
+     })
+ }
+
   render() {
     return (
       <div>
@@ -27,43 +48,13 @@ class CreateNewQuote extends Component {
             <H1>Vælg kunde:</H1>
             <Input placeholder="Søg efter kunde..."/>
 
-            <TableWrapper>
-              <Table>
-                <tbody>
-                  <TR style={{backgroundColor: '#E3E5E5'}}>
-                    <TH>Virksomhed</TH>
-                    <TH>E-mail</TH>
-                    <TH>Telefon</TH>
-                  </TR>
-                  <TR>
-                    <TD>Alfreds Futterkiste</TD>
-                    <TD>Germany</TD>
-                    <TD>15915948</TD>
-                  </TR>
-                  <TR>
-                    <TD>Berglunds snabbkop</TD>
-                    <TD>Sweden</TD>
-                    <TD>15915948</TD>
-                  </TR>
-                  <TR>
-                    <TD>Island Trading</TD>
-                    <TD>UK</TD>
-                    <TD>15915948</TD>
-                  </TR>
-                  <TR>
-                    <TD>Koniglich Essen</TD>
-                    <TD>Germany</TD>
-                    <TD>15915948</TD>
-                  </TR>
-                  <TR>
-                    <TD>Koniglich Essen</TD>
-                    <TD>Germany</TD>
-                    <TD>15915948</TD>
-                  </TR>
-                </tbody>
-              </Table>
-            </TableWrapper>
-
+            <TableComponent
+              th1={'Virksomhed'}
+              th2={'Email'}
+              th3={'Telefon'}
+              renderTableRows={this.renderCustomers()}
+            />
+            
             <H1>Tilbuds beskrivelse:</H1>
             <Input placeholder="Titel..."/>
             <TextArea placeholder="Beskrivelse..."/>
@@ -95,4 +86,10 @@ class CreateNewQuote extends Component {
   }
 }
 
-export default CreateNewQuote;
+function mapStateToProps(state, prop){
+  return{
+      customer: state.customer
+  }
+}
+
+export default connect(mapStateToProps, {fetchCustomers})(CreateNewQuote);

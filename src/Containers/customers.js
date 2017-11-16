@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 //import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'; 
 import { fetchCustomers } from '../Actions/customerAction';
-import { TableWrapper, Table, TD, TH, TR } from '../Styles/createNewQuote'
-import CustomerTable from '../Components/customerTable'
+import { TD, TR } from '../Styles/table'
+import TableComponent from '../Components/table'
 
 class Customer extends Component {
     componentDidMount(){
@@ -12,9 +12,7 @@ class Customer extends Component {
 
     renderCustomers = () => {
        return this.props.customer.map((array, index) => {
-            //console.log('customerArray', array);
             return Object.entries(array).map((item, index) => {
-               // console.log('cutomerItem', item);
                 return (
                     <TR key={index}>
                         <TD>{item[1].orgName}</TD>
@@ -28,9 +26,15 @@ class Customer extends Component {
 
     render() {
         return (
-            <div>
+            <div style={{width:'100%'}}>
                 <h2>kunder</h2>
-                <CustomerTable customer={this.props.customer} th1={'virksomhed'} th2={'email'} th3={'telefon'} renderTableRows={this.renderCustomers()}/>
+                <TableComponent
+                    height={'300px'}
+                    th1={'Virksomhed'}
+                    th2={'Email'}
+                    th3={'Telefon'}
+                    renderTableRows={this.renderCustomers()}
+                />
             </div>
         )
     }
@@ -41,4 +45,5 @@ function mapStateToProps(state, prop){
         customer: state.customer
     }
 }
+
 export default connect(mapStateToProps, {fetchCustomers})(Customer);
