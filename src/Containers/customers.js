@@ -3,18 +3,19 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'; 
 import { fetchCustomers } from '../Actions/customerAction';
 import { TableWrapper, Table, TD, TH, TR } from '../Styles/createNewQuote'
+import CustomerTable from '../Components/customerTable'
 
 class Customer extends Component {
     componentDidMount(){
         this.props.fetchCustomers();
     }
 
-    render() {
-        const renderCustomer = this.props.customer.map((array, index) => {
-            //console.log(array)
+    renderCustomers = () => {
+       return this.props.customer.map((array, index) => {
+            //console.log('customerArray', array);
             return Object.entries(array).map((item, index) => {
-                console.log(item)
-                return (/*<h3 key={key}>{item[1].orgName, }</h3>*/
+               // console.log('cutomerItem', item);
+                return (
                     <TR key={index}>
                         <TD>{item[1].orgName}</TD>
                         <TD>{item[1].contactEmail}</TD>
@@ -23,21 +24,13 @@ class Customer extends Component {
                 )
             })
         })
+    }
+
+    render() {
         return (
             <div>
-                <h2>Kunder</h2>
-                <TableWrapper>
-                    <Table>
-                        <tbody>
-                            <TR style={{backgroundColor: '#E3E5E5'}}>
-                                <TH>Virksomhed</TH>
-                                <TH>E-mail</TH>
-                                <TH>Telefon</TH>
-                            </TR>
-                                {renderCustomer}
-                        </tbody>
-                    </Table>
-                </TableWrapper>
+                <h2>kunder</h2>
+                <CustomerTable customer={this.props.customer} th1={'virksomhed'} th2={'email'} th3={'telefon'} renderTableRows={this.renderCustomers()}/>
             </div>
         )
     }
@@ -48,11 +41,4 @@ function mapStateToProps(state, prop){
         customer: state.customer
     }
 }
-
-// function mapDispatchToProps(dispatch){
-//     return {
-//         action: bindActionCreators(fetchCustomers, dispatch)
-//     }
-// }
-
 export default connect(mapStateToProps, {fetchCustomers})(Customer);
