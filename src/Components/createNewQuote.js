@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { Wrapper, LeftSideWrapper, RightSideWrapper, H1, Input, TableWrapper, Table, TD, TH, TR, TextArea, ProductWrapper, LabelWrapper, Label, TotalPriceWrapper, SaveButton } from '../Styles/createNewQuote';
-import { Button } from 'odeum-ui';
+import { Button, ButtonPanel } from 'odeum-ui';
 import ProductsFields from './renderProductFields';
+import { connect } from 'react-redux'; 
+import { fetchCustomers } from '../Actions/customerAction';
+import TableComponent from '../Components/table';
 
 class CreateNewQuote extends Component {
   constructor(props) {
@@ -17,8 +20,12 @@ class CreateNewQuote extends Component {
   }
 
   renderCustomers = () => {
+    if(!this.props.customer){
+      console.log('customer is null');
+    }
     return this.props.customer.map((array, index) => {
          return Object.entries(array).map((item, index) => {
+           console.log('renderCustomer', item)
              return (
                  <TR key={index}>
                      <TD>{item[1].orgName}</TD>
