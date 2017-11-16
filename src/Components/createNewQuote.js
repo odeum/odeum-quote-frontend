@@ -11,6 +11,9 @@ class CreateNewQuote extends Component {
     super(props);
     this.state = { dropDown: [] };
   }
+  componentDidMount(){
+    this.props.fetchCustomers();
+  }
 
   onAddBtnClick = (event) => {
     const dropDown = this.state.dropDown;
