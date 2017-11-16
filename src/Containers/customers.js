@@ -2,19 +2,18 @@ import React, { Component } from 'react'
 //import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'; 
 import { fetchCustomers } from '../Actions/customerAction';
-import { TableWrapper, Table, TD, TH, TR } from '../Styles/createNewQuote'
+import { TD, TR } from '../Styles/table'
+import TableComponent from '../Components/table'
 
 class Customer extends Component {
     componentDidMount(){
         this.props.fetchCustomers();
     }
 
-    render() {
-        const renderCustomer = this.props.customer.map((array, index) => {
-            //console.log(array)
+    renderCustomers = () => {
+       return this.props.customer.map((array, index) => {
             return Object.entries(array).map((item, index) => {
-                console.log(item)
-                return (/*<h3 key={key}>{item[1].orgName, }</h3>*/
+                return (
                     <TR key={index}>
                         <TD>{item[1].orgName}</TD>
                         <TD>{item[1].contactEmail}</TD>
@@ -23,21 +22,19 @@ class Customer extends Component {
                 )
             })
         })
+    }
+
+    render() {
         return (
-            <div>
-                <h2>Kunder</h2>
-                <TableWrapper>
-                    <Table>
-                        <tbody>
-                            <TR style={{backgroundColor: '#E3E5E5'}}>
-                                <TH>Virksomhed</TH>
-                                <TH>E-mail</TH>
-                                <TH>Telefon</TH>
-                            </TR>
-                                {renderCustomer}
-                        </tbody>
-                    </Table>
-                </TableWrapper>
+            <div style={{width:'100%'}}>
+                <h2>kunder</h2>
+                <TableComponent
+                    height={'300px'}
+                    th1={'Virksomhed'}
+                    th2={'Email'}
+                    th3={'Telefon'}
+                    renderTableRows={this.renderCustomers()}
+                />
             </div>
         )
     }
@@ -48,11 +45,5 @@ function mapStateToProps(state, prop){
         customer: state.customer
     }
 }
-
-// function mapDispatchToProps(dispatch){
-//     return {
-//         action: bindActionCreators(fetchCustomers, dispatch)
-//     }
-// }
 
 export default connect(mapStateToProps, {fetchCustomers})(Customer);

@@ -16,6 +16,20 @@ class CreateNewQuote extends Component {
     });
   }
 
+  renderCustomers = () => {
+    return this.props.customer.map((array, index) => {
+         return Object.entries(array).map((item, index) => {
+             return (
+                 <TR key={index}>
+                     <TD>{item[1].orgName}</TD>
+                     <TD>{item[1].contactEmail}</TD>
+                     <TD>{item[1].contactPhone}</TD>
+                 </TR>
+             )
+         })
+     })
+ }
+
   render() {
     return (
       <div>
@@ -24,43 +38,13 @@ class CreateNewQuote extends Component {
             <H1>Vælg kunde:</H1>
             <Input placeholder="Søg efter kunde..." />
 
-            <TableWrapper>
-              <Table>
-                <tbody>
-                  <TR style={{ backgroundColor: '#E3E5E5' }}>
-                    <TH>Virksomhed</TH>
-                    <TH>E-mail</TH>
-                    <TH>Telefon</TH>
-                  </TR>
-                  <TR>
-                    <TD>Alfreds Futterkiste</TD>
-                    <TD>Germany</TD>
-                    <TD>15915948</TD>
-                  </TR>
-                  <TR>
-                    <TD>Berglunds snabbkop</TD>
-                    <TD>Sweden</TD>
-                    <TD>15915948</TD>
-                  </TR>
-                  <TR>
-                    <TD>Island Trading</TD>
-                    <TD>UK</TD>
-                    <TD>15915948</TD>
-                  </TR>
-                  <TR>
-                    <TD>Koniglich Essen</TD>
-                    <TD>Germany</TD>
-                    <TD>15915948</TD>
-                  </TR>
-                  <TR>
-                    <TD>Koniglich Essen</TD>
-                    <TD>Germany</TD>
-                    <TD>15915948</TD>
-                  </TR>
-                </tbody>
-              </Table>
-            </TableWrapper>
-
+            <TableComponent
+              th1={'Virksomhed'}
+              th2={'Email'}
+              th3={'Telefon'}
+              renderTableRows={this.renderCustomers()}
+            />
+            
             <H1>Tilbuds beskrivelse:</H1>
             <Input placeholder="Titel..." />
             <TextArea placeholder="Beskrivelse..." />
@@ -80,13 +64,14 @@ class CreateNewQuote extends Component {
                 return item   
             })}
             <TotalPriceWrapper>
-           
-              <Label marginRight="3px" width="40px" paddingTop="7px">I alt:</Label>
-              <Input readOnly />
+              <Label marginRight="3px" width="40px" paddingTop="7px" style={{marginTop: '0px'}}>I alt:</Label>
+              <Input readOnly style={{marginTop: '0px', marginBottom: '0px'}}/>
             </TotalPriceWrapper>
 
-            <SaveButton>Opret tilbud</SaveButton>
-            {/*<Button icon='check_circle' label={'Opret tilbud'} size={'small'}/>*/}
+            {/*<SaveButton>Opret tilbud</SaveButton>*/}
+            <ButtonPanel justify='right' style={{marginRight: '0px', marginTop: '5px'}}>
+              <Button icon='check_circle' label={'Opret tilbud'} size={'small'}/>
+            </ButtonPanel>
           </RightSideWrapper>
         </Wrapper>
       </div>
@@ -94,4 +79,10 @@ class CreateNewQuote extends Component {
   }
 }
 
-export default CreateNewQuote;
+function mapStateToProps(state, prop){
+  return{
+      customer: state.customer
+  }
+}
+
+export default connect(mapStateToProps, {fetchCustomers})(CreateNewQuote);
