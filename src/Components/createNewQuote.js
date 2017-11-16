@@ -1,22 +1,19 @@
 import React, { Component } from 'react';
 import { Wrapper, LeftSideWrapper, RightSideWrapper, H1, Input, TableWrapper, Table, TD, TH, TR, TextArea, ProductWrapper, LabelWrapper, Label, TotalPriceWrapper, SaveButton } from '../Styles/createNewQuote';
-import { Button } from 'odeum-ui'
+import { Button } from 'odeum-ui';
+import ProductsFields from './renderProductFields';
 
 class CreateNewQuote extends Component {
-  renderProductInputs = () => {
-      var i
-      var arr = []
-      for(i = 0; i < 8; i++) {
-        arr.push(
-          <ProductWrapper>
-            <Input placeholder="Begynd at skrive..." width="250px" marginRight="4px" marginTop="0px" marginBottom="0px"/>
-            <Input width="65px" marginRight="4px" marginTop="0px" marginBottom="0px"/>
-            <Input width="65px" marginRight="4px" marginTop="0px" marginBottom="0px"/>
-            <Input readOnly width="65px" marginTop="0px" marginBottom="0px"/>
-          </ProductWrapper>
-        )
-      }
-    return arr
+  constructor(props) {
+    super(props);
+    this.state = { dropDown: [] };
+  }
+
+  onAddBtnClick = (event) => {
+    const dropDown = this.state.dropDown;
+    this.setState({
+      dropDown: dropDown.concat(<ProductsFields key={dropDown.length} />)
+    });
   }
 
   render() {
@@ -25,12 +22,12 @@ class CreateNewQuote extends Component {
         <Wrapper>
           <LeftSideWrapper>
             <H1>Vælg kunde:</H1>
-            <Input placeholder="Søg efter kunde..."/>
+            <Input placeholder="Søg efter kunde..." />
 
             <TableWrapper>
               <Table>
                 <tbody>
-                  <TR style={{backgroundColor: '#E3E5E5'}}>
+                  <TR style={{ backgroundColor: '#E3E5E5' }}>
                     <TH>Virksomhed</TH>
                     <TH>E-mail</TH>
                     <TH>Telefon</TH>
@@ -65,8 +62,8 @@ class CreateNewQuote extends Component {
             </TableWrapper>
 
             <H1>Tilbuds beskrivelse:</H1>
-            <Input placeholder="Titel..."/>
-            <TextArea placeholder="Beskrivelse..."/>
+            <Input placeholder="Titel..." />
+            <TextArea placeholder="Beskrivelse..." />
           </LeftSideWrapper>
 
           <RightSideWrapper>
@@ -77,11 +74,15 @@ class CreateNewQuote extends Component {
               <Label marginRight="25px;">Rabat (i kr.)</Label>
               <Label>Pris</Label>
             </LabelWrapper>
-            {this.renderProductInputs()}
-
+            <ProductsFields />
+            <button onClick={this.onAddBtnClick}>Add</button>
+            {this.state.dropDown.map((item, index) => {
+                return item   
+            })}
             <TotalPriceWrapper>
+           
               <Label marginRight="3px" width="40px" paddingTop="7px">I alt:</Label>
-              <Input readOnly/>
+              <Input readOnly />
             </TotalPriceWrapper>
 
             <SaveButton>Opret tilbud</SaveButton>
