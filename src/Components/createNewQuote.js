@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Wrapper, LeftSideWrapper, RightSideWrapper, H1, Input, TableWrapper, Table, TD, TH, TR, TextArea, ProductWrapper, LabelWrapper, Label, TotalPriceWrapper, SaveButton } from '../Styles/createNewQuote';
-import { Button } from 'odeum-ui'
+import { Button, ButtonPanel } from 'odeum-ui'
 
 class CreateNewQuote extends Component {
   renderProductInputs = () => {
@@ -80,12 +80,14 @@ class CreateNewQuote extends Component {
             {this.renderProductInputs()}
 
             <TotalPriceWrapper>
-              <Label marginRight="3px" width="40px" paddingTop="7px">I alt:</Label>
-              <Input readOnly/>
+              <Label marginRight="3px" width="40px" paddingTop="7px" style={{marginTop: '0px'}}>I alt:</Label>
+              <Input readOnly style={{marginTop: '0px', marginBottom: '0px'}}/>
             </TotalPriceWrapper>
 
-            <SaveButton>Opret tilbud</SaveButton>
-            {/*<Button icon='check_circle' label={'Opret tilbud'} size={'small'}/>*/}
+            {/*<SaveButton>Opret tilbud</SaveButton>*/}
+            <ButtonPanel justify='right' style={{marginRight: '0px', marginTop: '5px'}}>
+              <Button icon='check_circle' label={'Opret tilbud'} size={'small'}/>
+            </ButtonPanel>
           </RightSideWrapper>
         </Wrapper>
       </div>

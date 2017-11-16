@@ -8,7 +8,6 @@ import {
   Footer
 } from 'odeum-app'
 import CreateNewQuote from './Components/createNewQuote';
-import Cart from './Components/cart'; 
 import Product from './Containers/products';
 import Customer from './Containers/customers';
 
@@ -38,9 +37,6 @@ class App extends Component {
             </Tab>
             </Menu>
           <Menu label={'Workspace'} icon={'home'} route={'/workspace'}>
-            <Tab icon={'assignment'} label={'workspace'}>
-              <Cart/>
-            </Tab>
             <Tab icon={'assignment'} label={'produkt'}>
               <Product/>
             </Tab>
