@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Wrapper, LeftSideWrapper, RightSideWrapper, Input, TableWrapper, Table, TD, TH, TR, TextArea, ProductWrapper, LabelWrapper, Label, TotalPriceWrapper } from '../Styles/createNewQuote';
+import { Wrapper, LeftSideWrapper, RightSideWrapper } from '../Styles/createNewQuote';
+import { TR, TD } from '../Styles/table';
 import ProductsFields from '../Components/renderProductFields';
 import SaveButton from '../Components/saveButton';
 import QuoteDescription from '../Components/quoteDescription';

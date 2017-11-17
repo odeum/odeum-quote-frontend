@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
-//import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux'; 
-import { TableWrapper, Table, TD, TH, TR} from '../Styles/table'
+import { TableWrapper, Table, TH, TR} from '../Styles/table'
 import { H1, Input } from '../Styles/createNewQuote'
 
 class TableComponent extends Component {

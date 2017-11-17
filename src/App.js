@@ -4,8 +4,7 @@ import {
   Header,
   MenuPanel,
   Menu,
-  Tab,
-  Footer
+  Tab
 } from 'odeum-app'
 import CreateNewQuote from './Containers/createNewQuote';
 import Product from './Containers/products';
