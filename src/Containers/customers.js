@@ -6,6 +6,13 @@ import { TableWrapper, Table, TD, TH, TR } from '../Styles/createNewQuote'
 import CustomerTable from '../Components/customerTable'
 
 class Customer extends Component {
+    constructor(props){
+            super(props)
+            this.state={
+                filter: ''
+            }
+    }
+
     componentDidMount(){
         this.props.fetchCustomers();
     }
@@ -29,6 +36,7 @@ class Customer extends Component {
     render() {
         return (
             <div>
+                <input value={this.state.filter}/>
                 <h2>kunder</h2>
                 <CustomerTable customer={this.props.customer} th1={'virksomhed'} th2={'email'} th3={'telefon'} renderTableRows={this.renderCustomers()}/>
             </div>
