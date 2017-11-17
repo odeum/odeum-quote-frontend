@@ -1,23 +1,44 @@
 import React, { Component } from 'react';
 import { Wrapper, LeftSideWrapper, RightSideWrapper, H1, Input, TableWrapper, Table, TD, TH, TR, TextArea, ProductWrapper, LabelWrapper, Label, TotalPriceWrapper, SaveButton } from '../Styles/createNewQuote';
-import { Button, ButtonPanel } from 'odeum-ui'
+import { Button, ButtonPanel } from 'odeum-ui';
+import ProductsFields from './renderProductFields';
+import { connect } from 'react-redux'; 
+import { fetchCustomers } from '../Actions/customerAction';
+import TableComponent from '../Components/table';
 
 class CreateNewQuote extends Component {
-  renderProductInputs = () => {
-      var i
-      var arr = []
-      for(i = 0; i < 8; i++) {
-        arr.push(
-          <ProductWrapper>
-            <Input placeholder="Begynd at skrive..." width="250px" marginRight="4px" marginTop="0px" marginBottom="0px"/>
-            <Input width="65px" marginRight="4px" marginTop="0px" marginBottom="0px"/>
-            <Input width="65px" marginRight="4px" marginTop="0px" marginBottom="0px"/>
-            <Input readOnly width="65px" marginTop="0px" marginBottom="0px"/>
-          </ProductWrapper>
-        )
-      }
-    return arr
+  constructor(props) {
+    super(props);
+    this.state = { dropDown: [] };
   }
+  componentDidMount(){
+    this.props.fetchCustomers();
+  }
+
+  onAddBtnClick = (event) => {
+    const dropDown = this.state.dropDown;
+    this.setState({
+      dropDown: dropDown.concat(<ProductsFields key={dropDown.length} />)
+    });
+  }
+
+  renderCustomers = () => {
+    if(!this.props.customer){
+      console.log('customer is null');
+    }
+    return this.props.customer.map((array, index) => {
+         return Object.entries(array).map((item, index) => {
+           console.log('renderCustomer', item)
+             return (
+                 <TR key={index}>
+                     <TD>{item[1].orgName}</TD>
+                     <TD>{item[1].contactEmail}</TD>
+                     <TD>{item[1].contactPhone}</TD>
+                 </TR>
+             )
+         })
+     })
+ }
 
   render() {
     return (
@@ -25,48 +46,18 @@ class CreateNewQuote extends Component {
         <Wrapper>
           <LeftSideWrapper>
             <H1>Vælg kunde:</H1>
-            <Input placeholder="Søg efter kunde..."/>
+            <Input placeholder="Søg efter kunde..." />
 
-            <TableWrapper>
-              <Table>
-                <tbody>
-                  <TR style={{backgroundColor: '#E3E5E5'}}>
-                    <TH>Virksomhed</TH>
-                    <TH>E-mail</TH>
-                    <TH>Telefon</TH>
-                  </TR>
-                  <TR>
-                    <TD>Alfreds Futterkiste</TD>
-                    <TD>Germany</TD>
-                    <TD>15915948</TD>
-                  </TR>
-                  <TR>
-                    <TD>Berglunds snabbkop</TD>
-                    <TD>Sweden</TD>
-                    <TD>15915948</TD>
-                  </TR>
-                  <TR>
-                    <TD>Island Trading</TD>
-                    <TD>UK</TD>
-                    <TD>15915948</TD>
-                  </TR>
-                  <TR>
-                    <TD>Koniglich Essen</TD>
-                    <TD>Germany</TD>
-                    <TD>15915948</TD>
-                  </TR>
-                  <TR>
-                    <TD>Koniglich Essen</TD>
-                    <TD>Germany</TD>
-                    <TD>15915948</TD>
-                  </TR>
-                </tbody>
-              </Table>
-            </TableWrapper>
-
+            <TableComponent
+              th1={'Virksomhed'}
+              th2={'Email'}
+              th3={'Telefon'}
+              renderTableRows={this.renderCustomers()}
+            />
+            
             <H1>Tilbuds beskrivelse:</H1>
-            <Input placeholder="Titel..."/>
-            <TextArea placeholder="Beskrivelse..."/>
+            <Input placeholder="Titel..." />
+            <TextArea placeholder="Beskrivelse..." />
           </LeftSideWrapper>
 
           <RightSideWrapper>
@@ -77,8 +68,11 @@ class CreateNewQuote extends Component {
               <Label marginRight="25px;">Rabat (i kr.)</Label>
               <Label>Pris</Label>
             </LabelWrapper>
-            {this.renderProductInputs()}
-
+            <ProductsFields />
+            <button onClick={this.onAddBtnClick}>Add</button>
+            {this.state.dropDown.map((item, index) => {
+                return item   
+            })}
             <TotalPriceWrapper>
               <Label marginRight="3px" width="40px" paddingTop="7px" style={{marginTop: '0px'}}>I alt:</Label>
               <Input readOnly style={{marginTop: '0px', marginBottom: '0px'}}/>
@@ -95,4 +89,10 @@ class CreateNewQuote extends Component {
   }
 }
 
-export default CreateNewQuote;
+function mapStateToProps(state, prop){
+  return{
+      customer: state.customer
+  }
+}
+
+export default connect(mapStateToProps, {fetchCustomers})(CreateNewQuote);

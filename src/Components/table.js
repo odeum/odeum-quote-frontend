@@ -1,24 +1,20 @@
 import React, { Component } from 'react'
 //import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'; 
-import { TableWrapper, Table, TD, TH, TR } from '../Styles/createNewQuote'
+import { TableWrapper, Table, TD, TH, TR } from '../Styles/table'
 
-class CustomerTable extends Component {
-    componentdidUpdate(){
-        this.props.customer
-    }
-
-
+class TableComponent extends Component {
     render() {
         return (
-            <div>
-                <TableWrapper>
+            <div style={{width:'100%'}}>
+                <TableWrapper height={this.props.height} width={this.props.width}>
                     <Table>
                         <tbody>
                             <TR style={{backgroundColor: '#E3E5E5'}}>
                                 <TH>{this.props.th1}</TH>
                                 <TH>{this.props.th2}</TH>
                                 <TH>{this.props.th3}</TH>
+                                <TH>{this.props.th4}</TH>
                             </TR>
                                 {this.props.renderTableRows}
                         </tbody>
@@ -28,4 +24,4 @@ class CustomerTable extends Component {
         )
     }
 }
-export default CustomerTable;
+export default TableComponent;
