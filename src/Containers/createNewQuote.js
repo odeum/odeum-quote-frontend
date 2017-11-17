@@ -19,7 +19,6 @@ class CreateNewQuote extends Component {
     }
 
     onAddBtnClick = (event) => {
-        console.log('linje 21 createNewQuote.js')
         const dropDown = this.state.dropDown;
         this.setState({
             dropDown: dropDown.concat(<ProductsFields key={dropDown.length} />)
@@ -56,12 +55,10 @@ class CreateNewQuote extends Component {
                         <QuoteDescription />
                     </LeftSideWrapper>
                     <RightSideWrapper>
-                        <AddProduct onAddBtnClick={this.onAddBtnClick}>
-                            {this.state.dropDown.map((item, index) => {
-                                console.log('linje 61, createQuotes', item)
-                                return item
-                            })}
-                        </AddProduct>
+                         <AddProduct onAddBtnClick={this.onAddBtnClick}/> 
+                        {this.state.dropDown.map((i) => {
+                            return i; 
+                        })}
                         <TotalPrice />
                         <SaveButton />
                     </RightSideWrapper>
