@@ -10,6 +10,7 @@ import AddProduct from '../Components/CreateNewQuote/addProduct';
 import TotalPrice from '../Components/CreateNewQuote/totalPrice';
 import TableComponent from '../Components/table';
 
+const tableHeaders = { th1: 'Virksomhed', th2: 'E-mail', th3: 'Telefon' }
 class CreateNewQuote extends Component {
     constructor(props) {
         super(props);
@@ -41,6 +42,7 @@ class CreateNewQuote extends Component {
     }
 
     render() {
+
         return (
             <div>
                 <Wrapper>
@@ -48,17 +50,15 @@ class CreateNewQuote extends Component {
                         <TableComponent
                             title={'Vælg kunde:'}
                             searhPlaceholder={'Søg efter kunde...'}
-                            th1={'Virksomhed'}
-                            th2={'Email'}
-                            th3={'Telefon'}
+                            tableColumns={tableHeaders}
                             renderTableRows={this.renderCustomers()}
                         />
                         <QuoteDescription />
                     </LeftSideWrapper>
                     <RightSideWrapper>
-                         <AddProduct onAddBtnClick={this.onAddBtnClick}/> 
+                        <AddProduct onAddBtnClick={this.onAddBtnClick} />
                         {this.state.dropDown.map((i) => {
-                            return i; 
+                            return i;
                         })}
                         <TotalPrice />
                         <SaveButton />
