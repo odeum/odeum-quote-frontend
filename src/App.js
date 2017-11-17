@@ -4,13 +4,11 @@ import {
   Header,
   MenuPanel,
   Menu,
-  Tab,
-  Footer
+  Tab
 } from 'odeum-app'
-import CreateNewQuote from './Components/createNewQuote';
+import CreateNewQuote from './Containers/createNewQuote';
 import Product from './Containers/products';
 import Customer from './Containers/customers';
-import Add from './Components/addNewDropdown';
 
 class App extends Component {
 
@@ -42,7 +40,6 @@ class App extends Component {
               <Product/>
             </Tab>
             <Tab icon={'assignment'} label={'add'}>
-            <Add/>
           </Tab>
           </Menu>
         </MenuPanel>
