@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'; 
 import { fetchCustomers } from '../Actions/customerAction';
 import { TableWrapper, Table, TD, TH, TR } from '../Styles/createNewQuote'
-import CustomerTable from '../Components/customerTable'
+import CustomerTable from '../Components/table'
 
 class Customer extends Component {
     constructor(props){
