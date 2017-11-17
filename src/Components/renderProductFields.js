@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Input, ProductWrapper } from '../Styles/createNewQuote';
 
-export default class ProductsFields extends Component {
+ class ProductsFields extends Component {
   /* renderProductInputs = () => {
        var i
        var arr = []
@@ -30,3 +30,4 @@ export default class ProductsFields extends Component {
     );
   }
 }
+export default ProductsFields; 
