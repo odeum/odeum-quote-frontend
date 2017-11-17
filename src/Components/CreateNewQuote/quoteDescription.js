@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Input, H1, TextArea } from '../Styles/createNewQuote';
+import { Input, H1, TextArea } from '../../Styles/createNewQuote';
 
 class QuoteDescription extends Component {
     render() {

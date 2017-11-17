@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { Wrapper, LeftSideWrapper, RightSideWrapper } from '../Styles/createNewQuote';
-import { TR, TD } from '../Styles/table';
-import ProductsFields from '../Components/renderProductFields';
-import SaveButton from '../Components/saveButton';
-import QuoteDescription from '../Components/quoteDescription';
-import AddProduct from '../Components/addProduct';
-import TotalPrice from '../Components/totalPrice';
 import { connect } from 'react-redux';
 import { fetchCustomers } from '../Actions/customerAction';
+import { Wrapper, LeftSideWrapper, RightSideWrapper } from '../Styles/createNewQuote';
+import { TR, TD } from '../Styles/table';
+import ProductsFields from '../Components/CreateNewQuote/renderProductFields';
+import SaveButton from '../Components/CreateNewQuote/saveButton';
+import QuoteDescription from '../Components/CreateNewQuote/quoteDescription';
+import AddProduct from '../Components/CreateNewQuote/addProduct';
+import TotalPrice from '../Components/CreateNewQuote/totalPrice';
 import TableComponent from '../Components/table';
 
 class CreateNewQuote extends Component {
