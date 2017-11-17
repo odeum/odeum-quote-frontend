@@ -4,7 +4,7 @@ import { fetchCustomers } from '../Actions/customerAction';
 import { TD, TR } from '../Styles/table';
 import CustomerTable from '../Components/table'
 
-const ths = { th1:"virksomhed", email:"email", telefon:"telefon"}
+const tableHeaders = { th1:"virksomhed", email:"email", telefon:"telefon"}
 
 class Customer extends Component {
     constructor(props) {
@@ -37,7 +37,7 @@ class Customer extends Component {
             <div>
                 <input value={this.state.filter}/>
                 <h2>kunder</h2>
-                <CustomerTable  customer={this.props.customer} th={ths} renderTableRows={this.renderCustomers()}/>
+                <CustomerTable customer={this.props.customer} tableColumns={tableHeaders} renderTableRows={this.renderCustomers()}/>
             </div>
         )
     }

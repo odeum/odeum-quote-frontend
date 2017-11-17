@@ -4,6 +4,8 @@ import {fetchProducts} from '../Actions/productAction';
 import { TD, TR } from '../Styles/table';
 import TableComponent from '../Components/table';
 
+const tableHeaders = { titel:"Titel", beskrivelse:"Beskrivelse", pris:"Pris", type:"Type" };
+
 class Product extends Component {
     componentDidMount(){    
         this.props.fetchProducts();
@@ -26,14 +28,7 @@ class Product extends Component {
     return (
       <div style={{width: '100%'}}>
         <h2>Produkter</h2>
-        <TableComponent
-            height={'300px'}
-            th1={'Titel'}
-            th2={'Beskrivelse'}
-            th3={'Pris'}
-            th4={'Type'}
-            renderTableRows={fetchProducts}
-        />
+        <TableComponent tableColumns={tableHeaders} renderTableRows={fetchProducts}/>
       </div>
     )
   }
