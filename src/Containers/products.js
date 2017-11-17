@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'; 
 import {fetchProducts} from '../Actions/productAction';
-import { TD, TR } from '../Styles/createNewQuote';
+import { TD, TR } from '../Styles/table';
 import TableComponent from '../Components/table';
 
 class Product extends Component {

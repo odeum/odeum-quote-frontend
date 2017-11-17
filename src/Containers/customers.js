@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { connect } from 'react-redux'; 
 import { fetchCustomers } from '../Actions/customerAction';
-import { TD, TR } from '../Styles/createNewQuote'
-import CustomerTable from '../Components/table'
+import { TD, TR } from '../Styles/table';
+import CustomerTable from '../Components/table';
 
 class Customer extends Component {
     constructor(props) {
