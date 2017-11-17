@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
-//import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux'; 
-import { TableWrapper, Table, TD, TH, TR} from '../Styles/table'
+import { TableWrapper, Table, TH, TR} from '../Styles/table'
 import { H1, Input } from '../Styles/createNewQuote'
 
-class TableComponent extends Component {
+class TableComponent extends Component {    
+    renderFromProps() {
+        return Object.entries(this.props.tableColumns).map((propKey, index) => 
+         { return <TH key={index}>{propKey[1]}</TH>
+         });
+      }
+
     render() {
         return (
             <div style={{width:'100%'}}>
@@ -14,12 +18,9 @@ class TableComponent extends Component {
                     <Table>
                         <tbody>
                             <TR style={{backgroundColor: '#E3E5E5'}}>
-                                <TH>{this.props.th1}</TH>
-                                <TH>{this.props.th2}</TH>
-                                <TH>{this.props.th3}</TH>
-                                <TH>{this.props.th4}</TH>
+                            { this.renderFromProps()}
                             </TR>
-                                {this.props.renderTableRows}
+                              {this.props.renderTableRows}
                         </tbody>
                     </Table>
                 </TableWrapper>

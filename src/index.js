@@ -1,10 +1,9 @@
-import React, { Component } from 'react'
-import { render } from 'react-dom'
-import { BrowserRouter as Router, Route, } from 'react-router-dom'
-import App from './App'
-import registerServiceWorker from './registerServiceWorker'
-import './index.css'
-import ReduxPromise from 'redux-promise' 
+import React, { Component } from 'react';
+import { render } from 'react-dom';
+import { BrowserRouter as Router, Route, } from 'react-router-dom';
+import App from './App';
+import registerServiceWorker from './registerServiceWorker';
+import './index.css';
 import { Provider } from 'react-redux';
 import Store from './store';
 
