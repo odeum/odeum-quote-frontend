@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const TableWrapper = styled.div`
 width: ${(props) => props.width || '100%'};
-height: ${(props) => props.height || '145px'};
+height: ${(props) => props.height || '160px'};
 overflow-x: auto;
 margin-bottom: 20px;
 `
