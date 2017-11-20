@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import ProductsFields from './renderProductFields'; 
 import { H1, LabelWrapper, Label } from '../../Styles/createNewQuote';
+import { ButtonPanel, Button } from 'odeum-ui';
 
 class AddProduct extends Component {
-  
     render() {
         return (
             <div>
@@ -15,7 +15,6 @@ class AddProduct extends Component {
                     <Label>Pris</Label>
                 </LabelWrapper>
                 <ProductsFields />
-                <button onClick={this.props.onAddBtnClick}>Add</button>
             </div>
         )
     }

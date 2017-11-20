@@ -4,9 +4,9 @@ import { TotalPriceWrapper, Label, Input } from '../../Styles/createNewQuote';
  class TotalPrice extends Component {
     render() {
         return (
-            <div>
+            <div style={{marginLeft: 'auto'}}>
                 <TotalPriceWrapper>
-                    <Label marginRight="3px" width="40px" paddingTop="7px" style={{ marginTop: '0px' }}>I alt:</Label>
+                    <Label marginRight="3px" width="45px" paddingTop="7px" style={{ marginTop: '0px' }}>I alt:</Label>
                     <Input readOnly style={{ marginTop: '0px', marginBottom: '0px' }} />
                 </TotalPriceWrapper>
             </div>

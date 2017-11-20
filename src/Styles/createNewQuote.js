@@ -87,10 +87,9 @@ export const Label = styled.label`
 `
 
 export const TotalPriceWrapper = styled.div`
-    width: 70%;
+    width: 100%;
     height: 30px;
     margin-top: 23px;
-    margin-left: auto;
     display: inline-flex;
 `
 
