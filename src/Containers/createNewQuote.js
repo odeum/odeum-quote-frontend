@@ -62,7 +62,7 @@ class CreateNewQuote extends Component {
                     if(item[1].orgName.toLowerCase().includes(value.toLowerCase()) 
                     || item[1].contactEmail.toLowerCase().includes(value.toLowerCase()))
                     return (
-                        <TR key={index}>
+                        <TR key={index} onClick={(e) => {this.selectCustomerRow(e, item[1])}}>
                             <TD>{item[1].orgName}</TD>
                             <TD>{item[1].contactEmail}</TD>
                             <TD>{item[1].contactPhone}</TD>
