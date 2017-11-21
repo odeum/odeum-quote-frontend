@@ -16,11 +16,20 @@ const tableHeaders = { th1: 'Virksomhed', th2: 'E-mail', th3: 'Telefon' }
 class CreateNewQuote extends Component {
     constructor(props) {
         super(props);
-        this.state = {
+        this.state = { 
             dropDown: [],
+            selected: {},
             value: ''
         };
     }
+
+    selectCustomerRow = (event, item) => {
+        this.setState({
+            selected: item
+        })
+        console.log('clicked', item);
+    }
+
     componentDidMount() {
             this.props.fetchCustomers();
             this.props.fetchProducts();
@@ -37,12 +46,11 @@ class CreateNewQuote extends Component {
     renderCustomers = () => {
         /* Gets the customer information for the customer table */
         var value = this.state.value;
-        var newList = [];
         if (!value) {
             return this.props.customer.map((array, index) => {
                 return Object.entries(array).map((item, index) => {
                     return (
-                        <TR key={index}>
+                        <TR key={index} onClick={(e) => {this.selectCustomerRow(e, item[1])}}>
                             <TD>{item[1].orgName}</TD>
                             <TD>{item[1].contactEmail}</TD>
                             <TD>{item[1].contactPhone}</TD>
@@ -56,7 +64,7 @@ class CreateNewQuote extends Component {
                     if(item[1].orgName.toLowerCase().includes(value.toLowerCase()) 
                     || item[1].contactEmail.toLowerCase().includes(value.toLowerCase()))
                     return (
-                        <TR key={index}>
+                        <TR key={index} onClick={(e) => {this.selectCustomerRow(e, item[1])}}>
                             <TD>{item[1].orgName}</TD>
                             <TD>{item[1].contactEmail}</TD>
                             <TD>{item[1].contactPhone}</TD>
