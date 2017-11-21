@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchCustomers } from '../Actions/customerAction';
+import {fetchCustomers} from '../Actions/customerAction';
+import {fetchProducts} from '../Actions/productAction';
 import { Wrapper, LeftSideWrapper, RightSideWrapper } from '../Styles/createNewQuote';
 import { TR, TD } from '../Styles/table';
 import { ButtonPanel, Button } from 'odeum-ui';
@@ -21,13 +22,15 @@ class CreateNewQuote extends Component {
         };
     }
     componentDidMount() {
-        this.props.fetchCustomers();
+            this.props.fetchCustomers();
+            this.props.fetchProducts();
     }
+
 
     onAddBtnClick = (event) => {
         const dropDown = this.state.dropDown;
         this.setState({
-            dropDown: dropDown.concat(<ProductsFields key={dropDown.length} />)
+            dropDown: dropDown.concat(<ProductsFields key={dropDown.length} products={this.props.product}/>)
         });
     }
 
@@ -123,8 +126,9 @@ class CreateNewQuote extends Component {
 
 function mapStateToProps(state, prop) {
     return {
-        customer: state.customer
+        customer: state.customer,
+        product: state.product
     }
 }
 
-export default connect(mapStateToProps, { fetchCustomers })(CreateNewQuote);
+export default connect(mapStateToProps, { fetchCustomers, fetchProducts })(CreateNewQuote);
