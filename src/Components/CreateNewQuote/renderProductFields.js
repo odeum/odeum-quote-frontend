@@ -11,17 +11,12 @@ class ProductsFields extends Component {
 	}
 
 	handleVisblity = (evt) => {
-		console.log(evt.target.value + ' evt')
-		this.setState({
-			value:evt.target.value
-		})
 		console.log(this.state.value + ' state value')
-		if(this.state.value === ''){
+		if(evt.target.value === ''){
 			this.setState({setVisblity: false})
 		} else {
 			this.setState({setVisblity: true})
 		}
-		console.log(this.state.setVisblity)
 	}
 
 	renderLabels = () => {
@@ -45,8 +40,7 @@ class ProductsFields extends Component {
 						marginTop="0px" 
 						marginBottom="0px" 
 						type="text"
-						value={this.state.value} 
-						onChange={this.handleVisblity}
+						onChange={this.handleVisblity} 
 					/>
 					{this.state.setVisblity ? this.renderLabels() : null}
 					<Input width="65px" marginRight="4px" marginTop="0px" marginBottom="0px" />
