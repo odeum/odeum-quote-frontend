@@ -13,7 +13,7 @@ class TableComponent extends Component {
         return (
             <div style={{width:'100%'}}>
             <H1>{this.props.title}</H1>
-            <Input placeholder={this.props.searhPlaceholder} />
+            <Input onChange={this.props.onChange} value={this.props.value} placeholder={this.props.searhPlaceholder} />
                 <TableWrapper height={this.props.height} width={this.props.width}>
                     <Table>
                         <tbody>
