@@ -7,8 +7,8 @@ export const Wrapper = styled.div`
 `
 
 export const LeftSideWrapper = styled.div`
-    width: 475px;
-    height: 470px;
+    width: 600px;
+    height: 475px;
     display: flex;
     flex-direction: column;
     padding: 5px;
@@ -16,8 +16,8 @@ export const LeftSideWrapper = styled.div`
 `
 
 export const RightSideWrapper = styled.div`
-    width: 475px;
-    height: 470px;
+    width: 470px;
+    height: 475px;
     display: flex;
     flex-direction: column;
     padding: 5px;
@@ -87,10 +87,9 @@ export const Label = styled.label`
 `
 
 export const TotalPriceWrapper = styled.div`
-    width: 70%;
+    width: 100%;
     height: 30px;
     margin-top: 23px;
-    margin-left: auto;
     display: inline-flex;
 `
 

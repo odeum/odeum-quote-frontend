@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { fetchCustomers } from '../Actions/customerAction';
 import { Wrapper, LeftSideWrapper, RightSideWrapper } from '../Styles/createNewQuote';
 import { TR, TD } from '../Styles/table';
+import { ButtonPanel, Button } from 'odeum-ui';
 import ProductsFields from '../Components/CreateNewQuote/renderProductFields';
 import SaveButton from '../Components/CreateNewQuote/saveButton';
 import QuoteDescription from '../Components/CreateNewQuote/quoteDescription';
@@ -28,6 +29,7 @@ class CreateNewQuote extends Component {
     }
 
     renderCustomers = () => {
+        /* Gets the customer information for the customer table */
         return this.props.customer.map((array, index) => {
             return Object.entries(array).map((item, index) => {
                 return (
@@ -42,25 +44,44 @@ class CreateNewQuote extends Component {
     }
 
     render() {
-
         return (
             <div>
+                {/* Wrapps the whole page */}
                 <Wrapper>
+
+                    {/* Wrapper for the left section of the page */}
                     <LeftSideWrapper>
+
+                        {/* The search field and table for customer */}
                         <TableComponent
                             title={'Vælg kunde:'}
                             searhPlaceholder={'Søg efter kunde...'}
                             tableColumns={tableHeaders}
                             renderTableRows={this.renderCustomers()}
                         />
+
+                        {/*Title input and description input */}
                         <QuoteDescription />
                     </LeftSideWrapper>
+
+                    {/* Wrapper for the right section of the page */}
                     <RightSideWrapper>
-                        <AddProduct onAddBtnClick={this.onAddBtnClick} />
+
+                        {/* The fields for choosing products (renders one column) */}
+                        <AddProduct/>
                         {this.state.dropDown.map((i) => {
                             return i;
                         })}
+
+                        {/* Add button - renders a new field for products on onClick */}
+                        <ButtonPanel justify='right'>
+                            <Button onClick={this.onAddBtnClick} icon='add_circle_outline' label={'Ny kolonne'} size={'small'}/>
+                        </ButtonPanel>
+
+                        {/* Calculates the total price of the chosen products */}
                         <TotalPrice />
+
+                        {/* Save button - creates a PDF file of the quote */}
                         <SaveButton />
                     </RightSideWrapper>
                 </Wrapper>
