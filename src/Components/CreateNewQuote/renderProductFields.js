@@ -11,7 +11,7 @@ class ProductsFields extends Component {
 	}
 
 	handleVisblity = (evt) => {
-		console.log(evt.target.value + ' evt	')
+		console.log(evt.target.value + ' evt')
 		this.setState({
 			value:evt.target.value
 		})
@@ -38,7 +38,16 @@ class ProductsFields extends Component {
 		return (
 			<div>
 				<ProductWrapper>
-					<Input placeholder="Begynd at skrive..." width="250px" marginRight="4px" marginTop="0px" marginBottom="0px" onChange={this.handleVisblity} value={this.state.value}/>
+					<Input 
+						placeholder="Begynd at skrive..." 
+						width="250px" 
+						marginRight="4px" 
+						marginTop="0px" 
+						marginBottom="0px" 
+						type="text"
+						value={this.state.value} 
+						onChange={this.handleVisblity}
+					/>
 					{this.state.setVisblity ? this.renderLabels() : null}
 					<Input width="65px" marginRight="4px" marginTop="0px" marginBottom="0px" />
 					<Input width="65px" marginRight="4px" marginTop="0px" marginBottom="0px" />

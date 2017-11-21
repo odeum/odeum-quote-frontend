@@ -13,7 +13,6 @@ class AddProduct extends Component {
                     <Label marginRight="25px;">Rabat (i kr.)</Label>
                     <Label>Pris</Label>
                 </LabelWrapper>
-                <ProductsFields />
             </div>
         )
     }

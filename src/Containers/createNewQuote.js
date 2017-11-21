@@ -111,10 +111,10 @@ class CreateNewQuote extends Component {
 
                         {/* The fields for choosing products (renders one column) */}
                         <AddProduct />
+                        <ProductsFields />
                         {this.state.dropDown.map((i) => {
                             return i;
                         })}
-
                         {/* Add button - renders a new field for products on onClick */}
                         <ButtonPanel justify='right'>
                             <Button onClick={this.onAddBtnClick} icon='add_circle_outline' label={'Ny kolonne'} size={'small'} />
