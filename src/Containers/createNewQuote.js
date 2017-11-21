@@ -15,8 +15,19 @@ const tableHeaders = { th1: 'Virksomhed', th2: 'E-mail', th3: 'Telefon' }
 class CreateNewQuote extends Component {
     constructor(props) {
         super(props);
-        this.state = { dropDown: [] };
+        this.state = { 
+            dropDown: [],
+            selected: {}
+        };
     }
+
+    selectCustomerRow = (event, item) => {
+        this.setState({
+            selected: item
+        })
+        console.log('clicked', item);
+    }
+
     componentDidMount() {
         this.props.fetchCustomers();
     }
@@ -33,7 +44,7 @@ class CreateNewQuote extends Component {
         return this.props.customer.map((array, index) => {
             return Object.entries(array).map((item, index) => {
                 return (
-                    <TR key={index}>
+                    <TR key={index} onClick={(e) => {this.selectCustomerRow(e, item[1])}}>
                         <TD>{item[1].orgName}</TD>
                         <TD>{item[1].contactEmail}</TD>
                         <TD>{item[1].contactPhone}</TD>
