@@ -15,7 +15,10 @@ const tableHeaders = { th1: 'Virksomhed', th2: 'E-mail', th3: 'Telefon' }
 class CreateNewQuote extends Component {
     constructor(props) {
         super(props);
-        this.state = { dropDown: [] };
+        this.state = {
+            dropDown: [],
+            value: ''
+        };
     }
     componentDidMount() {
         this.props.fetchCustomers();
@@ -30,16 +33,42 @@ class CreateNewQuote extends Component {
 
     renderCustomers = () => {
         /* Gets the customer information for the customer table */
-        return this.props.customer.map((array, index) => {
-            return Object.entries(array).map((item, index) => {
-                return (
-                    <TR key={index}>
-                        <TD>{item[1].orgName}</TD>
-                        <TD>{item[1].contactEmail}</TD>
-                        <TD>{item[1].contactPhone}</TD>
-                    </TR>
-                )
+        var value = this.state.value;
+        var newList = [];
+        if (!value) {
+            return this.props.customer.map((array, index) => {
+                return Object.entries(array).map((item, index) => {
+                    return (
+                        <TR key={index}>
+                            <TD>{item[1].orgName}</TD>
+                            <TD>{item[1].contactEmail}</TD>
+                            <TD>{item[1].contactPhone}</TD>
+                        </TR>
+                    )
+                })
             })
+        } else {
+            return this.props.customer.map((array, index) => {
+                return Object.entries(array).map((item, index) => {
+                    if(item[1].orgName.toLowerCase().includes(value.toLowerCase()) 
+                    || item[1].contactEmail.toLowerCase().includes(value.toLowerCase()))
+                    return (
+                        <TR key={index}>
+                            <TD>{item[1].orgName}</TD>
+                            <TD>{item[1].contactEmail}</TD>
+                            <TD>{item[1].contactPhone}</TD>
+                        </TR>
+                    )
+                    else
+                        return null
+                })
+            })
+        }
+    }
+    onHandle = (e) => {
+        console.log('event', e.target.value);
+        this.setState({
+            value: e.target.value
         })
     }
 
@@ -58,6 +87,8 @@ class CreateNewQuote extends Component {
                             searhPlaceholder={'Søg efter kunde...'}
                             tableColumns={tableHeaders}
                             renderTableRows={this.renderCustomers()}
+                            onChange={this.onHandle}
+                            value={this.state.value}
                         />
 
                         {/*Title input and description input */}
@@ -68,14 +99,14 @@ class CreateNewQuote extends Component {
                     <RightSideWrapper>
 
                         {/* The fields for choosing products (renders one column) */}
-                        <AddProduct/>
+                        <AddProduct />
                         {this.state.dropDown.map((i) => {
                             return i;
                         })}
 
                         {/* Add button - renders a new field for products on onClick */}
                         <ButtonPanel justify='right'>
-                            <Button onClick={this.onAddBtnClick} icon='add_circle_outline' label={'Ny kolonne'} size={'small'}/>
+                            <Button onClick={this.onAddBtnClick} icon='add_circle_outline' label={'Ny kolonne'} size={'small'} />
                         </ButtonPanel>
 
                         {/* Calculates the total price of the chosen products */}

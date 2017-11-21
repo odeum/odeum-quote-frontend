@@ -9,7 +9,6 @@ import {
 import CreateNewQuote from './Containers/createNewQuote';
 import Product from './Containers/products';
 import Customer from './Containers/customers';
-import Filter from './Containers/filterDeletetMe'; 
 
 class App extends Component {
 
@@ -41,7 +40,6 @@ class App extends Component {
               <Product/>
             </Tab>
             <Tab icon={'assignment'} label={'add'}>
-            <Filter/>
           </Tab>
           </Menu>
         </MenuPanel>
