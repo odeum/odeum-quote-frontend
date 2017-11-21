@@ -27,8 +27,13 @@ class Product extends Component {
 
     return (
       <div style={{width: '100%'}}>
-        <h2>Produkter</h2>
-        <TableComponent tableColumns={tableHeaders} renderTableRows={fetchProducts}/>
+        <h2>Produkt oversigt</h2>
+        <TableComponent 
+            searhPlaceholder={'Søg efter produkt...'}
+            tableColumns={tableHeaders}
+            renderTableRows={fetchProducts}
+            height={'325px'}
+        />
       </div>
     )
   }
