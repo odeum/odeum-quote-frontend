@@ -43,7 +43,6 @@ class CreateNewQuote extends Component {
     renderCustomers = () => {
         /* Gets the customer information for the customer table */
         var value = this.state.value;
-        var newList = [];
         if (!value) {
             return this.props.customer.map((array, index) => {
                 return Object.entries(array).map((item, index) => {
