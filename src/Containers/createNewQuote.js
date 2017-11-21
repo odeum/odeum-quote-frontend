@@ -39,9 +39,17 @@ class CreateNewQuote extends Component {
     onAddBtnClick = (event) => {
         const dropDown = this.state.dropDown;
         this.setState({
-            dropDown: dropDown.concat(<ProductsFields key={dropDown.length} products={this.props.product}/>)
+            dropDown: dropDown.concat(<ProductsFields key={dropDown.length} products={this.props.product} renderChildren={this.renderProducts()}/>)
         });
     }
+
+    renderProducts = () => {
+			return this.props.product.map((item) => {
+				return item.product.map((product, key) => {
+					return <label key={key}>{product.name}</label>
+				})
+			})
+	}
 
     renderCustomers = () => {
         /* Gets the customer information for the customer table */
@@ -76,6 +84,7 @@ class CreateNewQuote extends Component {
             })
         }
     }
+    
     onHandle = (e) => {
         console.log('event', e.target.value);
         this.setState({
