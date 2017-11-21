@@ -63,9 +63,17 @@ class Customer extends Component {
 
     render() {
         return (
-            <div>
-                <h2>kunder</h2>
-                <CustomerTable onChange={this.onHandle} value={this.state.value} customer={this.props.customer} tableColumns={tableHeaders} renderTableRows={this.renderCustomers()} />
+            <div style={{width: '100%'}}>
+                <h2>Kunde oversigt</h2>
+                <CustomerTable 
+                    onChange={this.onHandle} 
+                    value={this.state.value}
+                    searhPlaceholder={'Søg efter kunde...'}
+                    height={'325px'}
+                    customer={this.props.customer} 
+                    tableColumns={tableHeaders} 
+                    renderTableRows={this.renderCustomers()}
+                />
             </div>
         )
     }
