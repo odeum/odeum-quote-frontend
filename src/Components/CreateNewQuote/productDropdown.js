@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import { DropdownWrapper, Link } from '../../Styles/dropdown';
+import { LinkWrapper, Link } from '../../Styles/dropdown';
 
 class ProductDropdown extends Component {
     render() {
         return (
-            <DropdownWrapper>
+            <LinkWrapper>
                 <Link>
                     {this.props.labels}
                 </Link>
-            </DropdownWrapper>
+            </LinkWrapper>
         )
     }
 }

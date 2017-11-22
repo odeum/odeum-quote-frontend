@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
 import { Input, ProductWrapper } from '../../Styles/createNewQuote';
-import { LinkWrapper } from '../../Styles/dropdown';
+import { LinkPosition } from '../../Styles/dropdown';
 
 class ProductsFields extends Component {
 	render() {
 		return (
 			<div>
 				<ProductWrapper>
-					<LinkWrapper>
+					<LinkPosition>
 						<Input
 							placeholder="Begynd at skrive..."
-							width="250px"
+							width="206px"
 							marginRight="4px"
 							marginTop="0px"
 							marginBottom="0px"
@@ -19,7 +19,7 @@ class ProductsFields extends Component {
 							value={this.props.value}
 						/>
 						{this.props.visbilty ? this.props.renderChildren : null}
-					</LinkWrapper>
+					</LinkPosition>
 					<Input width="65px" marginRight="4px" marginTop="0px" marginBottom="0px" />
 					<Input width="65px" marginRight="4px" marginTop="0px" marginBottom="0px" />
 					<Input readOnly width="65px" marginTop="0px" marginBottom="0px" />
