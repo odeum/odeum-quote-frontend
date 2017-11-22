@@ -65,8 +65,7 @@ class CreateNewQuote extends Component {
             return this.props.product.map((item) => {
                 return item.product.map((product, key) => {
                     if (product.name.toLowerCase().includes(productValue.toLowerCase())) {
-                        return <ProductDropdown key={key} labels={product.name}></ProductDropdown>
-                        /*<label key={key}>{product.name}</label>*/
+                        return <ProductDropdown key={key} name={product.name}></ProductDropdown>
                     } else {
                         return null;
                     }

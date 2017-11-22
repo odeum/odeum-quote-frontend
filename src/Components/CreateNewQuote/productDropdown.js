@@ -6,7 +6,7 @@ class ProductDropdown extends Component {
         return (
             <LinkWrapper>
                 <Link>
-                    {this.props.labels}
+                    {this.props.name}
                 </Link>
             </LinkWrapper>
         )
