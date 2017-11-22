@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ProductsFields from './renderProductFields'; 
 import { H1, LabelWrapper, Label } from '../../Styles/createNewQuote';
 
 class AddProduct extends Component {
