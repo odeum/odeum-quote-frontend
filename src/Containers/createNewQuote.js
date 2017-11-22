@@ -77,7 +77,6 @@ class CreateNewQuote extends Component {
         }
     }
     onHandle = (e) => {
-        console.log('event', e.target.value);
         this.setState({
             value: e.target.value
         })
