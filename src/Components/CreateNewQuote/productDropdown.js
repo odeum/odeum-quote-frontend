@@ -4,7 +4,7 @@ import { LinkWrapper, Link } from '../../Styles/dropdown';
 class ProductDropdown extends Component {
     render() {
         return (
-            <LinkWrapper>
+            <LinkWrapper onClick={this.props.setProduct}>
                 <Link>
                     {this.props.name}
                 </Link>

@@ -26,7 +26,8 @@ class CreateNewQuote extends Component {
             selected: {},
             value: '',
             productValue: '',
-            productVisibility: false
+            productVisibility: false,
+            totalPrice: 0
         };
     }
 
@@ -46,7 +47,15 @@ class CreateNewQuote extends Component {
     onAddBtnClick = (event) => {
         const dropDown = this.state.dropDown;
         this.setState({
-            dropDown: dropDown.concat(<ProductsFields key={dropDown.length} products={this.props.product} renderChildren={this.renderProducts()} />)
+            dropDown: dropDown.concat(
+            <ProductsFields 
+                value={this.state.productValue} 
+                renderChildren={this.renderProducts()} 
+                handleChange={this.handleChange} 
+                visbilty={this.state.productVisibility}
+                price={this.state.totalPrice}
+            />
+            )
         });
     }
     //#endregion small functions
@@ -60,14 +69,23 @@ class CreateNewQuote extends Component {
         } else {
             this.setState({productVisibility: true})
         }
-	}
+    }
+    
+    setProduct = (event, product) => {
+        console.log(product.price)
+        this.setState({
+            productVisibility: false,
+            productValue: product.name,
+            totalPrice: product.price        
+        })
+    }
 
     renderProducts = () => {
         var productValue = this.state.productValue
             return this.props.product.map((item) => {
                 return item.product.map((product, key) => {
                     if (product.name.toLowerCase().includes(productValue.toLowerCase())) {
-                        return <ProductDropdown key={key} name={product.name}></ProductDropdown>
+                        return <ProductDropdown key={key} name={product.name} setProduct={(e) => {this.setProduct(e, product)}}/>
                     } else {
                         return null;
                     }
@@ -147,7 +165,13 @@ class CreateNewQuote extends Component {
 
                         {/* The fields for choosing products (renders one column) */}
                         <AddProduct />
-                        <ProductsFields value={this.state.productValue} renderChildren={this.renderProducts()} handleChange={this.handleChange} visbilty={this.state.productVisibility}/>
+                        <ProductsFields 
+                            value={this.state.productValue} 
+                            renderChildren={this.renderProducts()} 
+                            handleChange={this.handleChange} 
+                            visbilty={this.state.productVisibility}
+                            price={this.state.totalPrice}
+                        />
                         {this.state.dropDown.map((i) => {
                             return i;
                         })}
