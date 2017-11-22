@@ -32,7 +32,7 @@ class CreateNewQuote extends Component {
     selectCustomerRow = (event, item) => {
         this.setState({
             selected: item,
-        }),
+        })
         console.log('clicked', item);
     }
 
