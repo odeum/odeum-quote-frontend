@@ -8,6 +8,7 @@
     "odeum-ui": "^0.1.26",
     "react": "^16.1.0",
     "react-dom": "^16.1.0",
+    "react-onclickoutside": "^6.7.0",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.17",

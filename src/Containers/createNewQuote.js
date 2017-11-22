@@ -13,6 +13,8 @@ import AddProduct from '../Components/CreateNewQuote/addProduct';
 import TotalPrice from '../Components/CreateNewQuote/totalPrice';
 import TableComponent from '../Components/table';
 import ProductDropdown from '../Components/CreateNewQuote/productDropdown';
+import onClickOutside from "react-onclickoutside";
+
 //#endregion imports
 
 const tableHeaders = { th1: 'Virksomhed', th2: 'E-mail', th3: 'Telefon' }
@@ -108,6 +110,10 @@ class CreateNewQuote extends Component {
         }
     }
 
+    handleClickOutside = () => {
+        this.setState({ productVisibility: false })
+      }
+
     onHandle = (e) => {
         this.setState({
             value: e.target.value
@@ -169,4 +175,6 @@ function mapStateToProps(state, prop) {
     }
 }
 
-export default connect(mapStateToProps, { fetchCustomers, fetchProducts })(CreateNewQuote);
+var commponnt = onClickOutside(CreateNewQuote);
+
+export default connect(mapStateToProps, { fetchCustomers, fetchProducts })(commponnt);
