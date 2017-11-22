@@ -12,6 +12,7 @@ import QuoteDescription from '../Components/CreateNewQuote/quoteDescription';
 import AddProduct from '../Components/CreateNewQuote/addProduct';
 import TotalPrice from '../Components/CreateNewQuote/totalPrice';
 import TableComponent from '../Components/table';
+import ProductDropdown from '../Components/CreateNewQuote/productDropdown';
 //#endregion imports
 
 const tableHeaders = { th1: 'Virksomhed', th2: 'E-mail', th3: 'Telefon' }
@@ -64,7 +65,8 @@ class CreateNewQuote extends Component {
             return this.props.product.map((item) => {
                 return item.product.map((product, key) => {
                     if (product.name.toLowerCase().includes(productValue.toLowerCase())) {
-                        return <label key={key}>{product.name}</label>
+                        return <ProductDropdown key={key} labels={product.name}></ProductDropdown>
+                        /*<label key={key}>{product.name}</label>*/
                     } else {
                         return null;
                     }
