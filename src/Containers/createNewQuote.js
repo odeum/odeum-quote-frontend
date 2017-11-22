@@ -1,3 +1,4 @@
+//#region imports
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchCustomers } from '../Actions/customerAction';
@@ -11,6 +12,7 @@ import QuoteDescription from '../Components/CreateNewQuote/quoteDescription';
 import AddProduct from '../Components/CreateNewQuote/addProduct';
 import TotalPrice from '../Components/CreateNewQuote/totalPrice';
 import TableComponent from '../Components/table';
+//#endregion imports
 
 const tableHeaders = { th1: 'Virksomhed', th2: 'E-mail', th3: 'Telefon' }
 class CreateNewQuote extends Component {
@@ -20,10 +22,12 @@ class CreateNewQuote extends Component {
             dropDown: [],
             selected: {},
             value: '',
-            productValue: ''
+            productValue: '',
+            productVisibility: false
         };
     }
 
+    //#region small functions
     selectCustomerRow = (event, item) => {
         this.setState({
             selected: item
@@ -43,28 +47,32 @@ class CreateNewQuote extends Component {
             dropDown: dropDown.concat(<ProductsFields key={dropDown.length} products={this.props.product} renderChildren={this.renderProducts()} />)
         });
     }
+    //#endregion small functions
 
-    renderProducts = (event) => {
-        console.log(event)
-        this.setState({productValue: event.target.value})
-        var productValue = this.state.productValue
-        if(!productValue){
-            console.log('kuku')
+
+    //#region product
+    handleChange = (evt) => {
+        this.setState({productValue: evt.target.value})
+        if(evt.target.value === ''){
+            this.setState({productVisibility: false})
         }else{
+            this.setState({productVisibility: true})
+        }
+	}
+
+    renderProducts = () => {
+        var productValue = this.state.productValue
             return this.props.product.map((item) => {
                 return item.product.map((product, key) => {
-                    console.log(product, 'product');
-                    console.log('productvalue', productValue)
                     if (product.name.toLowerCase().includes(productValue.toLowerCase())) {
                         return <label key={key}>{product.name}</label>
                     } else {
                         return null;
                     }
                 })
-            })
-        }
-       
+            })  
     }
+    //#endregion product 
 
     renderCustomers = () => {
         /* Gets the customer information for the customer table */
@@ -111,7 +119,6 @@ class CreateNewQuote extends Component {
             <div>
                 {/* Wrapps the whole page */}
                 <Wrapper>
-
                     {/* Wrapper for the left section of the page */}
                     <LeftSideWrapper>
 
@@ -134,7 +141,7 @@ class CreateNewQuote extends Component {
 
                         {/* The fields for choosing products (renders one column) */}
                         <AddProduct />
-                        <ProductsFields value={this.state.productValue} renderChildren={this.renderProducts()} />
+                        <ProductsFields value={this.state.productValue} renderChildren={this.renderProducts()} handleChange={this.handleChange} visbilty={this.state.kuku} />
                         {this.state.dropDown.map((i) => {
                             return i;
                         })}
