@@ -40,7 +40,6 @@ class CreateNewQuote extends Component {
         this.props.fetchProducts();
     }
 
-
     onAddBtnClick = (event) => {
         const dropDown = this.state.dropDown;
         this.setState({
@@ -53,9 +52,9 @@ class CreateNewQuote extends Component {
     //#region product
     handleChange = (evt) => {
         this.setState({productValue: evt.target.value})
-        if(evt.target.value === ''){
+        if(evt.target.value === '') {
             this.setState({productVisibility: false})
-        }else{
+        } else {
             this.setState({productVisibility: true})
         }
 	}
@@ -141,7 +140,7 @@ class CreateNewQuote extends Component {
 
                         {/* The fields for choosing products (renders one column) */}
                         <AddProduct />
-                        <ProductsFields value={this.state.productValue} renderChildren={this.renderProducts()} handleChange={this.handleChange} visbilty={this.state.kuku} />
+                        <ProductsFields value={this.state.productValue} renderChildren={this.renderProducts()} handleChange={this.handleChange} visbilty={this.state.productVisibility}/>
                         {this.state.dropDown.map((i) => {
                             return i;
                         })}
