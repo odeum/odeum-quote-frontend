@@ -31,6 +31,7 @@ class ProductsFields extends Component {
 						marginBottom="0px"
 						type="text"
 						onChange={this.handleVisblity}
+						value={this.props.value}
 					/>
 					{this.state.setVisblity ? this.props.renderChildren : null}
 					<Input width="65px" marginRight="4px" marginTop="0px" marginBottom="0px" />
