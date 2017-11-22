@@ -1,7 +1,8 @@
+//#region imports
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {fetchCustomers} from '../Actions/customerAction';
-import {fetchProducts} from '../Actions/productAction';
+import { fetchCustomers } from '../Actions/customerAction';
+import { fetchProducts } from '../Actions/productAction';
 import { Wrapper, LeftSideWrapper, RightSideWrapper } from '../Styles/createNewQuote';
 import { TR, TD } from '../Styles/table';
 import { ButtonPanel, Button } from 'odeum-ui';
@@ -11,18 +12,22 @@ import QuoteDescription from '../Components/CreateNewQuote/quoteDescription';
 import AddProduct from '../Components/CreateNewQuote/addProduct';
 import TotalPrice from '../Components/CreateNewQuote/totalPrice';
 import TableComponent from '../Components/table';
+//#endregion imports
 
 const tableHeaders = { th1: 'Virksomhed', th2: 'E-mail', th3: 'Telefon' }
 class CreateNewQuote extends Component {
     constructor(props) {
         super(props);
-        this.state = { 
+        this.state = {
             dropDown: [],
             selected: {},
-            value: ''
+            value: '',
+            productValue: '',
+            productVisibility: false
         };
     }
 
+    //#region small functions
     selectCustomerRow = (event, item) => {
         this.setState({
             selected: item,
@@ -39,17 +44,35 @@ class CreateNewQuote extends Component {
     onAddBtnClick = (event) => {
         const dropDown = this.state.dropDown;
         this.setState({
-            dropDown: dropDown.concat(<ProductsFields key={dropDown.length} products={this.props.product} renderChildren={this.renderProducts()}/>)
+            dropDown: dropDown.concat(<ProductsFields key={dropDown.length} products={this.props.product} renderChildren={this.renderProducts()} />)
         });
     }
+    //#endregion small functions
+
+
+    //#region product
+    handleChange = (evt) => {
+        this.setState({productValue: evt.target.value})
+        if(evt.target.value === ''){
+            this.setState({productVisibility: false})
+        }else{
+            this.setState({productVisibility: true})
+        }
+	}
 
     renderProducts = () => {
-			return this.props.product.map((item) => {
-				return item.product.map((product, key) => {
-					return <label key={key}>{product.name}</label>
-				})
-			})
-	}
+        var productValue = this.state.productValue
+            return this.props.product.map((item) => {
+                return item.product.map((product, key) => {
+                    if (product.name.toLowerCase().includes(productValue.toLowerCase())) {
+                        return <label key={key}>{product.name}</label>
+                    } else {
+                        return null;
+                    }
+                })
+            })  
+    }
+    //#endregion product 
 
     renderCustomers = () => {
         /* Gets the customer information for the customer table */
@@ -69,22 +92,22 @@ class CreateNewQuote extends Component {
         } else {
             return this.props.customer.map((array, index) => {
                 return Object.entries(array).map((item, index) => {
-                    if(item[1].orgName.toLowerCase().includes(value.toLowerCase()) 
-                    || item[1].contactEmail.toLowerCase().includes(value.toLowerCase()))
-                    return (
-                        <TR key={index} onClick={(e) => {this.selectCustomerRow(e, item[1])}}>
-                            <TD>{item[1].orgName}</TD>
-                            <TD>{item[1].contactEmail}</TD>
-                            <TD>{item[1].contactPhone}</TD>
-                        </TR>
-                    )
+                    if (item[1].orgName.toLowerCase().includes(value.toLowerCase())
+                        || item[1].contactEmail.toLowerCase().includes(value.toLowerCase()))
+                        return (
+                            <TR key={index} onClick={(e) => { this.selectCustomerRow(e, item[1]) }}>
+                                <TD>{item[1].orgName}</TD>
+                                <TD>{item[1].contactEmail}</TD>
+                                <TD>{item[1].contactPhone}</TD>
+                            </TR>
+                        )
                     else
                         return null
                 })
             })
         }
     }
-    
+
     onHandle = (e) => {
         this.setState({
             value: e.target.value
@@ -96,7 +119,6 @@ class CreateNewQuote extends Component {
             <div>
                 {/* Wrapps the whole page */}
                 <Wrapper>
-
                     {/* Wrapper for the left section of the page */}
                     <LeftSideWrapper>
 
@@ -119,7 +141,7 @@ class CreateNewQuote extends Component {
 
                         {/* The fields for choosing products (renders one column) */}
                         <AddProduct />
-                        <ProductsFields />
+                        <ProductsFields value={this.state.productValue} renderChildren={this.renderProducts()} handleChange={this.handleChange} visbilty={this.state.kuku} />
                         {this.state.dropDown.map((i) => {
                             return i;
                         })}

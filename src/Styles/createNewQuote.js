@@ -105,11 +105,3 @@ export const SaveButton = styled.button`
     border: none;
     border-radius: 4px;
 `
-
-export const DataList = styled.datalist`
-    border: .25em solid #137da0;
-    font-weight: bold;
-    color: black;
-    padding: 1px 1px;
-    cursor: pointer}
-`
