@@ -22,7 +22,7 @@ class ProductsFields extends Component {
 					</LinkPosition>
 					<Input width="65px" marginRight="4px" marginTop="0px" marginBottom="0px" />
 					<Input width="65px" marginRight="4px" marginTop="0px" marginBottom="0px" />
-					<Input readOnly width="65px" marginTop="0px" marginBottom="0px" />
+					<Input readOnly width="65px" marginTop="0px" marginBottom="0px" value={this.props.price}/>
 				</ProductWrapper>
 			</div>
 		);
