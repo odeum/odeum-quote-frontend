@@ -12,7 +12,6 @@ import QuoteDescription from '../Components/CreateNewQuote/quoteDescription';
 import AddProduct from '../Components/CreateNewQuote/addProduct';
 import TotalPrice from '../Components/CreateNewQuote/totalPrice';
 import TableComponent from '../Components/table';
-import ProductDropdown from '../Components/CreateNewQuote/productDropdown';
 import onClickOutside from "react-onclickoutside";
 
 //#endregion imports
@@ -24,10 +23,7 @@ class CreateNewQuote extends Component {
         this.state = {
             dropDown: [],
             selected: {},
-            value: '',
-            productValue: '',
-            productVisibility: false,
-            totalPrice: 0
+            value: ''
         };
     }
 
@@ -38,8 +34,8 @@ class CreateNewQuote extends Component {
         })
         console.log('clicked', item);
     }
-
     componentDidMount() {
+
         this.props.fetchCustomers();
         this.props.fetchProducts();
     }
@@ -48,51 +44,11 @@ class CreateNewQuote extends Component {
         const dropDown = this.state.dropDown;
         this.setState({
             dropDown: dropDown.concat(
-            <ProductsFields 
-                value={this.state.productValue} 
-                renderChildren={this.renderProducts()} 
-                handleChange={this.handleChange} 
-                visbilty={this.state.productVisibility}
-                price={this.state.totalPrice}
-            />
+                <ProductsFields/>
             )
         });
     }
     //#endregion small functions
-
-
-    //#region product
-    handleChange = (evt) => {
-        this.setState({productValue: evt.target.value})
-        if(evt.target.value === '') {
-            this.setState({productVisibility: false})
-        } else {
-            this.setState({productVisibility: true})
-        }
-    }
-    
-    setProduct = (event, product) => {
-        console.log(product.price)
-        this.setState({
-            productVisibility: false,
-            productValue: product.name,
-            totalPrice: product.price        
-        })
-    }
-
-    renderProducts = () => {
-        var productValue = this.state.productValue
-            return this.props.product.map((item) => {
-                return item.product.map((product, key) => {
-                    if (product.name.toLowerCase().includes(productValue.toLowerCase())) {
-                        return <ProductDropdown key={key} name={product.name} setProduct={(e) => {this.setProduct(e, product)}}/>
-                    } else {
-                        return null;
-                    }
-                })
-            })  
-    }
-    //#endregion product 
 
     renderCustomers = () => {
         /* Gets the customer information for the customer table */
@@ -101,7 +57,7 @@ class CreateNewQuote extends Component {
             return this.props.customer.map((array, index) => {
                 return Object.entries(array).map((item, index) => {
                     return (
-                        <TR key={index} onClick={(e) => {this.selectCustomerRow(e, item[1])}} style={{backgroundColor: this.state.selected === item[1] ? '#D3D3D3' : ''}}>
+                        <TR key={index} onClick={(e) => { this.selectCustomerRow(e, item[1]) }} style={{ backgroundColor: this.state.selected === item[1] ? '#D3D3D3' : '' }}>
                             <TD>{item[1].orgName}</TD>
                             <TD>{item[1].contactEmail}</TD>
                             <TD>{item[1].contactPhone}</TD>
@@ -127,10 +83,6 @@ class CreateNewQuote extends Component {
             })
         }
     }
-
-    handleClickOutside = () => {
-        this.setState({ productVisibility: false })
-      }
 
     onHandle = (e) => {
         this.setState({
@@ -165,13 +117,7 @@ class CreateNewQuote extends Component {
 
                         {/* The fields for choosing products (renders one column) */}
                         <AddProduct />
-                        <ProductsFields 
-                            value={this.state.productValue} 
-                            renderChildren={this.renderProducts()} 
-                            handleChange={this.handleChange} 
-                            visbilty={this.state.productVisibility}
-                            price={this.state.totalPrice}
-                        />
+                        <ProductsFields/>
                         {this.state.dropDown.map((i) => {
                             return i;
                         })}
