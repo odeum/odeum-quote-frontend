@@ -6,7 +6,7 @@ import { fetchProducts } from '../Actions/productAction';
 import { Wrapper, LeftSideWrapper, RightSideWrapper } from '../Styles/createNewQuote';
 import { TR, TD } from '../Styles/table';
 import { ButtonPanel, Button } from 'odeum-ui';
-import ProductsFields from '../Components/CreateNewQuote/renderProductFields';
+import ProductsFields from './productFields';
 import SaveButton from '../Components/CreateNewQuote/saveButton';
 import QuoteDescription from '../Components/CreateNewQuote/quoteDescription';
 import AddProduct from '../Components/CreateNewQuote/addProduct';

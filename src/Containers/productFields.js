@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { Input, ProductWrapper } from '../../Styles/createNewQuote';
-import { LinkPosition } from '../../Styles/dropdown';
+import { Input, ProductWrapper } from '../Styles/createNewQuote';
+import { LinkPosition } from '../Styles/dropdown';
 import { connect } from 'react-redux';
-import { fetchProducts } from '../../Actions/productAction';
-import ProductDropdown from './productDropdown';
+import { fetchProducts, saveProducts } from '../Actions/productAction';
+import ProductDropdown from '../Components/CreateNewQuote/productDropdown';
 //import onClickOutside from "react-onclickoutside";
 
 class ProductsFields extends Component {
@@ -21,7 +21,7 @@ class ProductsFields extends Component {
 	}
 
 	setProduct = (e, product) => {
-		console.log(product)
+        this.props.saveProducts(product);
 		this.setState({
 			productValue: product.name,
 			productVisibility: false,
@@ -32,11 +32,20 @@ class ProductsFields extends Component {
 	handleChange = (evt) => {
 		this.setState({productValue: evt.target.value})
         if (evt.target.value === '') {
-            this.setstate.productVisibility({productVisibility: false})
+            this.setState({productVisibility: false})
         } else {
-           this.setstate.productVisibility({productVisibility: true})
+			this.setState({productVisibility: true})
         }
-    }
+	}
+	
+/* 	printProducts = () => {
+        const { saveProduct } = this.props
+        console.log('saveProduct', saveProduct.arr)
+        saveProduct.arr.map((item, index) => {
+            console.log('saveProduct from store', item)
+            return item
+        })
+    } */
 
 	renderProducts = () => {
 		var productValue = this.state.productValue
@@ -79,14 +88,15 @@ class ProductsFields extends Component {
 
 function mapStateToProps(state, prop){
 	return{
-		product: state.product
+		product: state.product,
+		saveProduct: state.saveProduct
 	}
 }
+//var commponnt = onClickOutside(ProductsFields);
+
+export default connect(mapStateToProps, {fetchProducts, saveProducts})(ProductsFields)
 
 
-export default connect(mapStateToProps, {fetchProducts})(ProductsFields)
-
-//var commponnt = onClickOutside(CreateNewQuote);
 
     /*handleClickOutside = () => {
         this.setState({ productVisibility: false })
