@@ -1,8 +1,56 @@
 import React, { Component } from 'react'
 import { Input, ProductWrapper } from '../../Styles/createNewQuote';
 import { LinkPosition } from '../../Styles/dropdown';
+import { connect } from 'react-redux';
+import { fetchProducts } from '../../Actions/productAction';
+import ProductDropdown from './productDropdown';
+//import onClickOutside from "react-onclickoutside";
 
 class ProductsFields extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			productValue: '',
+			productVisibility: false,
+			totalPrice: 0
+		}
+	}
+
+	componentDidMount(){
+		this.props.fetchProducts();
+	}
+
+	setProduct = (e, product) => {
+		console.log(product)
+		this.setState({
+			productValue: product.name,
+			productVisibility: false,
+			totalPrice: product.price
+		})
+	}
+
+	handleChange = (evt) => {
+		this.setState({productValue: evt.target.value})
+        if (evt.target.value === '') {
+            this.state.productVisibility = false
+        } else {
+           this.state.productVisibility = true
+        }
+    }
+
+	renderProducts = () => {
+		var productValue = this.state.productValue
+		return this.props.product.map((item) => {
+			return item.product.map((product, key) => {
+				if (product.name.toLowerCase().includes(productValue.toLowerCase())) {
+					return <ProductDropdown key={key} name={product.name} setProduct={(e) => this.setProduct(e, product)}/>
+				} else {
+					return null;
+				}
+			})
+		})
+	}
+
 	render() {
 		return (
 			<div>
@@ -15,17 +63,31 @@ class ProductsFields extends Component {
 							marginTop="0px"
 							marginBottom="0px"
 							type="text"
-							onChange={this.props.handleChange}
-							value={this.props.value}
+							onChange={this.handleChange}
+							value={this.state.productValue}
 						/>
-						{this.props.visbilty ? this.props.renderChildren : null}
+						{this.state.productVisibility ? this.renderProducts() : null}
 					</LinkPosition>
 					<Input width="65px" marginRight="4px" marginTop="0px" marginBottom="0px" />
 					<Input width="65px" marginRight="4px" marginTop="0px" marginBottom="0px" />
-					<Input readOnly width="65px" marginTop="0px" marginBottom="0px" value={this.props.price}/>
+					<Input readOnly width="65px" marginTop="0px" marginBottom="0px" value={this.state.totalPrice} />
 				</ProductWrapper>
 			</div>
 		);
 	}
 }
-export default ProductsFields;
+
+function mapStateToProps(state, prop){
+	return{
+		product: state.product
+	}
+}
+
+
+export default connect(mapStateToProps, {fetchProducts})(ProductsFields)
+
+//var commponnt = onClickOutside(CreateNewQuote);
+
+    /*handleClickOutside = () => {
+        this.setState({ productVisibility: false })
+    }*/
