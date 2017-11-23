@@ -1,10 +1,11 @@
 
-import product from './productReducer'
+import {fetchProducts, saveProduct} from './productReducer'
 import customer from './customerReducer'
 import { combineReducers } from 'redux'; 
 
 const rootReducer = combineReducers({
-    product: product,
+    product: fetchProducts,
+    saveProduct: saveProduct,
     customer: customer
 }); 
 

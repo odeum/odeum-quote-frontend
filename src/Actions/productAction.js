@@ -10,3 +10,12 @@ export const fetchProducts = () => {
         payload: request
     };
 }
+
+export const SAVE_PRODUCT = 'SAVE_PRODUCT';
+export const saveProducts = (product, amount) => {
+    console.log('actions', product, amount)
+    return {
+        type: SAVE_PRODUCT,
+        payload: product
+    };
+}
