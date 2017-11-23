@@ -32,9 +32,9 @@ class ProductsFields extends Component {
 	handleChange = (evt) => {
 		this.setState({productValue: evt.target.value})
         if (evt.target.value === '') {
-            this.state.productVisibility = false
+            this.setstate.productVisibility({productVisibility: false})
         } else {
-           this.state.productVisibility = true
+           this.setstate.productVisibility({productVisibility: true})
         }
     }
 
