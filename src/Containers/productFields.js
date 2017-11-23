@@ -12,7 +12,9 @@ class ProductsFields extends Component {
 		this.state = {
 			productValue: '',
 			productVisibility: false,
-			totalPrice: 0
+			totalPrice: 0,
+			amount: 0,
+			discount:0
 		}
 	}
 
@@ -21,11 +23,14 @@ class ProductsFields extends Component {
 	}
 
 	setProduct = (e, product) => {
+		console.log('container', product)
         this.props.saveProducts(product);
 		this.setState({
 			productValue: product.name,
 			productVisibility: false,
-			totalPrice: product.price
+			totalPrice: product.price, 
+			amount: 1, 
+			discount: 0
 		})
 	}
 
@@ -77,8 +82,8 @@ class ProductsFields extends Component {
 						/>
 						{this.state.productVisibility ? this.renderProducts() : null}
 					</LinkPosition>
-					<Input width="65px" marginRight="4px" marginTop="0px" marginBottom="0px" />
-					<Input width="65px" marginRight="4px" marginTop="0px" marginBottom="0px" />
+					<Input value={this.state.amount} width="65px"  marginRight="4px" marginTop="0px" marginBottom="0px" />
+					<Input value={this.state.discount} width="65px" marginRight="4px" marginTop="0px" marginBottom="0px" />
 					<Input readOnly width="65px" marginTop="0px" marginBottom="0px" value={this.state.totalPrice} />
 				</ProductWrapper>
 			</div>
