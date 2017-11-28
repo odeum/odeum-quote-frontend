@@ -14,7 +14,8 @@ class ProductsFields extends Component {
 			productVisibility: false,
 			totalPrice: 0,
 			amount: 0,
-			discount: 0
+			discount: 0,
+			product:{}
 		}
 	}
 
@@ -30,18 +31,19 @@ class ProductsFields extends Component {
 			productVisibility: false,
 			totalPrice: product.price,
 			amount: 1,
-			discount: 0
+			discount: 0,
+			product: product
 		})
 	}
 
 	onAmountChange = (e) => {
-		const re = /^[0-9\b]+$/;	
+		const re = /^[1-9\b]+$/;	
 		var tempPrice
 		if (e.target.value === '' || re.test(e.target.value)) {
 			this.setState({ amount: e.target.value })
 			if (e.target.value !== '' && this.state.totalPrice !== 0) {
-				console.log(typeof(e.target.value))
-				tempPrice = parseInt(e.target.value) * this.state.totalPrice
+				console.log(this.state.product.price)
+				tempPrice = parseInt(e.target.value) * this.state.product.price
 				this.setState({totalPrice: tempPrice})
 			}
 		}
@@ -91,7 +93,7 @@ class ProductsFields extends Component {
 							marginBottom="0px"
 							type="text"
 							onChange={this.handleChange}
-							value={this.state.productValue}
+							value={this.state.product.name}
 						/>
 						{this.state.productVisibility ? this.renderProducts() : null}
 					</LinkPosition>
