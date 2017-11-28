@@ -4,7 +4,7 @@ import { LinkPosition } from '../Styles/dropdown';
 import { connect } from 'react-redux';
 import { fetchProducts, saveProducts } from '../Actions/productAction';
 import ProductDropdown from '../Components/CreateNewQuote/productDropdown';
-//import onClickOutside from "react-onclickoutside";
+import onClickOutside from "react-onclickoutside";
 
 class ProductsFields extends Component {
 	constructor(props) {
@@ -57,15 +57,18 @@ class ProductsFields extends Component {
 			this.setState({ productVisibility: true })
 		}
 	}
-
-	/* 	printProducts = () => {
-			const { saveProduct } = this.props
-			console.log('saveProduct', saveProduct.arr)
-			saveProduct.arr.map((item, index) => {
-				console.log('saveProduct from store', item)
-				return item
-			})
-		} */
+	handleClickOutside = evt => {
+        this.setState({productVisibility: false})
+      };
+	
+/* 	printProducts = () => {
+        const { saveProduct } = this.props
+        console.log('saveProduct', saveProduct.arr)
+        saveProduct.arr.map((item, index) => {
+            console.log('saveProduct from store', item)
+            return item
+        })
+    } */
 
 	renderProducts = () => {
 		var productValue = this.state.productValue
@@ -131,12 +134,6 @@ function mapStateToProps(state, prop) {
 		saveProduct: state.saveProduct
 	}
 }
-//var commponnt = onClickOutside(ProductsFields);
+var productsFields = onClickOutside(ProductsFields);
 
-export default connect(mapStateToProps, { fetchProducts, saveProducts })(ProductsFields)
-
-
-
-    /*handleClickOutside = () => {
-        this.setState({ productVisibility: false })
-    }*/
+export default connect(mapStateToProps, {fetchProducts, saveProducts})(productsFields)
