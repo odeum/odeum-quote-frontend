@@ -14,50 +14,63 @@ class ProductsFields extends Component {
 			productVisibility: false,
 			totalPrice: 0,
 			amount: 0,
-			discount:0
+			discount: 0
 		}
 	}
 
-	componentDidMount(){
+	componentDidMount() {
 		this.props.fetchProducts();
 	}
 
 	setProduct = (e, product) => {
 		console.log('container', product)
-        this.props.saveProducts(product);
+		this.props.saveProducts(product);
 		this.setState({
 			productValue: product.name,
 			productVisibility: false,
-			totalPrice: product.price, 
-			amount: 1, 
+			totalPrice: product.price,
+			amount: 1,
 			discount: 0
 		})
 	}
 
-	handleChange = (evt) => {
-		this.setState({productValue: evt.target.value})
-        if (evt.target.value === '') {
-            this.setState({productVisibility: false})
-        } else {
-			this.setState({productVisibility: true})
-        }
+	onAmountChange = (e) => {
+		const re = /^[0-9\b]+$/;	
+		var tempPrice
+		if (e.target.value === '' || re.test(e.target.value)) {
+			this.setState({ amount: e.target.value })
+			if (e.target.value !== '' && this.state.totalPrice !== 0) {
+				console.log(typeof(e.target.value))
+				tempPrice = parseInt(e.target.value) * this.state.totalPrice
+				this.setState({totalPrice: tempPrice})
+			}
+		}
 	}
-	
-/* 	printProducts = () => {
-        const { saveProduct } = this.props
-        console.log('saveProduct', saveProduct.arr)
-        saveProduct.arr.map((item, index) => {
-            console.log('saveProduct from store', item)
-            return item
-        })
-    } */
+
+	handleChange = (evt) => {
+		this.setState({ productValue: evt.target.value })
+		if (evt.target.value === '') {
+			this.setState({ productVisibility: false })
+		} else {
+			this.setState({ productVisibility: true })
+		}
+	}
+
+	/* 	printProducts = () => {
+			const { saveProduct } = this.props
+			console.log('saveProduct', saveProduct.arr)
+			saveProduct.arr.map((item, index) => {
+				console.log('saveProduct from store', item)
+				return item
+			})
+		} */
 
 	renderProducts = () => {
 		var productValue = this.state.productValue
 		return this.props.product.map((item) => {
 			return item.product.map((product, key) => {
 				if (product.name.toLowerCase().includes(productValue.toLowerCase())) {
-					return <ProductDropdown key={key} name={product.name} setProduct={(e) => this.setProduct(e, product)}/>
+					return <ProductDropdown key={key} name={product.name} setProduct={(e) => this.setProduct(e, product)} />
 				} else {
 					return null;
 				}
@@ -82,24 +95,43 @@ class ProductsFields extends Component {
 						/>
 						{this.state.productVisibility ? this.renderProducts() : null}
 					</LinkPosition>
-					<Input value={this.state.amount} width="65px"  marginRight="4px" marginTop="0px" marginBottom="0px" />
-					<Input value={this.state.discount} width="65px" marginRight="4px" marginTop="0px" marginBottom="0px" />
-					<Input readOnly width="65px" marginTop="0px" marginBottom="0px" value={this.state.totalPrice} />
+					<Input
+						width="65px"
+						marginRight="4px"
+						marginTop="0px"
+						marginBottom="0px"
+						value={this.state.amount}
+						onChange={this.onAmountChange}
+					/>
+					<Input
+						width="65px"
+						marginRight="4px"
+						marginTop="0px"
+						marginBottom="0px"
+						value={this.state.discount}
+					/>
+					<Input
+						readOnly
+						width="65px"
+						marginTop="0px"
+						marginBottom="0px"
+						value={this.state.totalPrice}
+					/>
 				</ProductWrapper>
 			</div>
 		);
 	}
 }
 
-function mapStateToProps(state, prop){
-	return{
+function mapStateToProps(state, prop) {
+	return {
 		product: state.product,
 		saveProduct: state.saveProduct
 	}
 }
 //var commponnt = onClickOutside(ProductsFields);
 
-export default connect(mapStateToProps, {fetchProducts, saveProducts})(ProductsFields)
+export default connect(mapStateToProps, { fetchProducts, saveProducts })(ProductsFields)
 
 
 
