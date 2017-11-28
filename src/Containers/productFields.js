@@ -42,7 +42,7 @@ class ProductsFields extends Component {
 		if (e.target.value === '' || re.test(e.target.value)) {
 			if(e.target.value !== ''){
 			console.log(e.target.value)
-			tempPrice -= parseInt(e.target.value)
+			tempPrice -= parseInt(e.target.value, 10)
 			}
 			this.setState({
 				discount: e.target.value,
@@ -59,7 +59,7 @@ class ProductsFields extends Component {
 			this.setState({ amount: e.target.value })
 			if (e.target.value !== '' && this.state.totalPrice !== 0) {
 				console.log(this.state.product.price)
-				tempPrice = parseInt(e.target.value) * this.state.product.price
+				tempPrice = parseInt(e.target.value, 10) * this.state.product.price
 				this.setState({totalPrice: tempPrice})
 			}
 		}
