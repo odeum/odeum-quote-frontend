@@ -25,7 +25,6 @@ class ProductsFields extends Component {
 	}
 
 	setProduct = (e, product) => {
-		console.log('container', product)
 		this.props.saveProducts(product);
 		this.setState({
 			productValue: product.name,
@@ -42,7 +41,6 @@ class ProductsFields extends Component {
 		var tempPrice = this.state.product.price * this.state.amount
 		if (e.target.value === '' || re.test(e.target.value)) {
 			if(e.target.value !== ''){
-			console.log(e.target.value)
 			tempPrice -= parseInt(e.target.value, 10)
 			}
 			this.setState({

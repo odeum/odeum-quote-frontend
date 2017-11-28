@@ -7,42 +7,32 @@ export function calculatePrice(state = initialUserState, action) {
     switch (action.type) {
 
         case CALCULATE_TOTALPRICE:
-            var temp = action.payload.name
-            if(state.arr === []){
-                return {
-                    ...state,
-                    arr: [...state.arr, action.payload]
-                }
-            }else{
-                console.log(state.arr)
-                 state.arr.map((item) => {
-                     console.log(item.name + ' hvad er temp ' + temp)
-                    if(item.name === temp){
-                       item.price = temp.price
-                    }
-                })
-            }
-            return {
-                ...state,
-                arr: [...state.arr, action.payload]
-            }
-           /* var temp = ''
+            var temp = action.payload
+            var tempArr = state.arr
+            var flag = false
             console.log(state.arr)
-            state.arr.map((item) => {
-                //console.log('item', item)
-                return temp = item.name
-            })*/
-            if (action.payload.name === temp) {
-                console.log('action payload ' + action.payload.price) 
-                return {
-                    arr: [action.payload]
+            if (state.arr.length > 0) {
+                tempArr.map((item) => {
+                    if (item.name === temp.name) {
+                        item.price = temp.price
+                        flag = true
+                    } 
+                })
+                if(flag === false){
+                    return {
+                        ...state,
+                        arr: [...state.arr, action.payload]
+                    }
                 }
             } else {
                 return {
                     ...state,
                     arr: [...state.arr, action.payload]
                 }
-
+            }
+            if (flag) {
+                state.arr = tempArr
+                return { ...state.arr, arr: [...state.arr] }
             }
         default: return state
     }
