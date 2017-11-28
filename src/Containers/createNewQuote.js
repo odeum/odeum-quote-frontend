@@ -12,7 +12,6 @@ import QuoteDescription from '../Components/CreateNewQuote/quoteDescription';
 import AddProduct from '../Components/CreateNewQuote/addProduct';
 import TotalPrice from '../Components/CreateNewQuote/totalPrice';
 import TableComponent from '../Components/table';
-import onClickOutside from "react-onclickoutside";
 
 //#endregion imports
 
@@ -146,6 +145,4 @@ function mapStateToProps(state, prop) {
     }
 }
 
-var commponnt = onClickOutside(CreateNewQuote);
-
-export default connect(mapStateToProps, { fetchCustomers, fetchProducts })(commponnt);
+export default connect(mapStateToProps, { fetchCustomers, fetchProducts })(CreateNewQuote);

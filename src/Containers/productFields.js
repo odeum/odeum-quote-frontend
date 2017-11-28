@@ -135,8 +135,3 @@ function mapStateToProps(state, prop) {
 var productsFields = onClickOutside(ProductsFields);
 
 export default connect(mapStateToProps, {fetchProducts, saveProducts})(productsFields)
-
-
-    /*handleClickOutside = () => {
-        this.setState({ productVisibility: false })
-    }*/
