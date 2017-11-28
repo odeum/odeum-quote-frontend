@@ -129,7 +129,7 @@ class CreateNewQuote extends Component {
                         })}
                         {/* Add button - renders a new field for products on onClick */}
                         <ButtonPanel justify='right'>
-                            <Button onClick={this.onAddBtnClick} icon='add_circle_outline' label={'Ny kolonne'} size={'small'} />
+                            <Button onClick={this.onAddBtnClick} icon='add_circle_outline' label={'Ny række'} size={'small'} />
                         </ButtonPanel>
 
                         {/* Calculates the total price of the chosen products */}
