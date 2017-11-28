@@ -4,7 +4,7 @@ import { LinkPosition } from '../Styles/dropdown';
 import { connect } from 'react-redux';
 import { fetchProducts, saveProducts } from '../Actions/productAction';
 import ProductDropdown from '../Components/CreateNewQuote/productDropdown';
-import onClickOutside from "react-onclickoutside";
+//import onClickOutside from "react-onclickoutside";
 
 class ProductsFields extends Component {
 	constructor(props) {
@@ -36,6 +36,22 @@ class ProductsFields extends Component {
 		})
 	}
 
+	onDiscountChange = (e) => {
+		const re =  /^[0-9\b]+$/
+		var tempPrice = this.state.product.price * this.state.amount
+		if (e.target.value === '' || re.test(e.target.value)) {
+			if(e.target.value !== ''){
+			console.log(e.target.value)
+			tempPrice -= parseInt(e.target.value, 10)
+			}
+			this.setState({
+				discount: e.target.value,
+				totalPrice: tempPrice
+			})
+			
+		}		
+	}
+
 	onAmountChange = (e) => {
 		const re = /^[0-9\b]+$/;	
 		var tempPrice
@@ -43,7 +59,7 @@ class ProductsFields extends Component {
 			this.setState({ amount: e.target.value })
 			if (e.target.value !== '' && this.state.totalPrice !== 0) {
 				console.log(this.state.product.price)
-				tempPrice = parseInt(e.target.value) * this.state.product.price
+				tempPrice = parseInt(e.target.value, 10) * this.state.product.price
 				this.setState({totalPrice: tempPrice})
 			}
 		}
@@ -57,18 +73,15 @@ class ProductsFields extends Component {
 			this.setState({ productVisibility: true })
 		}
 	}
-	handleClickOutside = evt => {
-        this.setState({productVisibility: false})
-      };
-	
-/* 	printProducts = () => {
-        const { saveProduct } = this.props
-        console.log('saveProduct', saveProduct.arr)
-        saveProduct.arr.map((item, index) => {
-            console.log('saveProduct from store', item)
-            return item
-        })
-    } */
+
+	/* 	printProducts = () => {
+			const { saveProduct } = this.props
+			console.log('saveProduct', saveProduct.arr)
+			saveProduct.arr.map((item, index) => {
+				console.log('saveProduct from store', item)
+				return item
+			})
+		} */
 
 	renderProducts = () => {
 		var productValue = this.state.productValue
@@ -96,7 +109,7 @@ class ProductsFields extends Component {
 							marginBottom="0px"
 							type="text"
 							onChange={this.handleChange}
-							value={this.state.product.name}
+							value={this.state.productValue}
 						/>
 						{this.state.productVisibility ? this.renderProducts() : null}
 					</LinkPosition>
@@ -114,6 +127,7 @@ class ProductsFields extends Component {
 						marginTop="0px"
 						marginBottom="0px"
 						value={this.state.discount}
+						onChange={this.onDiscountChange}
 					/>
 					<Input
 						readOnly
@@ -134,6 +148,12 @@ function mapStateToProps(state, prop) {
 		saveProduct: state.saveProduct
 	}
 }
-var productsFields = onClickOutside(ProductsFields);
+//var commponnt = onClickOutside(ProductsFields);
 
-export default connect(mapStateToProps, {fetchProducts, saveProducts})(productsFields)
+export default connect(mapStateToProps, { fetchProducts, saveProducts })(ProductsFields)
+
+
+
+    /*handleClickOutside = () => {
+        this.setState({ productVisibility: false })
+    }*/
