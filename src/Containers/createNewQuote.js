@@ -93,7 +93,12 @@ class CreateNewQuote extends Component {
 
     saveQuote = () => {
         //this.props.fetchQuote();
-        console.log('after reducer', this.props.calculatePrice.arr);
+        var temp = 0
+        this.props.calculatePrice.arr.map((item)=> {
+            return temp += item.price 
+        })
+        console.log('after reducer', temp);
+        console.log('arry',  this.props.calculatePrice.arr);
     }
 
     render() {

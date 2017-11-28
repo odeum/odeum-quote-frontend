@@ -60,13 +60,13 @@ class ProductsFields extends Component {
 		if (e.target.value === '' || re.test(e.target.value)) {
 			this.setState({ amount: e.target.value })
 			if (e.target.value !== '' && this.state.totalPrice !== 0) {
-				console.log('name', this.state.product.name)
+				//console.log('name', this.state.product.name)
 				tempPrice = parseInt(e.target.value, 10) * this.state.product.price
 				this.setState({totalPrice: tempPrice})
 				this.props.calculatePrice(tempPrice, this.state.product.name );
 			}
 		}
-		console.log('totalPrice', this.state.totalPrice);	
+	//	console.log('totalPrice', this.state.totalPrice);	
 	}
 
 	handleChange = (evt) => {
