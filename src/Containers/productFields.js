@@ -3,8 +3,9 @@ import { Input, ProductWrapper } from '../Styles/createNewQuote';
 import { LinkPosition } from '../Styles/dropdown';
 import { connect } from 'react-redux';
 import { fetchProducts, saveProducts } from '../Actions/productAction';
+import { calculatePrice } from '../Actions/quoteAction';
 import ProductDropdown from '../Components/CreateNewQuote/productDropdown';
-//import onClickOutside from "react-onclickoutside";
+import onClickOutside from "react-onclickoutside";
 
 class ProductsFields extends Component {
 	constructor(props) {
@@ -49,7 +50,8 @@ class ProductsFields extends Component {
 				totalPrice: tempPrice
 			})
 			
-		}		
+		}
+		
 	}
 
 	onAmountChange = (e) => {
@@ -63,6 +65,7 @@ class ProductsFields extends Component {
 				this.setState({totalPrice: tempPrice})
 			}
 		}
+		console.log('totalPrice', this.state.totalPrice);	
 	}
 
 	handleChange = (evt) => {
@@ -73,6 +76,9 @@ class ProductsFields extends Component {
 			this.setState({ productVisibility: true })
 		}
 	}
+	handleClickOutside = evt => {
+			this.setState({productVisibility: false})
+	  };
 
 	/* 	printProducts = () => {
 			const { saveProduct } = this.props
@@ -148,12 +154,9 @@ function mapStateToProps(state, prop) {
 		saveProduct: state.saveProduct
 	}
 }
-//var commponnt = onClickOutside(ProductsFields);
+var productsFields = onClickOutside(ProductsFields);
 
-export default connect(mapStateToProps, { fetchProducts, saveProducts })(ProductsFields)
+export default connect(mapStateToProps, { fetchProducts, saveProducts, calculatePrice })(productsFields)
 
 
 
-    /*handleClickOutside = () => {
-        this.setState({ productVisibility: false })
-    }*/

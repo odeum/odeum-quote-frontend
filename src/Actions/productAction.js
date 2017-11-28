@@ -4,7 +4,6 @@ export const FETCH_PRODUCTS = 'FETCH_PRODUCTS';
 export const fetchProducts = () => {
     const url = `http://localhost:8080/api/product/products`;
     const request = axios.get(url);
-    console.log(request)
     return {
         type: FETCH_PRODUCTS,
         payload: request
@@ -13,7 +12,6 @@ export const fetchProducts = () => {
 
 export const SAVE_PRODUCT = 'SAVE_PRODUCT';
 export const saveProducts = (product, amount) => {
-    console.log('actions', product, amount)
     return {
         type: SAVE_PRODUCT,
         payload: product

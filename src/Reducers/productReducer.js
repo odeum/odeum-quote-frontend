@@ -16,8 +16,6 @@ const initialUserState = {
 export function saveProduct(state = initialUserState, action) {
     switch (action.type) {
         case SAVE_PRODUCT:
-            console.log('reducer', action.payload);
-            console.log('state', state);
             return {
                 ...state,
                 arr: [...state.arr, action.payload]
