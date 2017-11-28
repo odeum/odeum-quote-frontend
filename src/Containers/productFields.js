@@ -37,7 +37,7 @@ class ProductsFields extends Component {
 	}
 
 	onAmountChange = (e) => {
-		const re = /^[1-9\b]+$/;	
+		const re = /^[0-9\b]+$/;	
 		var tempPrice
 		if (e.target.value === '' || re.test(e.target.value)) {
 			this.setState({ amount: e.target.value })

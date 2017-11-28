@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchCustomers } from '../Actions/customerAction';
 import { fetchProducts } from '../Actions/productAction';
+import { fetchQuote } from '../Actions/quoteAction'; 
 import { Wrapper, LeftSideWrapper, RightSideWrapper } from '../Styles/createNewQuote';
 import { TR, TD } from '../Styles/table';
 import { ButtonPanel, Button } from 'odeum-ui';
@@ -90,6 +91,10 @@ class CreateNewQuote extends Component {
         })
     }
 
+    saveQuote = () => {
+        this.props.fetchQuote();
+    }
+
     render() {
         return (
             <div>
@@ -130,7 +135,7 @@ class CreateNewQuote extends Component {
                         <TotalPrice />
 
                         {/* Save button - creates a PDF file of the quote */}
-                        <SaveButton />
+                        <SaveButton onClick={this.saveQuote} />
                     </RightSideWrapper>
                 </Wrapper>
             </div>
@@ -145,4 +150,4 @@ function mapStateToProps(state, prop) {
     }
 }
 
-export default connect(mapStateToProps, { fetchCustomers, fetchProducts })(CreateNewQuote);
+export default connect(mapStateToProps, { fetchCustomers, fetchProducts, fetchQuote })(CreateNewQuote);

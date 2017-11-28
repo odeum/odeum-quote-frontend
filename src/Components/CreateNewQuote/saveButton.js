@@ -6,7 +6,7 @@ import { Button, ButtonPanel } from 'odeum-ui';
         return (
             <div>
                 <ButtonPanel justify='right' style={{ marginRight: '0px', marginTop: '5px' }}>
-                    <Button icon='check_circle' label={'Opret tilbud'} size={'small'} />
+                    <Button onClick={this.props.onClick} icon='check_circle' label={'Opret tilbud'} size={'small'} />
                 </ButtonPanel>
             </div>
         )
