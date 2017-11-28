@@ -101,6 +101,13 @@ class CreateNewQuote extends Component {
         console.log('arry',  this.props.calculatePrice.arr);
     }
 
+    calculateTotalPrice = () => {
+        var temp = 0
+        this.props.calculatePrice.arr.map((item)=> {
+            return temp += item.price 
+        })
+    }
+
     render() {
         return (
             <div>
@@ -138,7 +145,7 @@ class CreateNewQuote extends Component {
                         </ButtonPanel>
 
                         {/* Calculates the total price of the chosen products */}
-                        <TotalPrice />
+                        <TotalPrice totalPrice={this.calculateTotalPrice()}/>
 
                         {/* Save button - creates a PDF file of the quote */}
                         <SaveButton onClick={this.saveQuote} />
