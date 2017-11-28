@@ -12,10 +12,10 @@ export const fetchQuote = () => {
 }
 
 export const CALCULATE_TOTALPRICE = 'CALCULATE_TOTALPRICE'
-export const calculatePrice = (data) => {
-    console.log('calculateAction', data); 
+export const calculatePrice = (price, name) => {
+    console.log('calculateAction', price, name); 
     return{
         type: CALCULATE_TOTALPRICE,
-        payload: data
+        payload: {price, name}
     }
 }

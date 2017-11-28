@@ -92,7 +92,8 @@ class CreateNewQuote extends Component {
     }
 
     saveQuote = () => {
-        this.props.fetchQuote();
+        //this.props.fetchQuote();
+        console.log('after reducer', this.props.calculatePrice.arr);
     }
 
     render() {
@@ -146,7 +147,8 @@ class CreateNewQuote extends Component {
 function mapStateToProps(state, prop) {
     return {
         customer: state.customer,
-        product: state.product
+        product: state.product, 
+        calculatePrice: state.calculatePrice
     }
 }
 

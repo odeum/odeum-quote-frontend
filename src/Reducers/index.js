@@ -1,12 +1,14 @@
 
 import {fetchProducts, saveProduct} from './productReducer'
-import customer from './customerReducer'
+import {calculatePrice} from './quoteReducer';
+import customer from './customerReducer'; 
 import { combineReducers } from 'redux'; 
 
 const rootReducer = combineReducers({
     product: fetchProducts,
     saveProduct: saveProduct,
-    customer: customer
+    customer: customer, 
+    calculatePrice: calculatePrice
 }); 
 
 export default rootReducer; 
