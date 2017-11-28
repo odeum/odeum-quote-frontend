@@ -39,6 +39,7 @@ class CreateNewQuote extends Component {
         this.props.fetchCustomers();
         this.props.fetchProducts();
     }
+    
 
     onAddBtnClick = (event) => {
         const dropDown = this.state.dropDown;
