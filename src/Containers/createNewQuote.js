@@ -107,11 +107,12 @@ class CreateNewQuote extends Component {
     }
 
     saveQuote = () => {
+        var values 
          const {titleDescribtion, textDescribtion, selectedCustomer } = this.state
          if(titleDescribtion === '' || selectedCustomer === 0){
             console.log('get fucked mate'); 
          }else{
-            this.props.fetchQuote(selectedCustomer, titleDescribtion, textDescribtion );
+            this.props.fetchQuote(values, selectedCustomer, titleDescribtion, textDescribtion, this.props.calculatePrice );
          }
    
     }
