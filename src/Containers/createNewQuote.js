@@ -32,7 +32,6 @@ class CreateNewQuote extends Component {
         this.setState({
             selected: item,
         })
-        console.log('clicked', item);
     }
     componentDidMount() {
 
@@ -93,6 +92,7 @@ class CreateNewQuote extends Component {
 
     saveQuote = () => {
         this.props.fetchQuote();
+        console.log(this.state.selected.orgId)
     }
 
     calculateTotalPrice = () => {
