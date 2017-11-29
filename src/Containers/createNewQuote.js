@@ -25,8 +25,7 @@ class CreateNewQuote extends Component {
             selectedCustomer: 0,
             value: '',
             titleDescribtion: '', 
-            textDescribtion:'',
-            totalPrice: 0 
+            textDescribtion:''
         };
     }
 
@@ -48,7 +47,7 @@ class CreateNewQuote extends Component {
         const dropDown = this.state.dropDown;
         this.setState({
             dropDown: dropDown.concat(
-                <ProductsFields/>
+                <ProductsFields key={Math.random(36).toString()}/>
             )
         });
     }
@@ -109,7 +108,7 @@ class CreateNewQuote extends Component {
 
     saveQuote = () => {
         var values 
-         const {titleDescribtion, textDescribtion, selectedCustomer, totalPrice } = this.state
+         const {titleDescribtion, textDescribtion, selectedCustomer} = this.state
          if(titleDescribtion === '' || selectedCustomer === 0){
             console.log('get fucked mate'); 
          }else{
@@ -123,8 +122,6 @@ class CreateNewQuote extends Component {
         this.props.calculatePrice.arr.forEach(item => {
              temp += item.price
         });
-        console.log('totalprice', temp)
-        //this.setState({totalPrice: temp})
         return temp
     }
 

@@ -35,6 +35,7 @@ export function calculatePrice(state = initialUserState, action) {
                 state.arr = tempArr
                 return { ...state.arr, arr: [...state.arr] }
             }
+            break
         default: return state
     }
 
