@@ -34,7 +34,8 @@ class ProductsFields extends Component {
 			discount: 0,
 			product: product
 		})
-		this.props.calculatePrice(product.price, product.name );
+		console.log(this.state)
+		this.props.calculatePrice(product._id, product.price, product.name, this.state.amount, this.state.discount );
 	}
 
 	onDiscountChange = (e) => {
@@ -48,7 +49,7 @@ class ProductsFields extends Component {
 				discount: e.target.value,
 				totalPrice: tempPrice
 			})
-			this.props.calculatePrice(tempPrice, this.state.product.name );
+			this.props.calculatePrice(this.state.product._id ,tempPrice, this.state.product.name, this.state.amount, this.state.discount );
 		}
 		
 	}
@@ -61,7 +62,7 @@ class ProductsFields extends Component {
 			if (e.target.value !== '' && this.state.totalPrice !== 0) {
 				tempPrice = parseInt(e.target.value, 10) * this.state.product.price
 				this.setState({totalPrice: tempPrice})
-				this.props.calculatePrice(tempPrice, this.state.product.name );
+				this.props.calculatePrice(this.state.product._id ,tempPrice, this.state.product.name, this.state.amount, this.state.discount );
 			}
 		}
 	}
