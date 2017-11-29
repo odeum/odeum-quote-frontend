@@ -25,7 +25,8 @@ class CreateNewQuote extends Component {
             selectedCustomer: 0,
             value: '',
             titleDescribtion: '', 
-            textDescribtion:''
+            textDescribtion:'',
+            totalPrice: 0 
         };
     }
 
@@ -122,7 +123,7 @@ class CreateNewQuote extends Component {
         this.props.calculatePrice.arr.forEach(item => {
             temp += item.price
         });
-        return temp
+        this.setState({totalPrice: temp})
     }
 
     render() {
@@ -166,7 +167,7 @@ class CreateNewQuote extends Component {
                         </ButtonPanel>
 
                         {/* Calculates the total price of the chosen products */}
-                        <TotalPrice totalPrice={this.calculateTotalPrice()}/>
+                        <TotalPrice totalPrice={this.state.totalPrice}/>
 
                         {/* Save button - creates a PDF file of the quote */}
                         <SaveButton onClick={this.saveQuote} />
