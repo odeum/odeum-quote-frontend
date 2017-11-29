@@ -6,8 +6,8 @@ class QuoteDescription extends Component {
         return (
             <div>
                 <H1>Tilbuds beskrivelse:</H1>
-                <Input placeholder="Titel..." />
-                <TextArea placeholder="Beskrivelse..." />
+                <Input placeholder="Titel..." value={this.props.titleValue} />
+                <TextArea placeholder="Beskrivelse..."  value={this.props.descriptionValue}/>
             </div>
         )
     }

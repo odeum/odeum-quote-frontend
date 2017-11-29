@@ -92,13 +92,7 @@ class CreateNewQuote extends Component {
     }
 
     saveQuote = () => {
-        //this.props.fetchQuote();
-        var temp = 0
-        this.props.calculatePrice.arr.map((item)=> {
-            return temp += item.price 
-        })
-        console.log('after reducer', temp);
-        console.log('arry',  this.props.calculatePrice.arr);
+        this.props.fetchQuote();
     }
 
     calculateTotalPrice = () => {
@@ -128,7 +122,7 @@ class CreateNewQuote extends Component {
                         />
 
                         {/*Title input and description input */}
-                        <QuoteDescription />
+                        <QuoteDescription titleValue={''} descriptionValue={''} />
                     </LeftSideWrapper>
 
                     {/* Wrapper for the right section of the page */}
