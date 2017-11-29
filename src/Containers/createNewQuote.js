@@ -109,7 +109,7 @@ class CreateNewQuote extends Component {
 
     saveQuote = () => {
         var values 
-         const {titleDescribtion, textDescribtion, selectedCustomer } = this.state
+         const {titleDescribtion, textDescribtion, selectedCustomer, totalPrice } = this.state
          if(titleDescribtion === '' || selectedCustomer === 0){
             console.log('get fucked mate'); 
          }else{
@@ -121,9 +121,11 @@ class CreateNewQuote extends Component {
     calculateTotalPrice = () => {
         var temp = 0
         this.props.calculatePrice.arr.forEach(item => {
-            temp += item.price
+             temp += item.price
         });
-        this.setState({totalPrice: temp})
+        console.log('totalprice', temp)
+        //this.setState({totalPrice: temp})
+        return temp
     }
 
     render() {
@@ -167,7 +169,7 @@ class CreateNewQuote extends Component {
                         </ButtonPanel>
 
                         {/* Calculates the total price of the chosen products */}
-                        <TotalPrice totalPrice={this.state.totalPrice}/>
+                        <TotalPrice totalPrice={this.calculateTotalPrice()}/>
 
                         {/* Save button - creates a PDF file of the quote */}
                         <SaveButton onClick={this.saveQuote} />

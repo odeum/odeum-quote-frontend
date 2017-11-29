@@ -1,13 +1,14 @@
 import axios from 'axios';
 
 export const FETCH_QUOTE = 'FETCH_QUOTE';
-export const fetchQuote = (values, selectedCustomer, titleDescribtion, textDescribtion, calculatePrice) => {
+export const fetchQuote = (values, selectedCustomer, titleDescribtion, textDescribtion, calculatePrice, totalPrice) => {
     console.log('action caluteprice', calculatePrice.arr)
     console.log('action caluteprice', selectedCustomer)
-    // values.customerID = selectedCustomer;
-    // values.description = titleDescribtion; 
-    // values.description = textDescribtion; 
-    // values.product = calculatePrice; 
+    var temp = 0
+    calculatePrice.arr.forEach(item => {
+         temp += item.price
+    });
+    console.log('totalprice', temp)
     const url = `http://localhost:8080/api/quotation/post`;
     const request = axios.post(`${url}`, {
         customerID: selectedCustomer,
@@ -18,7 +19,8 @@ export const fetchQuote = (values, selectedCustomer, titleDescribtion, textDescr
                 description: textDescribtion
             }],
         //description: textDescribtion,
-        product: calculatePrice.arr
+        product: calculatePrice.arr,
+        totalPrice: temp
     })
     return {
         type: FETCH_QUOTE,
@@ -27,9 +29,9 @@ export const fetchQuote = (values, selectedCustomer, titleDescribtion, textDescr
 }
 
 export const CALCULATE_TOTALPRICE = 'CALCULATE_TOTALPRICE'
-export const calculatePrice = (id, price, name, amount, discount) => {
+export const calculatePrice = (productID, price, name, amount, discount) => {
     return {
         type: CALCULATE_TOTALPRICE,
-        payload: { id, price, name, amount, discount }
+        payload: { productID, price, name, amount, discount }
     }
 }
