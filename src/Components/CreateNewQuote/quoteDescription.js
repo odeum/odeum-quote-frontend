@@ -6,8 +6,8 @@ class QuoteDescription extends Component {
         return (
             <div>
                 <H1>Tilbuds beskrivelse:</H1>
-                <Input placeholder="Titel..." value={this.props.titleValue} />
-                <TextArea placeholder="Beskrivelse..."  value={this.props.descriptionValue}/>
+                <Input placeholder="Titel..." value={this.props.titleValue} onChange={this.props.onChangeTitle}/>
+                <TextArea placeholder="Beskrivelse..."  value={this.props.descriptionValue} onChange={this.props.onChangeDescription}/>
             </div>
         )
     }

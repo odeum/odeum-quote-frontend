@@ -22,16 +22,19 @@ class CreateNewQuote extends Component {
         super(props);
         this.state = {
             dropDown: [],
-            selectedCustomer: {},
-            value: ''
+            selectedCustomer: 0,
+            value: '',
+            titleDescribtion: '', 
+            textDescribtion:''
         };
     }
 
     //#region small functions
     selectCustomerRow = (event, item) => {
         this.setState({
-            selectedCustomer: item,
+            selectedCustomer: item.orgId
         })
+        
     }
     componentDidMount() {
 
@@ -86,13 +89,31 @@ class CreateNewQuote extends Component {
 
     onHandle = (e) => {
         this.setState({
-            value: e.target.value
+            value: e.target.value,
+            titleDescribtion: e.target.value
+        })
+    }
+
+    onHandleTitle = (e) => {
+        this.setState({
+            titleDescribtion: e.target.value
+        })
+    }
+
+    onHandleDescription = (e) => {
+        this.setState({
+            textDescribtion: e.target.value
         })
     }
 
     saveQuote = () => {
-        this.props.fetchQuote();
-        console.log(this.state.selected.orgId)
+         const {titleDescribtion, textDescribtion, selectedCustomer } = this.state
+         if(titleDescribtion === '' || selectedCustomer === 0){
+            console.log('get fucked mate'); 
+         }else{
+            this.props.fetchQuote(selectedCustomer, titleDescribtion, textDescribtion );
+         }
+   
     }
 
     calculateTotalPrice = () => {
@@ -122,7 +143,11 @@ class CreateNewQuote extends Component {
                         />
 
                         {/*Title input and description input */}
-                        <QuoteDescription titleValue={''} descriptionValue={''} />
+                        <QuoteDescription 
+                        titleValue={this.state.titleDescribtion} 
+                        descriptionValue={this.state.textDescribtion} 
+                        onChangeTitle={this.onHandleTitle} 
+                        onChangeDescription={this.onHandleDescription}/>
                     </LeftSideWrapper>
 
                     {/* Wrapper for the right section of the page */}
