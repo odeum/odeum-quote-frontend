@@ -35,7 +35,7 @@ class ProductsFields extends Component {
 			product: product
 		})
 		console.log(this.state)
-		this.props.calculatePrice(product._id, product.price, product.name, this.state.amount, this.state.discount );
+		this.props.calculatePrice(product._id, product.price, product.name, 1, 0 );
 	}
 
 	onDiscountChange = (e) => {
