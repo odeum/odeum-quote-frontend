@@ -103,9 +103,10 @@ class CreateNewQuote extends Component {
 
     calculateTotalPrice = () => {
         var temp = 0
-        this.props.calculatePrice.arr.map((item)=> {
-            return temp += item.price 
-        })
+        this.props.calculatePrice.arr.forEach(item => {
+            temp += item.price
+        });
+        return temp
     }
 
     render() {
