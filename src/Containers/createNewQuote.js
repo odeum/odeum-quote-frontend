@@ -8,11 +8,12 @@ import { Wrapper, LeftSideWrapper, RightSideWrapper } from '../Styles/createNewQ
 import { TR, TD } from '../Styles/table';
 import { ButtonPanel, Button } from 'odeum-ui';
 import ProductsFields from './productFields';
-import SaveButton from '../Components/CreateNewQuote/saveButton';
 import QuoteDescription from '../Components/CreateNewQuote/quoteDescription';
 import AddProduct from '../Components/CreateNewQuote/addProduct';
 import TotalPrice from '../Components/CreateNewQuote/totalPrice';
 import TableComponent from '../Components/table';
+import PDFcontent from '../Components/PDFcontent';
+var jsPDF = require('jspdf');
 
 //#endregion imports
 
@@ -124,6 +125,14 @@ class CreateNewQuote extends Component {
         return temp
     }
 
+    downloadPDF = () => {
+		var doc = new jsPDF()
+		var data = document.getElementById("content");
+
+		doc.fromHTML(data, 20, 20)
+		doc.save('Tilbud.pdf')
+	}
+
     render() {
         return (
             <div>
@@ -167,8 +176,18 @@ class CreateNewQuote extends Component {
                         {/* Calculates the total price of the chosen products */}
                         <TotalPrice totalPrice={this.calculateTotalPrice()}/>
 
-                        {/* Save button - creates a PDF file of the quote */}
-                        <SaveButton onClick={this.saveQuote} />
+                        {/* This div is invisible. The reason it's there, is so that we can get the id from the div,
+                            to get the elements from the PDFcontent component, for the downloadPDF function */}
+                        <div id="content" style={{ display: 'none' }}>
+                            <PDFcontent/>
+                        </div>
+
+                        {/* ButtonPanel - the first button downloads the PDF file,
+                            the second button sends the quote to the customer */}
+                        <ButtonPanel justify='right' style={{ marginRight: '0px', marginTop: '5px' }}>            
+                            <Button onClick={this.downloadPDF} icon='visibility' label={'Vis tilbud'} size={'small'}/>
+                            <Button onClick={this.saveQuote} icon='check_circle' label={'Opret tilbud'} size={'small'} />
+                        </ButtonPanel>
                     </RightSideWrapper>
                 </Wrapper>
             </div>
