@@ -3,6 +3,12 @@ import PDFfile from '../Components/PDFfile'
 var jsPDF = require('jspdf');
 
 class PDF extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      visuel: false
+    }
+  }
     reactPDF = () => {
     var doc = new jsPDF()
     //var data = <PDFfile/>
@@ -16,8 +22,8 @@ class PDF extends Component {
   render() {
     return (
       <div>
-        <div id="hej">
-          <PDFfile/>
+        <div id="hej" style={{display: 'none'}}>
+          <PDFfile />
         </div>
         <button onClick={this.reactPDF}>HEJSA</button>
       </div>
