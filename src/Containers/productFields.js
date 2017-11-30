@@ -26,6 +26,7 @@ class ProductsFields extends Component {
 
 	setProduct = (e, product) => {
 		this.props.saveProducts(product);
+
 		this.setState({
 			productValue: product.name,
 			productVisibility: false,
@@ -35,7 +36,14 @@ class ProductsFields extends Component {
 			product: product
 		})
 
-		this.props.calculatePrice(product._id, product.price, product.name, 1, 0, product.subscription);
+		this.props.calculatePrice(
+			product._id, 
+			product.price, 
+			product.name, 
+			1, 
+			0, 
+			product.subscription
+		);
 	}
 
 	onDiscountChange = (e) => {
@@ -75,7 +83,15 @@ class ProductsFields extends Component {
 
 				tempPrice = parseInt(e.target.value, 10) * this.state.product.price
 				this.setState({ totalPrice: tempPrice })
-				this.props.calculatePrice(this.state.product._id, tempPrice, this.state.product.name, this.state.amount, this.state.discount, this.state.product.subscription);
+
+				this.props.calculatePrice(
+					this.state.product._id, 
+					tempPrice, 
+					this.state.product.name, 
+					this.state.amount, 
+					this.state.discount, 
+					this.state.product.subscription
+				);
 			}
 		}
 	}
@@ -95,15 +111,6 @@ class ProductsFields extends Component {
 		this.setState({ productVisibility: false })
 	};
 
-	/* 	printProducts = () => {
-			const { saveProduct } = this.props
-			console.log('saveProduct', saveProduct.arr)
-			saveProduct.arr.map((item, index) => {
-				console.log('saveProduct from store', item)
-				return item
-			})
-		} */
-
 	renderProducts = () => {
 
 		var productValue = this.state.productValue
@@ -113,9 +120,9 @@ class ProductsFields extends Component {
 			return item.product.map((product, key) => {
 
 				if (product.name.toLowerCase().includes(productValue.toLowerCase())) {
-					return 
-					<ProductDropdown 
-						key={key} name={product.name} 
+					return <ProductDropdown 
+						key={key} 
+						name={product.name} 
 						setProduct={(e) => this.setProduct(e, product)}
 					/>
 				} else {

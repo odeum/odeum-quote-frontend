@@ -10,31 +10,36 @@ export function calculatePrice(state = initialUserState, action) {
             var temp = action.payload
             var tempArr = state.arr
             var flag = false
+            
             if (state.arr.length > 0) {
-             tempArr.map((item) => {
+                state.arr.forEach(item => {
                     if (item.name === temp.name) {
                         item.price = temp.price
                         item.amount = temp.amount
                         item.discount = temp.discount
                         flag = true
                     } 
-                })
+                });
+
                 if(flag === false){
                     return {
                         ...state,
                         arr: [...state.arr, action.payload]
                     }
                 }
+
             } else {
                 return {
                     ...state,
                     arr: [...state.arr, action.payload]
                 }
             }
+
             if (flag) {
                 state.arr = tempArr
                 return { ...state.arr, arr: [...state.arr] }
             }
+            
             break
         default: return state
     }
