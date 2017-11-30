@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchCustomers } from '../Actions/customerAction';
 import { fetchProducts } from '../Actions/productAction';
-import { fetchQuote } from '../Actions/quoteAction'; 
+import { fetchQuote } from '../Actions/quoteAction';
 import { Wrapper, LeftSideWrapper, RightSideWrapper } from '../Styles/createNewQuote';
 import { TR, TD } from '../Styles/table';
 import { ButtonPanel, Button } from 'odeum-ui';
@@ -13,6 +13,7 @@ import AddProduct from '../Components/CreateNewQuote/addProduct';
 import TotalPrice from '../Components/CreateNewQuote/totalPrice';
 import TableComponent from '../Components/table';
 import PDFcontent from '../Components/PDFcontent';
+import {data} from '../img/data.js'
 var jsPDF = require('jspdf');
 
 //#endregion imports
@@ -25,8 +26,8 @@ class CreateNewQuote extends Component {
             dropDown: [],
             selectedCustomer: 0,
             value: '',
-            titleDescribtion: '', 
-            textDescribtion:''
+            titleDescribtion: '',
+            textDescribtion: ''
         };
     }
 
@@ -35,20 +36,20 @@ class CreateNewQuote extends Component {
         this.setState({
             selectedCustomer: item.orgId
         })
-        
+
     }
     componentDidMount() {
 
         this.props.fetchCustomers();
         this.props.fetchProducts();
     }
-    
+
 
     onAddBtnClick = (event) => {
         const dropDown = this.state.dropDown;
         this.setState({
             dropDown: dropDown.concat(
-                <ProductsFields key={Math.random(36).toString()}/>
+                <ProductsFields key={Math.random(36).toString()} />
             )
         });
     }
@@ -108,30 +109,32 @@ class CreateNewQuote extends Component {
     }
 
     saveQuote = () => {
-        var values 
-         const {titleDescribtion, textDescribtion, selectedCustomer} = this.state
-         if(titleDescribtion === '' || selectedCustomer === 0){ 
-         }else{
-            this.props.fetchQuote(values, selectedCustomer, titleDescribtion, textDescribtion, this.props.calculatePrice );
-         }
-   
+        var values
+        const { titleDescribtion, textDescribtion, selectedCustomer } = this.state
+        if (titleDescribtion === '' || selectedCustomer === 0) {
+        } else {
+            this.props.fetchQuote(values, selectedCustomer, titleDescribtion, textDescribtion, this.props.calculatePrice);
+        }
+
     }
 
     calculateTotalPrice = () => {
         var temp = 0
         this.props.calculatePrice.arr.forEach(item => {
-             temp += item.price
+            temp += item.price
         });
         return temp
     }
 
     downloadPDF = () => {
-		var doc = new jsPDF()
-		var data = document.getElementById("content");
+        var doc = new jsPDF()
+        var data = document.getElementById("content")
+        var image = data;
 
-		doc.fromHTML(data, 20, 20)
-		doc.save('Tilbud.pdf')
-	}
+        doc.addImage(image, 'JPEG', 15, 40, 50, 50)
+        doc.fromHTML(data, 20, 20)
+        doc.save('Tilbud.pdf')
+    }
 
     render() {
         return (
@@ -152,11 +155,11 @@ class CreateNewQuote extends Component {
                         />
 
                         {/*Title input and description input */}
-                        <QuoteDescription 
-                        titleValue={this.state.titleDescribtion} 
-                        descriptionValue={this.state.textDescribtion} 
-                        onChangeTitle={this.onHandleTitle} 
-                        onChangeDescription={this.onHandleDescription}/>
+                        <QuoteDescription
+                            titleValue={this.state.titleDescribtion}
+                            descriptionValue={this.state.textDescribtion}
+                            onChangeTitle={this.onHandleTitle}
+                            onChangeDescription={this.onHandleDescription} />
                     </LeftSideWrapper>
 
                     {/* Wrapper for the right section of the page */}
@@ -164,7 +167,7 @@ class CreateNewQuote extends Component {
 
                         {/* The fields for choosing products (renders one column) */}
                         <AddProduct />
-                        <ProductsFields/>
+                        <ProductsFields />
                         {this.state.dropDown.map((i) => {
                             return i;
                         })}
@@ -174,18 +177,18 @@ class CreateNewQuote extends Component {
                         </ButtonPanel>
 
                         {/* Calculates the total price of the chosen products */}
-                        <TotalPrice totalPrice={this.calculateTotalPrice()}/>
+                        <TotalPrice totalPrice={this.calculateTotalPrice()} />
 
                         {/* This div is invisible. The reason it's there, is so that we can get the id from the div,
                             to get the elements from the PDFcontent component, for the downloadPDF function */}
                         <div id="content" style={{ display: 'none' }}>
-                            <PDFcontent/>
+                            <PDFcontent />
                         </div>
 
                         {/* ButtonPanel - the first button downloads the PDF file,
                             the second button sends the quote to the customer */}
-                        <ButtonPanel justify='right' style={{ marginRight: '0px', marginTop: '5px' }}>            
-                            <Button onClick={this.downloadPDF} icon='visibility' label={'Vis tilbud'} size={'small'}/>
+                        <ButtonPanel justify='right' style={{ marginRight: '0px', marginTop: '5px' }}>
+                            <Button onClick={this.downloadPDF} icon='visibility' label={'Vis tilbud'} size={'small'} />
                             <Button onClick={this.saveQuote} icon='check_circle' label={'Opret tilbud'} size={'small'} />
                         </ButtonPanel>
                     </RightSideWrapper>
@@ -198,7 +201,7 @@ class CreateNewQuote extends Component {
 function mapStateToProps(state, prop) {
     return {
         customer: state.customer,
-        product: state.product, 
+        product: state.product,
         calculatePrice: state.calculatePrice
     }
 }
