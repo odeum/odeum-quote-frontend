@@ -113,8 +113,7 @@ class ProductsFields extends Component {
 			return item.product.map((product, key) => {
 
 				if (product.name.toLowerCase().includes(productValue.toLowerCase())) {
-					return 
-					<ProductDropdown 
+					return <ProductDropdown 
 						key={key} name={product.name} 
 						setProduct={(e) => this.setProduct(e, product)}
 					/>

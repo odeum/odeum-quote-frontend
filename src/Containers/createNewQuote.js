@@ -23,7 +23,8 @@ class CreateNewQuote extends Component {
         super(props);
         this.state = {
             dropDown: [],
-            selectedCustomer: 0,
+            selectedCustomerId: 0,
+            selectedCustomer: {},
             value: '',
             titleDescribtion: '',
             textDescribtion: ''
@@ -33,7 +34,8 @@ class CreateNewQuote extends Component {
     //#region small functions
     selectCustomerRow = (event, item) => {
         this.setState({
-            selectedCustomer: item.orgId
+            selectedCustomerId: item.orgId,
+            selectedCustomer: item
         })
 
     }
@@ -61,7 +63,7 @@ class CreateNewQuote extends Component {
             return this.props.customer.map((array, index) => {
                 return Object.entries(array).map((item, index) => {
                     return (
-                        <TR key={index} onClick={(e) => { this.selectCustomerRow(e, item[1]) }} style={{ backgroundColor: this.state.selectedCustomer === item[1].orgId ? '#D3D3D3' : '' }}>
+                        <TR key={index} onClick={(e) => { this.selectCustomerRow(e, item[1]) }} style={{ backgroundColor: this.state.selectedCustomer === item[1] ? '#D3D3D3' : '' }}>
                             <TD>{item[1].orgName}</TD>
                             <TD>{item[1].contactEmail}</TD>
                             <TD>{item[1].contactPhone}</TD>
@@ -175,7 +177,7 @@ class CreateNewQuote extends Component {
                         {/* This div is invisible. The reason it's there, is so that we can get the id from the div,
                             to get the elements from the PDFcontent component, for the downloadPDF function */}
                         <div id="content" style={{ display: 'none' }}>
-                            <PDFcontent />
+                            <PDFcontent chosenCustomer={this.state.selectedCustomer}/>
                         </div>
 
                         {/* ButtonPanel - the first button downloads the PDF file,

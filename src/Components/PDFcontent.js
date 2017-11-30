@@ -22,10 +22,11 @@ PDFdate = () => {
 }
 
 	render() {
+		
 		return (
 			<div>
 				<p>
-					Virksomhed: <br/> 
+					Virksomhed: {this.props.chosenCustomer.orgName}<br/> 
 					Kontaktperson: <br/> 
 					Adresse: <br/> 
 					By: 
