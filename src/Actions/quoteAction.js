@@ -18,7 +18,6 @@ export const fetchQuote = (values, selectedCustomer, titleDescribtion, textDescr
                 title: titleDescribtion,
                 description: textDescribtion
             }],
-        //description: textDescribtion,
         product: calculatePrice.arr,
         totalPrice: temp
     })
