@@ -60,7 +60,7 @@ class CreateNewQuote extends Component {
             return this.props.customer.map((array, index) => {
                 return Object.entries(array).map((item, index) => {
                     return (
-                        <TR key={index} onClick={(e) => { this.selectCustomerRow(e, item[1]) }} style={{ backgroundColor: this.state.selectedCustomer === item[1] ? '#D3D3D3' : '' }}>
+                        <TR key={index} onClick={(e) => { this.selectCustomerRow(e, item[1]) }} style={{ backgroundColor: this.state.selectedCustomer === item[1].orgId ? '#D3D3D3' : '' }}>
                             <TD>{item[1].orgName}</TD>
                             <TD>{item[1].contactEmail}</TD>
                             <TD>{item[1].contactPhone}</TD>
@@ -109,8 +109,7 @@ class CreateNewQuote extends Component {
     saveQuote = () => {
         var values 
          const {titleDescribtion, textDescribtion, selectedCustomer} = this.state
-         if(titleDescribtion === '' || selectedCustomer === 0){
-            console.log('get fucked mate'); 
+         if(titleDescribtion === '' || selectedCustomer === 0){ 
          }else{
             this.props.fetchQuote(values, selectedCustomer, titleDescribtion, textDescribtion, this.props.calculatePrice );
          }

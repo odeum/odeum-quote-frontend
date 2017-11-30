@@ -11,7 +11,7 @@ export function calculatePrice(state = initialUserState, action) {
             var tempArr = state.arr
             var flag = false
             if (state.arr.length > 0) {
-                tempArr.map((item) => {
+             tempArr.map((item) => {
                     if (item.name === temp.name) {
                         item.price = temp.price
                         item.amount = temp.amount
