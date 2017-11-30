@@ -13,8 +13,7 @@ import AddProduct from '../Components/CreateNewQuote/addProduct';
 import TotalPrice from '../Components/CreateNewQuote/totalPrice';
 import TableComponent from '../Components/table';
 import PDFcontent from '../Components/PDFcontent';
-import {data} from '../img/data.js'
-var jsPDF = require('jspdf');
+import { downloadPDF } from './pdf'
 
 //#endregion imports
 
@@ -127,13 +126,7 @@ class CreateNewQuote extends Component {
     }
 
     downloadPDF = () => {
-        var doc = new jsPDF()
-        var data = document.getElementById("content")
-        var image = data;
-
-        doc.addImage(image, 'JPEG', 15, 40, 50, 50)
-        doc.fromHTML(data, 20, 20)
-        doc.save('Tilbud.pdf')
+        downloadPDF();
     }
 
     render() {
