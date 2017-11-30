@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-//import Product from '../Containers/products'
 
 class PDFcontent extends Component {
 
@@ -21,14 +20,14 @@ PDFdate = () => {
 }
 
 	render() {
-		
+		const { chosenCustomer } = this.props
 		return (
 			<div>
 				<p>
-					Virksomhed: {this.props.chosenCustomer.orgName}<br/> 
-					Kontaktperson: <br/> 
-					Adresse: <br/> 
-					By: 
+					Virksomhed: {chosenCustomer.orgName}<br/> 
+					Kontaktperson: {chosenCustomer.contactFirstName} {chosenCustomer.contactLastName}<br/> 
+					Adresse: {chosenCustomer.orgAddress}<br/> 
+					By: {chosenCustomer.orgZip} {chosenCustomer.orgCity}
 				</p>
 
 				<p style={{marginLeft: '850px'}}>Aalborg, {this.PDFdate()}</p>
