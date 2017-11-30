@@ -12,6 +12,7 @@ export const fetchQuote = (values, selectedCustomer, titleDescribtion, textDescr
     const url = `http://localhost:8080/api/quotation/post`;
     const request = axios.post(`${url}`, {
         customerID: selectedCustomer,
+        salesPerson: '5a1fd2d039b2ad376549419f',
         status: 'Delivered',
         description: [
             {
