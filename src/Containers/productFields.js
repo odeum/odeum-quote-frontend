@@ -16,7 +16,7 @@ class ProductsFields extends Component {
 			totalPrice: 0,
 			amount: 0,
 			discount: 0,
-			product:{}
+			product: {}
 		}
 	}
 
@@ -34,50 +34,66 @@ class ProductsFields extends Component {
 			discount: 0,
 			product: product
 		})
-		console.log(this.state)
-		this.props.calculatePrice(product._id, product.price, product.name, 1, 0 );
+
+		this.props.calculatePrice(product._id, product.price, product.name, 1, 0, product.subscription);
 	}
 
 	onDiscountChange = (e) => {
-		const re =  /^[0-9\b]+$/
+		const re = /^[0-9\b]+$/
 		var tempPrice = this.state.product.price * this.state.amount
 		if (e.target.value === '' || re.test(e.target.value)) {
-			if(e.target.value !== ''){
-			tempPrice -= parseInt(e.target.value, 10)
+
+			if (e.target.value !== '') {
+				tempPrice -= parseInt(e.target.value, 10)
 			}
+
 			this.setState({
 				discount: e.target.value,
 				totalPrice: tempPrice
 			})
-			this.props.calculatePrice(this.state.product._id ,tempPrice, this.state.product.name, this.state.amount, this.state.discount );
+
+			this.props.calculatePrice(
+				this.state.product._id, 
+				tempPrice, 
+				this.state.product.name, 
+				this.state.amount, 
+				this.state.discount, 
+				this.state.product.subscription
+			);
 		}
-		
+
 	}
 
 	onAmountChange = (e) => {
-		const re = /^[0-9\b]+$/;	
+		const re = /^[0-9\b]+$/;
 		var tempPrice
 		if (e.target.value === '' || re.test(e.target.value)) {
+
 			this.setState({ amount: e.target.value })
+
 			if (e.target.value !== '' && this.state.totalPrice !== 0) {
+
 				tempPrice = parseInt(e.target.value, 10) * this.state.product.price
-				this.setState({totalPrice: tempPrice})
-				this.props.calculatePrice(this.state.product._id ,tempPrice, this.state.product.name, this.state.amount, this.state.discount );
+				this.setState({ totalPrice: tempPrice })
+				this.props.calculatePrice(this.state.product._id, tempPrice, this.state.product.name, this.state.amount, this.state.discount, this.state.product.subscription);
 			}
 		}
 	}
 
 	handleChange = (evt) => {
+
 		this.setState({ productValue: evt.target.value })
+
 		if (evt.target.value === '') {
 			this.setState({ productVisibility: false })
 		} else {
 			this.setState({ productVisibility: true })
 		}
 	}
+
 	handleClickOutside = evt => {
-			this.setState({productVisibility: false})
-	  };
+		this.setState({ productVisibility: false })
+	};
 
 	/* 	printProducts = () => {
 			const { saveProduct } = this.props
@@ -89,11 +105,19 @@ class ProductsFields extends Component {
 		} */
 
 	renderProducts = () => {
+
 		var productValue = this.state.productValue
+
 		return this.props.product.map((item) => {
+
 			return item.product.map((product, key) => {
+
 				if (product.name.toLowerCase().includes(productValue.toLowerCase())) {
-					return <ProductDropdown key={key} name={product.name} setProduct={(e) => this.setProduct(e, product)} />
+					return 
+					<ProductDropdown 
+						key={key} name={product.name} 
+						setProduct={(e) => this.setProduct(e, product)}
+					/>
 				} else {
 					return null;
 				}
