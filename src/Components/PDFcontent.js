@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { dateStyle } from '../Styles/PDFstyles'
 //import Product from '../Containers/products'
 
 class PDFcontent extends Component {
@@ -22,16 +21,17 @@ PDFdate = () => {
 }
 
 	render() {
+		
 		return (
 			<div>
 				<p>
-					Virksomhed: <br/> 
+					Virksomhed: {this.props.chosenCustomer.orgName}<br/> 
 					Kontaktperson: <br/> 
 					Adresse: <br/> 
 					By: 
 				</p>
 
-				<dateStyle>Aalborg, {this.PDFdate()}</dateStyle>
+				<p style={{marginLeft: '850px'}}>Aalborg, {this.PDFdate()}</p>
 
 				<h1>Tilbud</h1>
 				<p>Dette er en beskrivelse</p>
