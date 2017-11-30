@@ -53,6 +53,7 @@ class CreateNewQuote extends Component {
                 <ProductsFields key={Math.random(36).toString()} />
             )
         });
+        console.log(this.state.selectedCustomer)
     }
     //#endregion small functions
 
