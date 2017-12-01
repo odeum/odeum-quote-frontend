@@ -20,23 +20,23 @@ PDFdate = () => {
 }
 
 	render() {
-		const { chosenCustomer } = this.props
+		const { chosenCustomer, title, description } = this.props
 		return (
 			<div>
 				<p>
-					Virksomhed: {chosenCustomer.orgName}<br/> 
-					Kontaktperson: {chosenCustomer.contactFirstName} {chosenCustomer.contactLastName}<br/> 
-					Adresse: {chosenCustomer.orgAddress}<br/> 
-					By: {chosenCustomer.orgZip} {chosenCustomer.orgCity}
+					{chosenCustomer.orgName}<br/> 
+					<i>Att.: <b>{chosenCustomer.contactFirstName} {chosenCustomer.contactLastName}</b></i><br/> 
+					{chosenCustomer.orgAddress}<br/> 
+					{chosenCustomer.orgZip} {chosenCustomer.orgCity}
 				</p>
 
 				<p style={{marginLeft: '850px'}}>Aalborg, {this.PDFdate()}</p>
 
-				<h1>Tilbud</h1>
-				<p>Dette er en beskrivelse</p>
+				<h1>{title}</h1>
+				<p>{description}</p>
 			</div>
 		)
 	}
-}
+}//<div style={{height: '200px', width: '100px', background: 'red', wordWrap: 'break-word'}}><p style={{wordWrap: 'break-word'}}>{description}</p></div>
 
 export default PDFcontent
