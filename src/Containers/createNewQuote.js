@@ -26,8 +26,8 @@ class CreateNewQuote extends Component {
             selectedCustomerId: 0,
             selectedCustomer: {},
             value: '',
-            titleDescribtion: '',
-            textDescribtion: ''
+            titleDescription: '',
+            textDescription: ''
         };
     }
 
@@ -53,7 +53,6 @@ class CreateNewQuote extends Component {
                 <ProductsFields key={Math.random(36).toString()} />
             )
         });
-        console.log(this.state.selectedCustomer)
     }
     //#endregion small functions
 
@@ -94,19 +93,19 @@ class CreateNewQuote extends Component {
     onHandle = (e) => {
         this.setState({
             value: e.target.value,
-            titleDescribtion: e.target.value
+            titleDescription: e.target.value
         })
     }
 
     onHandleTitle = (e) => {
         this.setState({
-            titleDescribtion: e.target.value
+            titleDescription: e.target.value
         })
     }
 
     onHandleDescription = (e) => {
         this.setState({
-            textDescribtion: e.target.value
+            textDescription: e.target.value
         })
     }
 
@@ -129,7 +128,8 @@ class CreateNewQuote extends Component {
     }
 
     downloadPDF = () => {
-        downloadPDF();
+        var description = this.state.textDescription
+        downloadPDF(description);
     }
 
     render() {
@@ -152,8 +152,8 @@ class CreateNewQuote extends Component {
 
                         {/*Title input and description input */}
                         <QuoteDescription
-                            titleValue={this.state.titleDescribtion}
-                            descriptionValue={this.state.textDescribtion}
+                            titleValue={this.state.titleDescription}
+                            descriptionValue={this.state.textDescription}
                             onChangeTitle={this.onHandleTitle}
                             onChangeDescription={this.onHandleDescription} />
                     </LeftSideWrapper>
@@ -178,7 +178,7 @@ class CreateNewQuote extends Component {
                         {/* This div is invisible. The reason it's there, is so that we can get the id from the div,
                             to get the elements from the PDFcontent component, for the downloadPDF function */}
                         <div id="content" style={{ display: 'none' }}>
-                            <PDFcontent chosenCustomer={this.state.selectedCustomer}/>
+                            <PDFcontent chosenCustomer={this.state.selectedCustomer} title={this.state.titleDescription} description={this.state.textDescription}/>
                         </div>
 
                         {/* ButtonPanel - the first button downloads the PDF file,
