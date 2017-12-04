@@ -1,11 +1,10 @@
-import { CALCULATE_TOTALPRICE } from '../Actions/quoteAction';
+import { CALCULATE_TOTALPRICE, FECTCH_QUOTATION } from '../Actions/quoteAction';
 const initialUserState = {
 
     arr: []
 }
 export function calculatePrice(state = initialUserState, action) {
     switch (action.type) {
-
         case CALCULATE_TOTALPRICE:
             var temp = action.payload
             var tempArr = state.arr
@@ -43,5 +42,13 @@ export function calculatePrice(state = initialUserState, action) {
             break
         default: return state
     }
+}
 
+export function fetchQuotation(state = [], action) {
+    switch (action.type) {
+        case FECTCH_QUOTATION:
+            state = [];
+            return state.concat([action.payload.data]);
+        default: return state
+    }
 }
