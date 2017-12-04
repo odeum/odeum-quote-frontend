@@ -1,19 +1,19 @@
 import axios from 'axios';
+import {createDate} from '../Components/HelperFuncs/createDate'
 
 export const FETCH_QUOTE = 'FETCH_QUOTE';
 export const fetchQuote = (values, selectedCustomer, titleDescribtion, textDescribtion, calculatePrice, totalPrice) => {
-    console.log('action caluteprice', calculatePrice.arr)
-    console.log('action caluteprice', selectedCustomer)
+    var date = createDate();
     var temp = 0
     calculatePrice.arr.forEach(item => {
          temp += item.price
     });
-    console.log('totalprice', temp)
     const url = `http://localhost:8080/api/quotation/post`;
     const request = axios.post(`${url}`, {
         customerID: selectedCustomer,
         salesPerson: '5a1fd2d039b2ad376549419f',
         status: 'Delivered',
+        date: date,
         description: [
             {
                 title: titleDescribtion,
