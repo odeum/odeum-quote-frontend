@@ -32,11 +32,11 @@ PDFdate = () => {
 
 				<p style={{marginLeft: '850px'}}>Aalborg, {this.PDFdate()}</p>
 
-				<h1>{title}</h1>
-				<p>{description}</p>
+				{/*<h1>{title}</h1>*/}
+				{/*<p>{description}</p> <- THIS CAN NOT BE STYLED FOR THE PDF (MULTIPLE LINES)*/} 
 			</div>
 		)
 	}
-}//<div style={{height: '200px', width: '100px', background: 'red', wordWrap: 'break-word'}}><p style={{wordWrap: 'break-word'}}>{description}</p></div>
+}
 
 export default PDFcontent
