@@ -4,6 +4,7 @@ import {createDate} from '../Components/HelperFuncs/createDate'
 export const FETCH_QUOTE = 'FETCH_QUOTE';
 export const fetchQuote = (values, selectedCustomer, titleDescribtion, textDescribtion, calculatePrice, totalPrice) => {
     var date = createDate();
+    console.log('damn',titleDescribtion);
     var temp = 0
     calculatePrice.arr.forEach(item => {
          temp += item.price

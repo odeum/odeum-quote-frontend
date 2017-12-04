@@ -13,6 +13,7 @@ class Quote extends Component {
             searchValue: ''
         }
     }
+
     componentDidMount() {
         this.props.fetchQuotation();
     }
@@ -20,30 +21,38 @@ class Quote extends Component {
     renderQuote = () => {
         var value = this.state.searchValue
         if (!value) {
+
             return this.props.quotation.map((array, index) => {
                 return array.quotation.map((item, index) => {
+
                     return (
                         <TR key={index}>
+
                             {item.description.map((d, index) => {
                                 return (
                                     <TD key={index}>{d.title}</TD>
                                 )
                             })}
+
                             <TD>{item.customerID}</TD>
                             <TD>{item.totalPrice}</TD>
                             <TD>{item.status}</TD>
+                            
                         </TR>
                     )
-                });
-            });
+
+                })
+            })
+
         } else {
+
             return this.props.quotation.map((array, index) => {
                 return array.quotation.map((item, index) => {
                     return (
+
                         item.description.map((d, index) => {
-                            console.log(item)
-                            if(d.title !== undefined){
                             if(d.title.toLowerCase().includes(value.toLocaleLowerCase())){
+
                                 return (
                                 <TR>
                                     <TD key={index}>{d.title}</TD>
@@ -52,11 +61,14 @@ class Quote extends Component {
                                     <TD>{item.status}</TD>
                                 </TR>
                                 )
+
                             }
-                        }})
+                        })
+
                     ) 
                 })
             })
+            
         }
     }
 
@@ -69,7 +81,9 @@ class Quote extends Component {
     render() {
         return (
             <div style={{ width: '100%' }}>
+
                 <h2>tilbuds oversigt</h2>
+
                 <TableComponent
                     value={this.state.searchValue}
                     searhPlaceholder={'Søg efter produkt...'}
@@ -78,6 +92,7 @@ class Quote extends Component {
                     renderTableRows={this.renderQuote()}
                     height={'325px'}
                 />
+
             </div>
         )
     }
