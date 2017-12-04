@@ -20,7 +20,7 @@ PDFdate = () => {
 }
 
 	render() {
-		const { chosenCustomer, title, description } = this.props
+		const { chosenCustomer } = this.props
 		return (
 			<div>
 				<p>
@@ -31,9 +31,6 @@ PDFdate = () => {
 				</p>
 
 				<p style={{marginLeft: '850px'}}>Aalborg, {this.PDFdate()}</p>
-
-				{/*<h1>{title}</h1>*/}
-				{/*<p>{description}</p> <- THIS CAN NOT BE STYLED FOR THE PDF (MULTIPLE LINES)*/} 
 			</div>
 		)
 	}

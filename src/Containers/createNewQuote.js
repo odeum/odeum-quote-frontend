@@ -13,7 +13,9 @@ import AddProduct from '../Components/CreateNewQuote/addProduct';
 import TotalPrice from '../Components/CreateNewQuote/totalPrice';
 import TableComponent from '../Components/table';
 import PDFcontent from '../Components/PDFcontent';
-import { downloadPDF } from './pdf'
+import { calculatePrice } from '../Reducers/quoteReducer';
+import PDFtable from '../Components/pdfTable';
+import { downloadPDF } from './pdf';
 
 //#endregion imports
 
@@ -111,10 +113,19 @@ class CreateNewQuote extends Component {
 
     saveQuote = () => {
         var values
-        const { titleDescribtion, textDescribtion, selectedCustomerId } = this.state
-        if (titleDescribtion === '' || selectedCustomerId === 0) {
-        } else {
-            this.props.fetchQuote(values, selectedCustomerId, titleDescribtion, textDescribtion, this.props.calculatePrice);
+        console.log('products', this.props.calculatePrice.arr)
+        const { titleDescription, textDescription, selectedCustomerId } = this.state
+        if (titleDescription === '') {
+            console.log('Du mangler en de title')
+        }
+        if(selectedCustomerId === 0){
+            console.log('Du mangler at vælge en kunde')
+        }  
+        if(0 > this.props.calculatePrice.arr.length){
+            console.log('Du mangler at vælge en produkt')
+        }
+        else {
+            this.props.fetchQuote(values, selectedCustomerId, titleDescription, textDescription, this.props.calculatePrice);
         }
 
     }
@@ -180,6 +191,10 @@ class CreateNewQuote extends Component {
                             to get the elements from the PDFcontent component, for the downloadPDF function */}
                         <div id="content" style={{ display: 'none' }}>
                             <PDFcontent chosenCustomer={this.state.selectedCustomer} title={this.state.titleDescription} description={this.state.textDescription}/>
+                        </div>
+
+                        <div id="pdfTable" style={{ display: 'none' }}>
+                            <PDFtable/>
                         </div>
 
                         {/* ButtonPanel - the first button downloads the PDF file,
