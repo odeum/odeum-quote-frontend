@@ -6,7 +6,7 @@ var rMargin = 20; // right margin in mm
 var pdfInMM = 260; // width of A4 in mm
 var tMargin = 20; // tip margin in mm
 
-export const downloadPDF = (description, title) => {
+export const downloadPDF = (description, title, productTable) => {
     var doc = new jsPDF("p", "mm", "a4"); //p = portrait, mm = millimeters, a4 = a4 paper
     var data = document.getElementById("content");
     var tableData = document.getElementById("pdfTable");
@@ -14,19 +14,21 @@ export const downloadPDF = (description, title) => {
     var desc = doc.splitTextToSize(description, (pdfInMM - lMargin - rMargin)); //splits the string into multible lines
 
     var columns = ["Produkt", "Beskrivelse af produkt", "Pris"];
-    var rows = [
-        [1, "Shawa", "Tanzania"],
-        [2, "Nelson", "Kazakhstan"],
-        [3, "Garcia", "Madagascar"]
-    ];
+    console.log(productTable)
+    var rows = [] ;
+    productTable.map((item) => {
+        console.log(item)
+        return rows.push([item.name, item.description, item.price])
+    })
+    rows.push(["Samlet pris:", "", "sdds"])
 
     //FIRST PAGE
     //The logo
     doc.addImage(image, 'JPEG', 150, 0, 40, 40);
-
+    
     //The customer information and the date - comes from the PDFcontent component
     doc.fromHTML(data, tMargin, lMargin);
-
+    
     //The title
     doc.setFontSize(20);
     doc.setFontType("bold");

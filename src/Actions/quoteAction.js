@@ -29,10 +29,11 @@ export const fetchQuote = (values, selectedCustomer, titleDescribtion, textDescr
 }
 
 export const CALCULATE_TOTALPRICE = 'CALCULATE_TOTALPRICE'
-export const calculatePrice = (productID, price, name, amount, discount) => {
+export const calculatePrice = (productID, price, name, amount, discount, sub ,description) => {
+console.log('action', description)
     return {
         type: CALCULATE_TOTALPRICE,
-        payload: { productID, price, name, amount, discount }
+        payload: { productID, price, name, amount, discount, sub, description }
     }
 }
 
