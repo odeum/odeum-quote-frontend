@@ -14,6 +14,7 @@ import TotalPrice from '../Components/CreateNewQuote/totalPrice';
 import TableComponent from '../Components/table';
 import PDFcontent from '../Components/PDFcontent';
 import { downloadPDF } from './pdf'
+import { calculatePrice } from '../Reducers/quoteReducer';
 
 //#endregion imports
 
@@ -111,9 +112,18 @@ class CreateNewQuote extends Component {
 
     saveQuote = () => {
         var values
+        console.log('products', this.props.calculatePrice.arr)
         const { titleDescription, textDescription, selectedCustomerId } = this.state
-        if (titleDescription === '' || selectedCustomerId === 0) {
-        } else {
+        if (titleDescription === '') {
+            console.log('Du mangler en de title')
+        }
+        if(selectedCustomerId === 0){
+            console.log('Du mangler at vælge en kunde')
+        }  
+        if(0 > this.props.calculatePrice.arr.length){
+            console.log('Du mangler at vælge en produkt')
+        }
+        else {
             this.props.fetchQuote(values, selectedCustomerId, titleDescription, textDescription, this.props.calculatePrice);
         }
 
