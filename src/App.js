@@ -9,6 +9,7 @@ import {
 import CreateNewQuote from './Containers/createNewQuote';
 import Product from './Containers/products';
 import Customer from './Containers/customers';
+import Quote from './Containers/quote';
 
 class App extends Component {
 
@@ -22,7 +23,7 @@ class App extends Component {
 							<CreateNewQuote />
 						</Tab>
 						<Tab icon={'assignment'} label={'Tilbuds oversigt'}>
-							Oversigt over alle tilbud
+							<Quote/>
             			</Tab>
 					</Menu>
 					<Menu label={'Kunder'} icon={'people'} route={'/kunder'}>
