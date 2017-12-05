@@ -1,7 +1,7 @@
 //#region imports
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { ButtonPanel, Button } from 'odeum-ui'
+import { ButtonPanel, Button, Modal } from 'odeum-ui'
 
 import { fetchCustomers } from '../Actions/customerAction'
 import { fetchProducts } from '../Actions/productAction'
@@ -218,7 +218,7 @@ class CreateNewQuote extends Component {
                             <Button onClick={this.downloadPDF} icon='visibility' label={'Vis tilbud'} size={'small'} />
                             <Button onClick={this.saveQuote} icon='check_circle' label={'Opret tilbud'} size={'small'} />
                         </ButtonPanel>
-
+                            
                     </RightSideWrapper>
                 </Wrapper>
             </div>
