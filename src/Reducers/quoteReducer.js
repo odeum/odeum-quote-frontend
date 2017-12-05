@@ -1,11 +1,11 @@
-import { CALCULATE_TOTALPRICE, FECTCH_QUOTATION } from '../Actions/quoteAction';
+import { CHOSEN_PRODUCTS, FECTCH_QUOTATION } from '../Actions/quoteAction';
 const initialUserState = {
 
     arr: []
 }
-export function calculatePrice(state = initialUserState, action) {
+export function chosenProducts(state = initialUserState, action) {
     switch (action.type) {
-        case CALCULATE_TOTALPRICE:
+        case CHOSEN_PRODUCTS:
             var temp = action.payload
             var tempArr = state.arr
             var flag = false
@@ -36,7 +36,7 @@ export function calculatePrice(state = initialUserState, action) {
 
             if (flag) {
                 state.arr = tempArr
-                return { ...state.arr, arr: [...state.arr] }
+                return {arr: [...state.arr] }
             }
             
             break
