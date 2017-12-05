@@ -137,7 +137,7 @@ class CreateNewQuote extends Component {
     downloadPDF = () => {
         var description = this.state.textDescription
         var title = this.state.titleDescription
-        var productTable = this.props.calculatePrice.arr
+        var productTable = this.props.chosenProducts.arr
         var totalPrice = this.calculateTotalPrice();
         downloadPDF(description, title, productTable, totalPrice);
     }

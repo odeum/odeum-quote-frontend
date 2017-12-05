@@ -48,7 +48,7 @@ export const downloadPDF = (description, title, productTable, totalPrice) => {
     doc.text(15, 45, 'Produkt oversigt');
 
     //doc.fromHTML(tableData, 50, lMargin)
-    console.log('rows', rows[1])
+    console.log('rows', rows)
     doc.autoTable(columns, rows, {
         margin: {top: 50},
         styles: {
