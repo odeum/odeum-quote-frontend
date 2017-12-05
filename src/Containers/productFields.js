@@ -27,7 +27,6 @@ class ProductsFields extends Component {
 
 	setProduct = (e, product) => {
 		this.props.saveProducts(product);
-		console.log('hej', product)
 		this.setState({
 			productValue: product.name,
 			productVisibility: false,
