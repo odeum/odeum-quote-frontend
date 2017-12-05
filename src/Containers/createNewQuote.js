@@ -1,26 +1,30 @@
 //#region imports
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { fetchCustomers } from '../Actions/customerAction';
-import { fetchProducts } from '../Actions/productAction';
-import { saveQuote } from '../Actions/quoteAction';
-import { Wrapper, LeftSideWrapper, RightSideWrapper } from '../Styles/createNewQuote';
-import { TR, TD } from '../Styles/table';
-import { ButtonPanel, Button } from 'odeum-ui';
-import ProductsFields from './productFields';
-import QuoteDescription from '../Components/CreateNewQuote/quoteDescription';
-import AddProduct from '../Components/CreateNewQuote/addProduct';
-import TotalPrice from '../Components/CreateNewQuote/totalPrice';
-import TableComponent from '../Components/table';
-import PDFcontent from '../Components/PDFcontent';
-import { downloadPDF } from './pdf';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { ButtonPanel, Button } from 'odeum-ui'
 
+import { fetchCustomers } from '../Actions/customerAction'
+import { fetchProducts } from '../Actions/productAction'
+import { saveQuote } from '../Actions/quoteAction'
+
+import QuoteDescription from '../Components/CreateNewQuote/quoteDescription'
+import AddProduct from '../Components/CreateNewQuote/addProduct'
+import TotalPrice from '../Components/CreateNewQuote/totalPrice'
+import TableComponent from '../Components/table'
+import PDFcontent from '../Components/PDFcontent'
+
+import ProductsFields from './productFields'
+import { downloadPDF } from './pdf'
+
+import { Wrapper, LeftSideWrapper, RightSideWrapper } from '../Styles/createNewQuote'
+import { TR, TD } from '../Styles/table'
 //#endregion imports
 
 const tableHeaders = { th1: 'Virksomhed', th2: 'E-mail', th3: 'Telefon' }
 class CreateNewQuote extends Component {
     constructor(props) {
-        super(props);
+        super(props)
+
         this.state = {
             dropDown: [],
             selectedCustomerId: 0,
@@ -28,7 +32,7 @@ class CreateNewQuote extends Component {
             value: '',
             titleDescription: '',
             textDescription: ''
-        };
+        }
     }
 
     //#region small functions
@@ -53,41 +57,6 @@ class CreateNewQuote extends Component {
             )
         });
     }
-    //#endregion small functions
-
-    renderCustomers = () => {
-        /* Gets the customer information for the customer table */
-        var value = this.state.value;
-        if (!value) {
-            return this.props.customer.map((array, index) => {
-                return Object.entries(array).map((item, index) => {
-                    return (
-                        <TR key={index} onClick={(e) => { this.selectCustomerRow(e, item[1]) }} style={{ backgroundColor: this.state.selectedCustomer === item[1] ? '#D3D3D3' : '' }}>
-                            <TD>{item[1].orgName}</TD>
-                            <TD>{item[1].contactEmail}</TD>
-                            <TD>{item[1].contactPhone}</TD>
-                        </TR>
-                    )
-                })
-            })
-        } else {
-            return this.props.customer.map((array, index) => {
-                return Object.entries(array).map((item, index) => {
-                    if (item[1].orgName.toLowerCase().includes(value.toLowerCase())
-                        || item[1].contactEmail.toLowerCase().includes(value.toLowerCase()))
-                        return (
-                            <TR key={index} onClick={(e) => { this.selectCustomerRow(e, item[1]) }}>
-                                <TD>{item[1].orgName}</TD>
-                                <TD>{item[1].contactEmail}</TD>
-                                <TD>{item[1].contactPhone}</TD>
-                            </TR>
-                        )
-                    else
-                        return null
-                })
-            })
-        }
-    }
 
     onHandle = (e) => {
         this.setState({
@@ -111,19 +80,23 @@ class CreateNewQuote extends Component {
     saveQuote = () => {
         var values
         const { titleDescription, textDescription, selectedCustomerId } = this.state
+
         if (titleDescription === '') {
             console.log('Du mangler en de title')
         }
-        if(selectedCustomerId === 0){
+
+        if (selectedCustomerId === 0) {
             console.log('Du mangler at vælge en kunde')
-        }  
-        if(0 > this.props.chosenProducts.arr.length){
+        }
+
+        if (0 > this.props.chosenProducts.arr.length) {
             console.log('Du mangler at vælge en produkt')
         }
+
         else {
             this.props.saveQuote(values, selectedCustomerId, titleDescription, textDescription, this.props.chosenProducts);
         }
-
+        
     }
 
     calculateTotalPrice = () => {
@@ -139,6 +112,46 @@ class CreateNewQuote extends Component {
         var title = this.state.titleDescription
         var productTable = this.props.chosenProducts.arr
         downloadPDF(description, title, productTable);
+    }
+    //#endregion small functions
+
+    renderCustomers = () => {
+        /* Gets the customer information for the customer table */
+        var value = this.state.value;
+
+        if (!value) {
+            return this.props.customer.map((array, index) => {
+                return Object.entries(array).map((item, index) => {
+
+                    return (
+                        <TR key={index} onClick={(e) => { this.selectCustomerRow(e, item[1]) }} style={{ backgroundColor: this.state.selectedCustomer === item[1] ? '#D3D3D3' : '' }}>
+                            <TD>{item[1].orgName}</TD>
+                            <TD>{item[1].contactEmail}</TD>
+                            <TD>{item[1].contactPhone}</TD>
+                        </TR>
+                    )
+
+                })
+            })
+        } else {
+
+            return this.props.customer.map((array, index) => {
+                return Object.entries(array).map((item, index) => {
+                    if (item[1].orgName.toLowerCase().includes(value.toLowerCase())
+                        || item[1].contactEmail.toLowerCase().includes(value.toLowerCase()))
+
+                        return (
+                            <TR key={index} onClick={(e) => { this.selectCustomerRow(e, item[1]) }}>
+                                <TD>{item[1].orgName}</TD>
+                                <TD>{item[1].contactEmail}</TD>
+                                <TD>{item[1].contactPhone}</TD>
+                            </TR>
+                        )
+
+                    else return null
+                })
+            })
+        }
     }
 
     render() {
@@ -164,7 +177,9 @@ class CreateNewQuote extends Component {
                             titleValue={this.state.titleDescription}
                             descriptionValue={this.state.textDescription}
                             onChangeTitle={this.onHandleTitle}
-                            onChangeDescription={this.onHandleDescription} />
+                            onChangeDescription={this.onHandleDescription}
+                        />
+
                     </LeftSideWrapper>
 
                     {/* Wrapper for the right section of the page */}
@@ -173,9 +188,11 @@ class CreateNewQuote extends Component {
                         {/* The fields for choosing products (renders one column) */}
                         <AddProduct />
                         <ProductsFields />
+
                         {this.state.dropDown.map((i) => {
                             return i;
                         })}
+
                         {/* Add button - renders a new field for products on onClick */}
                         <ButtonPanel justify='right'>
                             <Button onClick={this.onAddBtnClick} icon='add_circle_outline' label={'Ny række'} size={'small'} />
@@ -187,7 +204,7 @@ class CreateNewQuote extends Component {
                         {/* This div is invisible. The reason it's there, is so that we can get the id from the div,
                             to get the elements from the PDFcontent component, for the downloadPDF function */}
                         <div id="content" style={{ display: 'none' }}>
-                            <PDFcontent chosenCustomer={this.state.selectedCustomer} title={this.state.titleDescription} description={this.state.textDescription}/>
+                            <PDFcontent chosenCustomer={this.state.selectedCustomer} title={this.state.titleDescription} description={this.state.textDescription} />
                         </div>
 
                         {/* ButtonPanel - the first button downloads the PDF file,
@@ -196,6 +213,7 @@ class CreateNewQuote extends Component {
                             <Button onClick={this.downloadPDF} icon='visibility' label={'Vis tilbud'} size={'small'} />
                             <Button onClick={this.saveQuote} icon='check_circle' label={'Opret tilbud'} size={'small'} />
                         </ButtonPanel>
+
                     </RightSideWrapper>
                 </Wrapper>
             </div>

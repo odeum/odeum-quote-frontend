@@ -13,25 +13,21 @@ export function chosenProducts(state = initialUserState, action) {
             if (state.arr.length > 0) {
                 state.arr.forEach(item => {
                     if (item.name === temp.name) {
+
                         item.price = temp.price
                         item.amount = temp.amount
                         item.discount = temp.discount
                         flag = true
+
                     } 
                 });
 
                 if(flag === false){
-                    return {
-                        ...state,
-                        arr: [...state.arr, action.payload]
-                    }
+                    return {...state, arr: [...state.arr, action.payload]}
                 }
 
             } else {
-                return {
-                    ...state,
-                    arr: [...state.arr, action.payload]
-                }
+                return { ...state, arr: [...state.arr, action.payload]}
             }
 
             if (flag) {

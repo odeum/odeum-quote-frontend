@@ -10,18 +10,13 @@ export function fetchProducts(state = [], action) {
 }
 
 const initialUserState = {
-
     arr: []
 }
+
 export function saveProduct(state = initialUserState, action) {
     switch (action.type) {
         case SAVE_PRODUCT:
-            return {
-                ...state,
-                arr: [...state.arr, action.payload]
-            }
+            return { ...state, arr: [...state.arr, action.payload] }
         default: return state
-
     }
-
 }

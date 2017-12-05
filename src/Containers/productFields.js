@@ -1,11 +1,16 @@
+//#region imports
 import React, { Component } from 'react'
-import { Input, ProductWrapper } from '../Styles/createNewQuote';
-import { LinkPosition } from '../Styles/dropdown';
 import { connect } from 'react-redux';
+import onClickOutside from "react-onclickoutside";
+
 import { fetchProducts, saveProducts } from '../Actions/productAction';
 import { chosenProducts } from '../Actions/quoteAction';
+
 import ProductDropdown from '../Components/CreateNewQuote/productDropdown';
-import onClickOutside from "react-onclickoutside";
+
+import { Input, ProductWrapper } from '../Styles/createNewQuote';
+import { LinkPosition } from '../Styles/dropdown';
+//#endregion imports
 
 class ProductsFields extends Component {
 	constructor(props) {
@@ -27,7 +32,7 @@ class ProductsFields extends Component {
 
 	setProduct = (e, product) => {
 		this.props.saveProducts(product);
-		console.log('hej', product)
+
 		this.setState({
 			productValue: product.name,
 			productVisibility: false,
@@ -47,11 +52,13 @@ class ProductsFields extends Component {
 			product.subscription, 
 			product.description
 		);
+
 	}
 
 	onDiscountChange = (e) => {
 		const re = /^[0-9\b]+$/
 		var tempPrice = this.state.product.price * this.state.amount
+
 		if (e.target.value === '' || re.test(e.target.value)) {
 
 			if (e.target.value !== '') {
@@ -70,20 +77,19 @@ class ProductsFields extends Component {
 				this.state.amount, 
 				this.state.discount, 
 				this.state.product.subscription
-			);
-		}
+			)
 
+		}
 	}
 
 	onAmountChange = (e) => {
 		const re = /^[0-9\b]+$/;
 		var tempPrice
-		if (e.target.value === '' || re.test(e.target.value)) {
 
+		if (e.target.value === '' || re.test(e.target.value)) {
 			this.setState({ amount: e.target.value })
 
 			if (e.target.value !== '' && this.state.totalPrice !== 0) {
-
 				tempPrice = parseInt(e.target.value, 10) * this.state.product.price
 				this.setState({ totalPrice: tempPrice })
 
@@ -95,12 +101,12 @@ class ProductsFields extends Component {
 					this.state.discount, 
 					this.state.product.subscription
 				);
+
 			}
 		}
 	}
 
 	handleChange = (evt) => {
-
 		this.setState({ productValue: evt.target.value })
 
 		if (evt.target.value === '') {
@@ -108,6 +114,7 @@ class ProductsFields extends Component {
 		} else {
 			this.setState({ productVisibility: true })
 		}
+
 	}
 
 	handleClickOutside = evt => {
@@ -115,24 +122,22 @@ class ProductsFields extends Component {
 	};
 
 	renderProducts = () => {
-
 		var productValue = this.state.productValue
 
 		return this.props.product.map((item) => {
-
 			return item.product.map((product, key) => {
-
 				if (product.name.toLowerCase().includes(productValue.toLowerCase())) {
+
 					return <ProductDropdown 
 						key={key} 
 						name={product.name} 
 						setProduct={(e) => this.setProduct(e, product)}
 					/>
-				} else {
-					return null;
-				}
+
+				} else { return null }
 			})
 		})
+
 	}
 
 	render() {
@@ -140,6 +145,7 @@ class ProductsFields extends Component {
 			<div>
 				<ProductWrapper>
 					<LinkPosition>
+
 						<Input
 							placeholder="Begynd at skrive..."
 							width="206px"
@@ -150,8 +156,10 @@ class ProductsFields extends Component {
 							onChange={this.handleChange}
 							value={this.state.productValue}
 						/>
+
 						{this.state.productVisibility ? this.renderProducts() : null}
 					</LinkPosition>
+
 					<Input
 						width="65px"
 						marginRight="4px"
@@ -160,6 +168,7 @@ class ProductsFields extends Component {
 						value={this.state.amount}
 						onChange={this.onAmountChange}
 					/>
+
 					<Input
 						width="65px"
 						marginRight="4px"
@@ -168,6 +177,7 @@ class ProductsFields extends Component {
 						value={this.state.discount}
 						onChange={this.onDiscountChange}
 					/>
+
 					<Input
 						readOnly
 						width="65px"
@@ -175,6 +185,7 @@ class ProductsFields extends Component {
 						marginBottom="0px"
 						value={this.state.totalPrice}
 					/>
+
 				</ProductWrapper>
 			</div>
 		);
@@ -188,6 +199,7 @@ function mapStateToProps(state, prop) {
 		chosenProducts: state.chosenProducts
 	}
 }
+
 var productsFields = onClickOutside(ProductsFields);
 
 export default connect(mapStateToProps, { fetchProducts, saveProducts, chosenProducts })(productsFields)
