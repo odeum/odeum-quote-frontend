@@ -5,7 +5,6 @@ export default function (state = [], action) {
         case FETCH_CUSTOMER:
             state = [];
             return state.concat([action.payload.data] );
-            
         default: return state
     }
 }
