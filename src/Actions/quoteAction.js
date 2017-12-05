@@ -37,7 +37,7 @@ export const calculatePrice = (productID, price, name, amount, discount) => {
     }
 }
 
-export const FECTCH_QUOTATION = 'FETCH_PRODUCTS';
+export const FECTCH_QUOTATION = 'FECTCH_QUOTATION';
 export const fetchQuotation = () => {
     const url = `http://localhost:8080/api/quotation/quotations`;
     const request = axios.get(url);
