@@ -16,6 +16,7 @@ class ProductsFields extends Component {
 			totalPrice: 0,
 			amount: 0,
 			discount: 0,
+			description: '',
 			product: {}
 		}
 	}
@@ -26,13 +27,14 @@ class ProductsFields extends Component {
 
 	setProduct = (e, product) => {
 		this.props.saveProducts(product);
-
+		console.log('hej', product)
 		this.setState({
 			productValue: product.name,
 			productVisibility: false,
 			totalPrice: product.price,
 			amount: 1,
 			discount: 0,
+			description: product.description,
 			product: product
 		})
 
@@ -42,7 +44,8 @@ class ProductsFields extends Component {
 			product.name, 
 			1, 
 			0, 
-			product.subscription
+			product.subscription, 
+			product.description
 		);
 	}
 
