@@ -62,6 +62,8 @@ class Quote extends Component {
                                 </TR>
                                 )
 
+                            }else{
+                                return null
                             }
                         })
 
@@ -73,7 +75,6 @@ class Quote extends Component {
     }
 
     handleSearchInput = (e) => {
-        1
         this.setState({ searchValue: e.target.value })
     }
 
