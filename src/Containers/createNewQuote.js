@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { fetchCustomers } from '../Actions/customerAction';
 import { fetchProducts } from '../Actions/productAction';
 import { saveQuote } from '../Actions/quoteAction';
+import {fetchSalesPerson} from '../Actions/salesPersonAction'
 import { Wrapper, LeftSideWrapper, RightSideWrapper } from '../Styles/createNewQuote';
 import { TR, TD } from '../Styles/table';
 import { ButtonPanel, Button } from 'odeum-ui';
@@ -42,6 +43,8 @@ class CreateNewQuote extends Component {
     componentDidMount() {
         this.props.fetchCustomers();
         this.props.fetchProducts();
+
+        
     }
 
 
@@ -135,6 +138,7 @@ class CreateNewQuote extends Component {
     }
 
     downloadPDF = () => {
+        this.props.fetchSalesPerson();
         var description = this.state.textDescription
         var title = this.state.titleDescription
         var productTable = this.props.chosenProducts.arr
@@ -208,8 +212,9 @@ function mapStateToProps(state, prop) {
     return {
         customer: state.customer,
         product: state.product,
-        chosenProducts: state.chosenProducts
+        chosenProducts: state.chosenProducts,
+        salesPerson: state.salesPerson
     }
 }
 
-export default connect(mapStateToProps, { fetchCustomers, fetchProducts, saveQuote })(CreateNewQuote);
+export default connect(mapStateToProps, { fetchCustomers, fetchProducts, saveQuote, fetchSalesPerson })(CreateNewQuote);
