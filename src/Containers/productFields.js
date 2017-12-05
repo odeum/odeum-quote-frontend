@@ -3,7 +3,7 @@ import { Input, ProductWrapper } from '../Styles/createNewQuote';
 import { LinkPosition } from '../Styles/dropdown';
 import { connect } from 'react-redux';
 import { fetchProducts, saveProducts } from '../Actions/productAction';
-import { calculatePrice } from '../Actions/quoteAction';
+import { chosenProducts } from '../Actions/quoteAction';
 import ProductDropdown from '../Components/CreateNewQuote/productDropdown';
 import onClickOutside from "react-onclickoutside";
 
@@ -38,7 +38,7 @@ class ProductsFields extends Component {
 			product: product
 		})
 
-		this.props.calculatePrice(
+		this.props.chosenProducts(
 			product._id, 
 			product.price, 
 			product.name, 
@@ -185,12 +185,12 @@ function mapStateToProps(state, prop) {
 	return {
 		product: state.product,
 		saveProduct: state.saveProduct,
-		calculatePrice: state.calculatePrice
+		chosenProducts: state.chosenProducts
 	}
 }
 var productsFields = onClickOutside(ProductsFields);
 
-export default connect(mapStateToProps, { fetchProducts, saveProducts, calculatePrice })(productsFields)
+export default connect(mapStateToProps, { fetchProducts, saveProducts, chosenProducts })(productsFields)
 
 
 

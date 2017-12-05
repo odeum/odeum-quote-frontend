@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchCustomers } from '../Actions/customerAction';
 import { fetchProducts } from '../Actions/productAction';
-import { fetchQuote } from '../Actions/quoteAction';
+import { saveQuote } from '../Actions/quoteAction';
 import { Wrapper, LeftSideWrapper, RightSideWrapper } from '../Styles/createNewQuote';
 import { TR, TD } from '../Styles/table';
 import { ButtonPanel, Button } from 'odeum-ui';
@@ -13,7 +13,6 @@ import AddProduct from '../Components/CreateNewQuote/addProduct';
 import TotalPrice from '../Components/CreateNewQuote/totalPrice';
 import TableComponent from '../Components/table';
 import PDFcontent from '../Components/PDFcontent';
-import { calculatePrice } from '../Reducers/quoteReducer';
 import PDFtable from '../Components/pdfTable';
 import { downloadPDF } from './pdf';
 
@@ -113,7 +112,6 @@ class CreateNewQuote extends Component {
 
     saveQuote = () => {
         var values
-        console.log('products', this.props.calculatePrice.arr)
         const { titleDescription, textDescription, selectedCustomerId } = this.state
         if (titleDescription === '') {
             console.log('Du mangler en de title')
@@ -121,18 +119,18 @@ class CreateNewQuote extends Component {
         if(selectedCustomerId === 0){
             console.log('Du mangler at vælge en kunde')
         }  
-        if(0 > this.props.calculatePrice.arr.length){
+        if(0 > this.props.chosenProducts.arr.length){
             console.log('Du mangler at vælge en produkt')
         }
         else {
-            this.props.fetchQuote(values, selectedCustomerId, titleDescription, textDescription, this.props.calculatePrice);
+            this.props.saveQuote(values, selectedCustomerId, titleDescription, textDescription, this.props.chosenProducts);
         }
 
     }
 
     calculateTotalPrice = () => {
         var temp = 0
-        this.props.calculatePrice.arr.forEach(item => {
+        this.props.chosenProducts.arr.forEach(item => {
             temp += item.price
         });
         return temp
@@ -141,7 +139,7 @@ class CreateNewQuote extends Component {
     downloadPDF = () => {
         var description = this.state.textDescription
         var title = this.state.titleDescription
-        var productTable = this.props.calculatePrice.arr
+        var productTable = this.props.chosenProducts.arr
         downloadPDF(description, title, productTable);
     }
 
@@ -215,8 +213,8 @@ function mapStateToProps(state, prop) {
     return {
         customer: state.customer,
         product: state.product,
-        calculatePrice: state.calculatePrice
+        chosenProducts: state.chosenProducts
     }
 }
 
-export default connect(mapStateToProps, { fetchCustomers, fetchProducts, fetchQuote })(CreateNewQuote);
+export default connect(mapStateToProps, { fetchCustomers, fetchProducts, saveQuote })(CreateNewQuote);
