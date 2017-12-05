@@ -47,10 +47,8 @@ class CreateNewQuote extends Component {
     componentDidMount() {
         this.props.fetchCustomers();
         this.props.fetchProducts();
-
-        
+        this.props.fetchSalesPerson();
     }
-
 
     onAddBtnClick = (event) => {
         const dropDown = this.state.dropDown;
@@ -111,12 +109,12 @@ class CreateNewQuote extends Component {
     }
 
     downloadPDF = () => {
-        this.props.fetchSalesPerson();
+        var salesPerson = this.props.salesPerson
         var description = this.state.textDescription
         var title = this.state.titleDescription
         var productTable = this.props.chosenProducts.arr
         var totalPrice = this.calculateTotalPrice();
-        downloadPDF(description, title, productTable, totalPrice);
+        downloadPDF(description, title, productTable, totalPrice, salesPerson);
     }
     //#endregion small functions
 

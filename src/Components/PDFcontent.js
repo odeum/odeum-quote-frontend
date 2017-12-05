@@ -16,7 +16,7 @@ PDFdate = () => {
 		mm = '0' + mm
 	} 
 	
-	return today = mm + '/' + dd + '/' + yyyy;
+	return today = dd + '/' + mm + '/' + yyyy;
 }
 
 	render() {
