@@ -36,7 +36,7 @@ export function chosenProducts(state = initialUserState, action) {
 
             if (flag) {
                 state.arr = tempArr
-                return { ...state.arr, arr: [...state.arr] }
+                return {arr: [...state.arr] }
             }
             
             break

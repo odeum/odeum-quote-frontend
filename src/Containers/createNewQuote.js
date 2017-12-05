@@ -13,7 +13,6 @@ import AddProduct from '../Components/CreateNewQuote/addProduct';
 import TotalPrice from '../Components/CreateNewQuote/totalPrice';
 import TableComponent from '../Components/table';
 import PDFcontent from '../Components/PDFcontent';
-import PDFtable from '../Components/pdfTable';
 import { downloadPDF } from './pdf';
 
 //#endregion imports
@@ -38,10 +37,9 @@ class CreateNewQuote extends Component {
             selectedCustomerId: item.orgId,
             selectedCustomer: item
         })
-
     }
-    componentDidMount() {
 
+    componentDidMount() {
         this.props.fetchCustomers();
         this.props.fetchProducts();
     }
@@ -190,10 +188,6 @@ class CreateNewQuote extends Component {
                             to get the elements from the PDFcontent component, for the downloadPDF function */}
                         <div id="content" style={{ display: 'none' }}>
                             <PDFcontent chosenCustomer={this.state.selectedCustomer} title={this.state.titleDescription} description={this.state.textDescription}/>
-                        </div>
-
-                        <div id="pdfTable" style={{ display: 'none' }}>
-                            <PDFtable/>
                         </div>
 
                         {/* ButtonPanel - the first button downloads the PDF file,

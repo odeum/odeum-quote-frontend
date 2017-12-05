@@ -9,15 +9,12 @@ var tMargin = 20; // tip margin in mm
 export const downloadPDF = (description, title, productTable) => {
     var doc = new jsPDF("p", "mm", "a4"); //p = portrait, mm = millimeters, a4 = a4 paper
     var data = document.getElementById("content");
-    var tableData = document.getElementById("pdfTable");
     var image = imgData;
     var desc = doc.splitTextToSize(description, (pdfInMM - lMargin - rMargin)); //splits the string into multible lines
 
     var columns = ["Produkt", "Beskrivelse af produkt", "Pris"];
-    console.log(productTable)
     var rows = [] ;
     productTable.map((item) => {
-        console.log(item)
         return rows.push([item.name, item.description, item.price])
     })
     rows.push(["Samlet pris:", "", "sdds"])
