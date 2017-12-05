@@ -6,7 +6,7 @@ var rMargin = 20; // right margin in mm
 var pdfInMM = 260; // width of A4 in mm
 var tMargin = 20; // tip margin in mm
 
-export const downloadPDF = (description, title, productTable, totalPrice) => {
+export const downloadPDF = (description, title, productTable, totalPrice, salesPerson) => {
     var doc = new jsPDF("p", "mm", "a4"); //p = portrait, mm = millimeters, a4 = a4 paper
     var data = document.getElementById("content");
     var image = imgData;
@@ -38,6 +38,25 @@ export const downloadPDF = (description, title, productTable, totalPrice) => {
     doc.setFontSize(12);
     doc.setFontType("normal");
     doc.text(lMargin, 100, desc);
+
+    //Get and print the sales person
+    doc.text(lMargin, 230, 'Med venlig hilsen')
+    var companyName
+    var contactPerson
+    var email
+    var phone
+    salesPerson.map((item) => {
+        return (companyName = item.salesperson.companyName,
+                contactPerson = item.salesperson.contactPerson,
+                email = 'Email: ' + item.salesperson.email,
+                phone = 'Telefon: ' + item.salesperson.phone)
+    })
+    doc.setFontStyle('bold')
+    doc.text(lMargin, 235, companyName)
+    doc.text(lMargin, 240, contactPerson)
+    doc.setFontStyle('normal')
+    doc.text(lMargin, 245, email)
+    doc.text(lMargin, 250, phone)
 
     //Footer
     doc.setFontSize(7.5);
