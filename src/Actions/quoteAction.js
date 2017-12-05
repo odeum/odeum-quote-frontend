@@ -1,10 +1,9 @@
 import axios from 'axios';
 import {createDate} from '../Components/HelperFuncs/createDate'
 
-export const FETCH_QUOTE = 'FETCH_QUOTE';
-export const fetchQuote = (values, selectedCustomer, titleDescribtion, textDescribtion, calculatePrice, totalPrice) => {
+export const SAVE_QUOTE = 'SAVE_QUOTE';
+export const saveQuote = (values, selectedCustomer, titleDescribtion, textDescribtion, calculatePrice, totalPrice) => {
     var date = createDate();
-    console.log('damn',titleDescribtion);
     var temp = 0
     calculatePrice.arr.forEach(item => {
          temp += item.price
@@ -24,16 +23,15 @@ export const fetchQuote = (values, selectedCustomer, titleDescribtion, textDescr
         totalPrice: temp
     })
     return {
-        type: FETCH_QUOTE,
+        type: SAVE_QUOTE,
         payload: request
     }
 }
 
-export const CALCULATE_TOTALPRICE = 'CALCULATE_TOTALPRICE'
-export const calculatePrice = (productID, price, name, amount, discount, sub ,description) => {
-console.log('action', description)
+export const CHOSEN_PRODUCTS = 'CHOSEN_PRODUCTS'
+export const chosenProducts = (productID, price, name, amount, discount, sub ,description) => {
     return {
-        type: CALCULATE_TOTALPRICE,
+        type: CHOSEN_PRODUCTS,
         payload: { productID, price, name, amount, discount, sub, description }
     }
 }
