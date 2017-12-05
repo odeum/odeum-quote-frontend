@@ -6,18 +6,19 @@ var rMargin = 20; // right margin in mm
 var pdfInMM = 260; // width of A4 in mm
 var tMargin = 20; // tip margin in mm
 
-export const downloadPDF = (description, title, productTable) => {
+export const downloadPDF = (description, title, productTable, totalPrice) => {
     var doc = new jsPDF("p", "mm", "a4"); //p = portrait, mm = millimeters, a4 = a4 paper
     var data = document.getElementById("content");
     var image = imgData;
     var desc = doc.splitTextToSize(description, (pdfInMM - lMargin - rMargin)); //splits the string into multible lines
 
     var columns = ["Produkt", "Beskrivelse af produkt", "Pris"];
-    var rows = [] ;
+    var rows = [];
     productTable.map((item) => {
         return rows.push([item.name, item.description, item.price])
     })
-    rows.push(["Samlet pris:", "", "sdds"])
+
+    rows.push(["Samlet pris:", "", totalPrice])
 
     //FIRST PAGE
     //The logo
@@ -47,9 +48,12 @@ export const downloadPDF = (description, title, productTable) => {
     doc.text(15, 45, 'Produkt oversigt');
 
     //doc.fromHTML(tableData, 50, lMargin)
+    console.log('rows', rows)
     doc.autoTable(columns, rows, {
         margin: {top: 50},
-        styles: {overflow: 'linebreak'}
+        styles: {
+            overflow: 'linebreak'
+        }
     });
 
     //Makes the PDF
