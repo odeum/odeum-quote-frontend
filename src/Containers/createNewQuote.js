@@ -6,13 +6,14 @@ import { ButtonPanel, Button } from 'odeum-ui'
 import { fetchCustomers } from '../Actions/customerAction'
 import { fetchProducts } from '../Actions/productAction'
 import { saveQuote } from '../Actions/quoteAction'
-import { fetchSalesPerson } from '../Actions/salesPersonAction'; 
+import { fetchSalesPerson } from '../Actions/salesPersonAction';
 
 import QuoteDescription from '../Components/CreateNewQuote/quoteDescription'
 import AddProduct from '../Components/CreateNewQuote/addProduct'
 import TotalPrice from '../Components/CreateNewQuote/totalPrice'
 import TableComponent from '../Components/table'
 import PDFcontent from '../Components/PDFcontent'
+import PopupWindow from '../Components/popupWindow'
 
 import ProductsFields from './productFields'
 import { downloadPDF } from './pdf'
@@ -32,7 +33,8 @@ class CreateNewQuote extends Component {
             selectedCustomer: {},
             value: '',
             titleDescription: '',
-            textDescription: ''
+            textDescription: '',
+            showPopup: false
         }
     }
 
@@ -95,9 +97,15 @@ class CreateNewQuote extends Component {
         }
 
         else {
+            this.togglePopup()
             this.props.saveQuote(values, selectedCustomerId, selectedCustomer.orgName, titleDescription, textDescription, this.props.chosenProducts);
         }
-        
+    }
+
+    togglePopup = () => {
+        this.setState({
+            showPopup: !this.state.showPopup
+        });
     }
 
     calculateTotalPrice = () => {
@@ -215,8 +223,11 @@ class CreateNewQuote extends Component {
                         <ButtonPanel justify='right' style={{ marginRight: '0px', marginTop: '5px' }}>
                             <Button onClick={this.downloadPDF} icon='visibility' label={'Vis tilbud'} size={'small'} />
                             <Button onClick={this.saveQuote} icon='check_circle' label={'Opret tilbud'} size={'small'} />
+                            {this.state.showPopup ?
+                                <PopupWindow text='Tilbuddet blev oprettet' closePopup={this.togglePopup} closeModal={this.togglePopup} /> : null
+                            }
                         </ButtonPanel>
-                            
+
                     </RightSideWrapper>
                 </Wrapper>
             </div>
