@@ -1,6 +1,7 @@
 //#region imports
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { convertPriceToEu } from '../Components/HelperFuncs/convertPrice';
 
 import { fetchQuotation } from '../Actions/quoteAction';
 import { fecthOneCustomer } from '../Actions/customerAction';
@@ -10,7 +11,7 @@ import TableComponent from '../Components/table';
 import { TD, TR } from '../Styles/table';
 //#endregion imports
 
-const tableHeaders = { h1: 'Titel', h2: 'Kunde', h4: 'Pris', h5: 'Status' };
+const tableHeaders = { h1: 'Titel', h2: 'Kunde', h4: 'Status', h5: 'Pris' };
 
 class Quote extends Component {
     constructor(props) {
@@ -49,10 +50,11 @@ class Quote extends Component {
 
     renderQuote = () => {
         var value = this.state.searchValue
+        
         if (!value) {
             return this.props.quotation.map((array, index) => {
                 return array.quotation.map((item, index) => {
-
+                    var splitTotalprice = convertPriceToEu(item.totalPrice)
                     return (
                         <TR key={index} onClick={(e) => { this.selectedQuote(e, item) }}>
                             {item.description.map((d, index) => {
@@ -61,8 +63,8 @@ class Quote extends Component {
                                 )
                             })}
                             <TD>{item.customerName}</TD>
-                            <TD>{item.totalPrice}</TD>
                             <TD>{item.status}</TD>
+                            <TD>{splitTotalprice} kr.</TD>
                         </TR>
                     )
 
@@ -71,17 +73,16 @@ class Quote extends Component {
         } else {
             return this.props.quotation.map((array, index) => {
                 return array.quotation.map((item, index) => {
-
+                    var splitTotalprice = convertPriceToEu(item.totalPrice)
                     return (
                         item.description.map((d, index) => {
                             if (d.title.toLowerCase().includes(value.toLocaleLowerCase())) {
-
                                 return (
                                     <TR key={index} onClick={this.selectedQuote}>
                                         <TD key={index}>{d.title}</TD>
                                         <TD>{item.customerID}</TD>
-                                        <TD>{item.totalPrice}</TD>
                                         <TD>{item.status}</TD>
+                                        <TD>{splitTotalprice} kr.</TD>
                                     </TR>
                                 )
 

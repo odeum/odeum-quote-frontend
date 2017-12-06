@@ -1,4 +1,5 @@
 import { imgData } from '../img/data.js';
+import { convertPriceToEu } from '../Components/HelperFuncs/convertPrice'
 var jsPDF = require('jspdf');
 require('jspdf-autotable');
 var lMargin = 20; // left margin in mm
@@ -19,14 +20,14 @@ export const downloadPDF = (description, title, productTable, totalPrice, salesP
     // var newPrice = totalPrice.toFixed(2).replace(/./g, function(c, i, a) {
     //     return i && c !== "," && ((a.length - i) % 3 === 0) ? '.' + c : c;
     // });
-    var splitTotalprice = Number(totalPrice).toLocaleString("es-ES", { minimumFractionDigits: 2 });
-
+    var splitTotalprice = convertPriceToEu(totalPrice)
+    
     productTable.map((item) => {
-        var splitPrice = Number(item.price).toLocaleString("es-ES", { minimumFractionDigits: 2 });
+        var splitPrice = convertPriceToEu(item.price)
         return rows.push([item.name, item.description, splitPrice])
     })
     //Last line of the table
-    rows.push(["Samlet pris:", "", splitTotalprice])
+    rows.push(["Samlet pris:", "", splitTotalprice ])
 
     //FIRST PAGE
     //The logo

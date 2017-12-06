@@ -2,6 +2,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import onClickOutside from "react-onclickoutside";
+import { convertPriceToEu } from '../Components/HelperFuncs/convertPrice';
 
 import { fetchProducts, saveProducts } from '../Actions/productAction';
 import { chosenProducts } from '../Actions/quoteAction';
@@ -140,6 +141,8 @@ class ProductsFields extends Component {
 	}
 
 	render() {
+		var splitPrice = convertPriceToEu(this.state.totalPrice)
+		var splitDiscount = convertPriceToEu(this.state.discount)
 		return (
 			<div>
 				<ProductWrapper>
@@ -173,7 +176,7 @@ class ProductsFields extends Component {
 						marginRight="4px"
 						marginTop="0px"
 						marginBottom="0px"
-						value={this.state.discount}
+						value={splitDiscount}
 						onChange={this.onDiscountChange}
 					/>
 
@@ -182,7 +185,7 @@ class ProductsFields extends Component {
 						width="65px"
 						marginTop="0px"
 						marginBottom="0px"
-						value={this.state.totalPrice}
+						value={splitPrice}
 					/>
 
 				</ProductWrapper>
