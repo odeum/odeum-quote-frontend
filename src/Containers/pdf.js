@@ -1,6 +1,6 @@
 import { imgData } from '../img/data.js';
 var jsPDF = require('jspdf');
-            require('jspdf-autotable');
+require('jspdf-autotable');
 var lMargin = 20; // left margin in mm
 var rMargin = 20; // right margin in mm
 var pdfInMM = 260; // width of A4 in mm
@@ -16,11 +16,17 @@ export const downloadPDF = (description, title, productTable, totalPrice, salesP
     //Gets the data for the table
     var columns = ["Produkt", "Beskrivelse af produkt", "Pris"];
     var rows = [];
+    // var newPrice = totalPrice.toFixed(2).replace(/./g, function(c, i, a) {
+    //     return i && c !== "," && ((a.length - i) % 3 === 0) ? '.' + c : c;
+    // });
+    var splitTotalprice = Number(totalPrice).toLocaleString("es-ES", { minimumFractionDigits: 2 });
+
     productTable.map((item) => {
-        return rows.push([item.name, item.description, item.price])
+        var splitPrice = Number(item.price).toLocaleString("es-ES", { minimumFractionDigits: 2 });
+        return rows.push([item.name, item.description, splitPrice])
     })
     //Last line of the table
-    rows.push(["Samlet pris:", "", totalPrice])
+    rows.push(["Samlet pris:", "", splitTotalprice])
 
     //FIRST PAGE
     //The logo
@@ -47,9 +53,9 @@ export const downloadPDF = (description, title, productTable, totalPrice, salesP
     var phone
     salesPerson.map((item) => {
         return (companyName = item.salesperson.companyName,
-                contactPerson = item.salesperson.contactPerson,
-                email = 'Email: ' + item.salesperson.email,
-                phone = 'Telefon: ' + item.salesperson.phone)
+            contactPerson = item.salesperson.contactPerson,
+            email = 'Email: ' + item.salesperson.email,
+            phone = 'Telefon: ' + item.salesperson.phone)
     })
     doc.setFontStyle('bold')
     doc.text(lMargin, 235, companyName)
