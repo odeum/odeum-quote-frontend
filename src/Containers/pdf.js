@@ -82,6 +82,9 @@ export const downloadPDF = (description, title, productTable, totalPrice, salesP
         },
         bodyStyles: {
             textColor: 'black'
+        },
+        columnStyles:{
+            2: { halign: 'right' }
         }
     });
 
