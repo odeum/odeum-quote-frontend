@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { fetchQuotation } from '../Actions/quoteAction';
+import { fecthOneCustomer } from '../Actions/customerAction';
 
 import TableComponent from '../Components/table';
 
@@ -20,7 +21,22 @@ class Quote extends Component {
     }
 
     componentDidMount() {
-        this.props.fetchQuotation();
+        this.props.fetchQuotation() 
+    }
+
+    oneCustomer = () => {
+        const { fecthOneCustomer } = this.props
+        var customerId = []
+        console.log(customerId)
+        fecthOneCustomer(customerId);
+        return this.props.quotation.map((array, index) => {
+            return array.quotation.map((item, index) => {
+                return (
+                    customerId.push(item.customerID)
+                )
+            })
+        }) 
+       
     }
 
     selectedQuote = (e, item) => {
@@ -36,15 +52,15 @@ class Quote extends Component {
         if (!value) {
             return this.props.quotation.map((array, index) => {
                 return array.quotation.map((item, index) => {
-                    
+
                     return (
-                        <TR key={index} onClick={(e) => {this.selectedQuote(e, item)}}>
+                        <TR key={index} onClick={(e) => { this.selectedQuote(e, item) }}>
                             {item.description.map((d, index) => {
                                 return (
                                     <TD key={index}>{d.title}</TD>
                                 )
                             })}
-                            <TD>{item.customerID}</TD>
+                            <TD>{item.customerName}</TD>
                             <TD>{item.totalPrice}</TD>
                             <TD>{item.status}</TD>
                         </TR>
@@ -55,26 +71,26 @@ class Quote extends Component {
         } else {
             return this.props.quotation.map((array, index) => {
                 return array.quotation.map((item, index) => {
-                
+
                     return (
                         item.description.map((d, index) => {
-                            if(d.title.toLowerCase().includes(value.toLocaleLowerCase())){
+                            if (d.title.toLowerCase().includes(value.toLocaleLowerCase())) {
 
                                 return (
-                                <TR key={index} onClick={this.selectedQuote}>
-                                    <TD key={index}>{d.title}</TD>
-                                    <TD>{item.customerID}</TD>
-                                    <TD>{item.totalPrice}</TD>
-                                    <TD>{item.status}</TD>
-                                </TR>
+                                    <TR key={index} onClick={this.selectedQuote}>
+                                        <TD key={index}>{d.title}</TD>
+                                        <TD>{item.customerID}</TD>
+                                        <TD>{item.totalPrice}</TD>
+                                        <TD>{item.status}</TD>
+                                    </TR>
                                 )
 
-                            }else{ return null }
+                            } else { return null }
                         })
-                    ) 
+                    )
                 })
             })
-            
+
         }
     }
 
@@ -99,8 +115,9 @@ class Quote extends Component {
 
 function mapStateToProps(state, prop) {
     return {
-        quotation: state.quotation
+        quotation: state.quotation,
+        oneCustomer: state.oneCustomer
     }
 }
 
-export default connect(mapStateToProps, { fetchQuotation })(Quote);
+export default connect(mapStateToProps, { fetchQuotation, fecthOneCustomer })(Quote);

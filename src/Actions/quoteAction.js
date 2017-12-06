@@ -2,7 +2,7 @@ import axios from 'axios';
 import {createDate} from '../Components/HelperFuncs/createDate'
 
 export const SAVE_QUOTE = 'SAVE_QUOTE';
-export const saveQuote = (values, selectedCustomer, titleDescribtion, textDescribtion, calculatePrice, totalPrice) => {
+export const saveQuote = (values, selectedCustomerId, selectedCustomerName, titleDescribtion, textDescribtion, calculatePrice, totalPrice) => {
     var date = createDate();
     var temp = 0
     console.log('daddy')
@@ -11,7 +11,8 @@ export const saveQuote = (values, selectedCustomer, titleDescribtion, textDescri
     });
     const url = `http://localhost:8080/api/quotation/post`;
     const request = axios.post(`${url}`, {
-        customerID: selectedCustomer,
+        customerID: selectedCustomerId,
+        customerName: selectedCustomerName,
         salesPerson: '5a1fd2d039b2ad376549419f',
         status: 'Delivered',
         date: date,

@@ -10,3 +10,15 @@ export const fetchCustomers = () => {
         payload: request
     };
 }
+
+export const FETCH_ONECUSTOMER = 'FETCH_ONECUSTOMER'; 
+export const fecthOneCustomer = (id) => {
+    console.log('id', id); 
+    const url = `http://crm.webhouse.dk/rest/crm/organisation/${id}`;
+    const request = axios.get(url, config);
+    console.log('request', request);    
+    return {
+        type:FETCH_ONECUSTOMER, 
+        payload:request  
+    } 
+}

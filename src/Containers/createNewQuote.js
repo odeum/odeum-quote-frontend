@@ -1,7 +1,7 @@
 //#region imports
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { ButtonPanel, Button, Modal } from 'odeum-ui'
+import { ButtonPanel, Button } from 'odeum-ui'
 
 import { fetchCustomers } from '../Actions/customerAction'
 import { fetchProducts } from '../Actions/productAction'
@@ -80,7 +80,7 @@ class CreateNewQuote extends Component {
 
     saveQuote = () => {
         var values
-        const { titleDescription, textDescription, selectedCustomerId } = this.state
+        const { titleDescription, textDescription, selectedCustomerId, selectedCustomer } = this.state
 
         if (titleDescription === '') {
             console.log('Du mangler en de title')
@@ -95,7 +95,7 @@ class CreateNewQuote extends Component {
         }
 
         else {
-            this.props.saveQuote(values, selectedCustomerId, titleDescription, textDescription, this.props.chosenProducts);
+            this.props.saveQuote(values, selectedCustomerId, selectedCustomer.orgName, titleDescription, textDescription, this.props.chosenProducts);
         }
         
     }
