@@ -17,6 +17,7 @@ import PopupWindow from '../Components/popupWindow'
 
 import ProductsFields from './productFields'
 import { downloadPDF } from './pdf'
+import { convertPriceToEu } from '../Components/HelperFuncs/convertPrice'
 
 import { Wrapper, LeftSideWrapper, RightSideWrapper } from '../Styles/createNewQuote'
 import { TR, TD } from '../Styles/table'
@@ -110,6 +111,7 @@ class CreateNewQuote extends Component {
 
     calculateTotalPrice = () => {
         var temp = 0
+        convertPriceToEu(temp)
         this.props.chosenProducts.arr.forEach(item => {
             temp += item.price
         });
