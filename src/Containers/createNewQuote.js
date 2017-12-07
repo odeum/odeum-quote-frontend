@@ -5,7 +5,7 @@ import { ButtonPanel, Button } from 'odeum-ui'
 
 import { fetchCustomers } from '../Actions/customerAction'
 import { fetchProducts } from '../Actions/productAction'
-import { saveQuote } from '../Actions/quoteAction'
+import { saveQuote, createPdf } from '../Actions/quoteAction'
 import { fetchSalesPerson } from '../Actions/salesPersonAction';
 
 import QuoteDescription from '../Components/CreateNewQuote/quoteDescription'
@@ -83,7 +83,17 @@ class CreateNewQuote extends Component {
     saveQuote = () => {
         var values
         const { titleDescription, textDescription, selectedCustomerId, selectedCustomer } = this.state
-
+        const {chosenProducts, salesPerson} = this.props; 
+        var companyName
+        var contactPerson
+        var email
+        var phone
+        salesPerson.map((item) => {
+            return (companyName = item.salesperson.companyName,
+                contactPerson = item.salesperson.contactPerson,
+                email =  item.salesperson.email,
+                phone =  item.salesperson.phone)
+        })
         if (titleDescription === '') {
             console.log('Du mangler en de title')
         }
@@ -98,7 +108,10 @@ class CreateNewQuote extends Component {
 
         else {
             this.togglePopup()
-            this.props.saveQuote(values, selectedCustomerId, selectedCustomer.orgName, titleDescription, textDescription, this.props.chosenProducts);
+            this.props.saveQuote(values, selectedCustomerId, selectedCustomer.orgName, titleDescription, textDescription, chosenProducts);
+            this.props.createPdf(values, selectedCustomerId, selectedCustomer.orgName, selectedCustomer.contactFirstName, 
+                selectedCustomer.contactLastName, selectedCustomer.orgAddress, selectedCustomer.orgZip, selectedCustomer.orgCity, 
+                titleDescription, textDescription, chosenProducts, companyName, contactPerson, email, phone);
         }
     }
 
@@ -244,4 +257,4 @@ function mapStateToProps(state, prop) {
     }
 }
 
-export default connect(mapStateToProps, { fetchCustomers, fetchProducts, saveQuote, fetchSalesPerson })(CreateNewQuote);
+export default connect(mapStateToProps, { fetchCustomers, fetchProducts, saveQuote, fetchSalesPerson, createPdf })(CreateNewQuote);
