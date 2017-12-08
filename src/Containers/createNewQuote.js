@@ -109,8 +109,8 @@ class CreateNewQuote extends Component {
 
         else {
             this.togglePopup()
-            this.props.saveQuote(values, selectedCustomerId, selectedCustomer.orgName, titleDescription, textDescription, chosenProducts);
-            this.props.createPdf(values, selectedCustomerId, selectedCustomer.orgName, selectedCustomer.contactFirstName, 
+            this.props.saveQuote(values, selectedCustomerId, selectedCustomer.orgName,  titleDescription, textDescription, chosenProducts);
+            this.props.createPdf(values, selectedCustomerId, selectedCustomer.orgName, selectedCustomer.contactEmail, selectedCustomer.contactFirstName, 
                 selectedCustomer.contactLastName, selectedCustomer.orgAddress, selectedCustomer.orgZip, selectedCustomer.orgCity, 
                 titleDescription, textDescription, chosenProducts, companyName, contactPerson, email, phone);
         }
@@ -132,6 +132,7 @@ class CreateNewQuote extends Component {
     }
 
     downloadPDF = () => {
+        console.log('dsds', this.state.selectedCustomer)
         var salesPerson = this.props.salesPerson
         var description = this.state.textDescription
         var title = this.state.titleDescription
@@ -144,7 +145,7 @@ class CreateNewQuote extends Component {
     renderCustomers = () => {
         /* Gets the customer information for the customer table */
         var value = this.state.value;
-
+        
         if (!value) {
             return this.props.customer.map((array, index) => {
                 return Object.entries(array).map((item, index) => {

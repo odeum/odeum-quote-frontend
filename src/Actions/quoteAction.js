@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {createDate} from '../Components/HelperFuncs/createDate'
+import {convertPriceToEu} from '../Components/HelperFuncs/convertPrice'
 
 export const SAVE_QUOTE = 'SAVE_QUOTE';
 export const saveQuote = (values, selectedCustomerId, selectedCustomerName, titleDescribtion, textDescribtion, calculatePrice, totalPrice) => {
@@ -9,6 +10,8 @@ export const saveQuote = (values, selectedCustomerId, selectedCustomerName, titl
     calculatePrice.arr.forEach(item => {
          temp += item.price
     });
+
+   
     const url = `http://localhost:8080/api/quotation/post`;
     const request = axios.post(`${url}`, {
         customerID: selectedCustomerId,
@@ -31,21 +34,22 @@ export const saveQuote = (values, selectedCustomerId, selectedCustomerName, titl
 }
 
 export const CREATE_PDF = 'CREATE_PDF'
-export const createPdf = (values, selectedCustomerId, selectedCustomerName, customerContactFirstName, customerContactLastName, 
+export const createPdf = (values, selectedCustomerId, selectedCustomerName, customerEmail, customerContactFirstName, customerContactLastName, 
     customerOrgAddress, customerOrgZip, customerOrgCity, titleDescribtion, textDescribtion, calculatePrice, companyName, contactPerson, email, phone) => {
     var date = createDate();
     var temp = 0
-    console.log('daddy')
     calculatePrice.arr.forEach(item => {
          temp += item.price
     });
-    const url = `http://localhost:8080/api/pdf/postPdf`
+    var splitTotalprice = convertPriceToEu(temp)
+    const url = `http://localhost:8080/api/pdf/post/${titleDescribtion}/${customerEmail}`
     const request = axios.post(`${url}`,{ 
         customerID: selectedCustomerId,
         customerName: selectedCustomerName,
         customerContactFirstName: customerContactFirstName,
         customerContactLastName: customerContactLastName,
         customerOrgAddress: customerOrgAddress,
+        customerEmail: customerEmail,
         customerOrgZip: customerOrgZip,
         customerOrgCity: customerOrgCity,
         companyName: companyName, 
@@ -61,7 +65,7 @@ export const createPdf = (values, selectedCustomerId, selectedCustomerName, cust
                 description: textDescribtion
             }],
         product: calculatePrice.arr,
-        totalPrice: temp
+        totalPrice: splitTotalprice
     })
     return {
         type: CREATE_PDF,
