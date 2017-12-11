@@ -52,7 +52,9 @@ class Quote extends Component {
         var value = this.state.searchValue
         
         if (!value) {
+            console.log(this.props.quotation)
             return this.props.quotation.map((array, index) => {
+                console.log(array)
                 return array.quotation.map((item, index) => {
                     var splitTotalprice = convertPriceToEu(item.totalPrice)
                     return (

@@ -64,21 +64,19 @@ class ProductsFields extends Component {
 			if (e.target.value !== '') {
 				tempPrice -= parseInt(e.target.value, 10)
 			}
-
 			this.setState({
 				discount: e.target.value,
 				totalPrice: tempPrice
 			})
 
-			this.props.calculatePrice(
+			this.props.chosenProducts(
 				this.state.product._id, 
 				tempPrice, 
 				this.state.product.name, 
 				this.state.amount, 
-				this.state.discount, 
+				e.target.value, 
 				this.state.product.subscription
 			)
-
 		}
 	}
 
@@ -92,16 +90,14 @@ class ProductsFields extends Component {
 			if (e.target.value !== '' && this.state.totalPrice !== 0) {
 				tempPrice = parseInt(e.target.value, 10) * this.state.product.price
 				this.setState({ totalPrice: tempPrice })
-
-				this.props.calculatePrice(
+				this.props.chosenProducts(
 					this.state.product._id, 
 					tempPrice, 
 					this.state.product.name, 
-					this.state.amount, 
+					e.target.value,
 					this.state.discount, 
 					this.state.product.subscription
 				);
-
 			}
 		}
 	}
@@ -142,7 +138,6 @@ class ProductsFields extends Component {
 
 	render() {
 		var splitPrice = convertPriceToEu(this.state.totalPrice)
-		var splitDiscount = convertPriceToEu(this.state.discount)
 		return (
 			<div>
 				<ProductWrapper>
@@ -176,7 +171,7 @@ class ProductsFields extends Component {
 						marginRight="4px"
 						marginTop="0px"
 						marginBottom="0px"
-						value={splitDiscount}
+						value={this.state.discount}
 						onChange={this.onDiscountChange}
 					/>
 

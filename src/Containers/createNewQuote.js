@@ -65,7 +65,7 @@ class CreateNewQuote extends Component {
     onHandle = (e) => {
         this.setState({
             value: e.target.value,
-            titleDescription: e.target.value
+            //titleDescription: e.target.value
         })
     }
 
@@ -89,6 +89,7 @@ class CreateNewQuote extends Component {
         var contactPerson
         var email
         var phone
+        console.log(this.props.chosenProducts)
         salesPerson.map((item) => {
             return (companyName = item.salesperson.companyName,
                 contactPerson = item.salesperson.contactPerson,
