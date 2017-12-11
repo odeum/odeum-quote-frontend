@@ -124,12 +124,12 @@ class CreateNewQuote extends Component {
     }
 
     calculateTotalPrice = () => {
-        var temp = 0
-        convertPriceToEu(temp)
+        var temp = 0   
         this.props.chosenProducts.arr.forEach(item => {
             temp += item.price
         });
-        return temp
+        var splitTotalPrice = convertPriceToEu(temp)
+        return splitTotalPrice
     }
 
     downloadPDF = () => {
