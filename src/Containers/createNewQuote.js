@@ -169,7 +169,7 @@ class CreateNewQuote extends Component {
                         || item[1].contactEmail.toLowerCase().includes(value.toLowerCase()))
 
                         return (
-                            <TR key={index} onClick={(e) => { this.selectCustomerRow(e, item[1]) }}>
+                            <TR key={index} onClick={(e) => { this.selectCustomerRow(e, item[1]) }} style={{ backgroundColor: this.state.selectedCustomer === item[1] ? '#D3D3D3' : '' }}>
                                 <TD>{item[1].orgName}</TD>
                                 <TD>{item[1].contactEmail}</TD>
                                 <TD>{item[1].contactPhone}</TD>
