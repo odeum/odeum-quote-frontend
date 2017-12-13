@@ -20,14 +20,13 @@ export const downloadPDF = (description, title, productTable, totalPrice, salesP
     // var newPrice = totalPrice.toFixed(2).replace(/./g, function(c, i, a) {
     //     return i && c !== "," && ((a.length - i) % 3 === 0) ? '.' + c : c;
     // });
-    var splitTotalprice = convertPriceToEu(totalPrice)
     
     productTable.map((item) => {
         var splitPrice = convertPriceToEu(item.price)
         return rows.push([item.name, item.description, splitPrice])
     })
     //Last line of the table
-    rows.push(["Samlet pris:", "", splitTotalprice ])
+    rows.push(["Samlet pris:", "", totalPrice ])
 
     //FIRST PAGE
     //The logo
