@@ -1,7 +1,8 @@
 import { imgData } from '../img/data.js';
 import { convertPriceToEu } from '../Components/HelperFuncs/convertPrice'
-var jsPDF = require('jspdf');
-require('jspdf-autotable');
+import * as jsPDF from 'jspdf'
+import 'jspdf-autotable'
+
 var lMargin = 20; // left margin in mm
 var rMargin = 20; // right margin in mm
 var pdfInMM = 260; // width of A4 in mm
@@ -17,9 +18,6 @@ export const downloadPDF = (description, title, productTable, totalPrice, salesP
     //Gets the data for the table
     var columns = ["Produkt", "Beskrivelse af produkt", "Pris"];
     var rows = [];
-    // var newPrice = totalPrice.toFixed(2).replace(/./g, function(c, i, a) {
-    //     return i && c !== "," && ((a.length - i) % 3 === 0) ? '.' + c : c;
-    // });
     var splitTotalprice = convertPriceToEu(totalPrice)
     
     productTable.map((item) => {
