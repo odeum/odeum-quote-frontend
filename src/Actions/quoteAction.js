@@ -6,7 +6,6 @@ export const SAVE_QUOTE = 'SAVE_QUOTE';
 export const saveQuote = (values, selectedCustomerId, selectedCustomerName, titleDescribtion, textDescribtion, calculatePrice, totalPrice) => {
     var date = createDate();
     var temp = 0
-    console.log('daddy')
     calculatePrice.arr.forEach(item => {
          temp += item.price
     });
