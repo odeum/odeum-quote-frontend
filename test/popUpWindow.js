@@ -1,13 +1,10 @@
 import PopUpWindow from '../src/Components/popupWindow'
-import Button2 from './button';
 import expect from 'expect';
 import Enzyme, { shallow, mount } from 'enzyme';
 import React from 'react';
 import Adapter from 'enzyme-adapter-react-16';
 import { Popup, InnerPopup, Text, StyledModalHeader, StyledModalHeaderIcon, StyledModalHeaderClose, StyledModalHeaderTitle } from '../src/Styles/popup'; 
 import { ButtonPanel, Button, Icon } from 'odeum-ui'
-
-import 'jsdom-global/register';
 
 Enzyme.configure({ adapter: new Adapter() });
 describe('Table Component', () => {
