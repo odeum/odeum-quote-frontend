@@ -104,7 +104,7 @@ class Quote extends Component {
 
                 <TableComponent
                     value={this.state.searchValue}
-                    searhPlaceholder={'Søg efter produkt...'}
+                    searhPlaceholder={'Søg efter et tilbud'}
                     tableColumns={tableHeaders}
                     onChange={this.handleSearchInput}
                     renderTableRows={this.renderQuote()}
